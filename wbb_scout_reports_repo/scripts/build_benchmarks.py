@@ -245,7 +245,7 @@ def add_rebounding_context(df):
                 
                 # Calculate DRtg and Net Rtg
                 opp_pts = opp_row['pts'] if 'pts' in opp_row else opp_row.get('team_score', 0)
-                opp_poss = opp_row['poss_est'] if 'poss_est' in opp_row else row['poss_est']
+                opp_poss = opp_row['poss_est']
                 
                 if opp_poss > 0:
                     row['drtg'] = 100 * opp_pts / opp_poss
