@@ -390,8 +390,7 @@ class BenchmarkLookup:
         for i in range(len(breakpoints) - 1):
             if values[i] <= value <= values[i + 1]:
                 # Interpolate
-                frac = (value - values[i]) / (values[i + 1] - values[i])
-                return breakpoints[i] + frac * (breakpoints[i + 1] - breakpoints[i])
+                 frac = (value - values[i]) / (values[i + 1] - values[i]) if (values[i + 1] - values[i]) > 0 else 0.0
 
         return np.nan
 
