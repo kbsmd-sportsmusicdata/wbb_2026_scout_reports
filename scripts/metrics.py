@@ -286,7 +286,6 @@ def calc_ast_tov(ast: Union[pd.Series, float],
         ratio = np.divide(ast, tov)
     return np.nan_to_num(ratio, nan=0.0)
 
-
 # =============================================================================
 # PLAYER-SPECIFIC METRICS
 # =============================================================================
