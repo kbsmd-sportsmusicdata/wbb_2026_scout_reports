@@ -282,10 +282,9 @@ def calc_ast_tov(ast: Union[pd.Series, float],
 
     Measures playmaking efficiency (higher is better).
     """
-    if isinstance(tov, pd.Series):
-        return np.where(tov > 0, ast / tov, ast)  # If 0 TOV, return AST count
-    return ast / tov if tov > 0 else float(ast)
-
+    with np.errstate(divide='ignore', invalid='ignore'):
+        ratio = np.divide(ast, tov)
+    return np.nan_to_num(ratio, nan=0.0)
 
 # =============================================================================
 # PLAYER-SPECIFIC METRICS
