@@ -519,3 +519,375 @@ def add_position_group(df: pd.DataFrame,
     else:
         df['position_group'] = 'Other'
     return df
+
+
+# =============================================================================
+# ADVANCED PLAYER METRICS (Box Score Derived)
+# =============================================================================
+
+def calc_game_score(pts: Union[pd.Series, float],
+                    fgm: Union[pd.Series, float],
+                    fga: Union[pd.Series, float],
+                    ftm: Union[pd.Series, float],
+                    fta: Union[pd.Series, float],
+                    orb: Union[pd.Series, float],
+                    drb: Union[pd.Series, float],
+                    stl: Union[pd.Series, float],
+                    ast: Union[pd.Series, float],
+                    blk: Union[pd.Series, float],
+                    pf: Union[pd.Series, float],
+                    tov: Union[pd.Series, float]) -> Union[pd.Series, float]:
+    """
+    Game Score (John Hollinger).
+
+    Formula: GmSc = PTS + 0.4*FGM - 0.7*FGA - 0.4*(FTA-FTM) + 0.7*ORB + 0.3*DRB
+                    + STL + 0.7*AST + 0.7*BLK - 0.4*PF - TOV
+
+    Single-number measure of a player's game performance.
+    Typical range: 0-40, with 10 being average starter performance.
+    """
+    return (pts + 0.4 * fgm - 0.7 * fga - 0.4 * (fta - ftm)
+            + 0.7 * orb + 0.3 * drb + stl + 0.7 * ast
+            + 0.7 * blk - 0.4 * pf - tov)
+
+
+def calc_pie(pts: Union[pd.Series, float],
+             fgm: Union[pd.Series, float],
+             fga: Union[pd.Series, float],
+             ftm: Union[pd.Series, float],
+             fta: Union[pd.Series, float],
+             orb: Union[pd.Series, float],
+             drb: Union[pd.Series, float],
+             stl: Union[pd.Series, float],
+             ast: Union[pd.Series, float],
+             blk: Union[pd.Series, float],
+             pf: Union[pd.Series, float],
+             tov: Union[pd.Series, float],
+             game_pts: Union[pd.Series, float],
+             game_fgm: Union[pd.Series, float],
+             game_fga: Union[pd.Series, float],
+             game_ftm: Union[pd.Series, float],
+             game_fta: Union[pd.Series, float],
+             game_orb: Union[pd.Series, float],
+             game_drb: Union[pd.Series, float],
+             game_stl: Union[pd.Series, float],
+             game_ast: Union[pd.Series, float],
+             game_blk: Union[pd.Series, float],
+             game_pf: Union[pd.Series, float],
+             game_tov: Union[pd.Series, float]) -> Union[pd.Series, float]:
+    """
+    Player Impact Estimate (PIE).
+
+    Formula: PIE = (PTS + FGM + FTM - FGA - FTA + DRB + 0.5*ORB + AST + STL + 0.5*BLK - PF - TOV)
+                   / (Game_PTS + Game_FGM + Game_FTM - Game_FGA - Game_FTA + Game_DRB
+                      + 0.5*Game_ORB + Game_AST + Game_STL + 0.5*Game_BLK - Game_PF - Game_TOV)
+
+    Measures player's overall contribution relative to game totals.
+    Range: 0-1, with 0.10 (10%) being average for a 5-player rotation.
+    """
+    player_contribution = (pts + fgm + ftm - fga - fta + drb + 0.5 * orb
+                           + ast + stl + 0.5 * blk - pf - tov)
+
+    game_contribution = (game_pts + game_fgm + game_ftm - game_fga - game_fta
+                         + game_drb + 0.5 * game_orb + game_ast + game_stl
+                         + 0.5 * game_blk - game_pf - game_tov)
+
+    if isinstance(game_contribution, pd.Series):
+        return np.where(game_contribution != 0, player_contribution / game_contribution, 0.0)
+    return player_contribution / game_contribution if game_contribution != 0 else 0.0
+
+
+def calc_stl_pct(stl: Union[pd.Series, float],
+                 minutes: Union[pd.Series, float],
+                 opp_poss: Union[pd.Series, float],
+                 team_minutes: float = 200.0) -> Union[pd.Series, float]:
+    """
+    Steal Percentage.
+
+    Formula: STL% = (STL * Team_Min / 5) / (Min * Opp_Poss)
+
+    Percentage of opponent possessions ending in a steal by this player.
+    """
+    if isinstance(minutes, pd.Series):
+        denom = minutes * opp_poss
+        return np.where(
+            (denom > 0) & (minutes > 0),
+            (stl * team_minutes / 5) / denom * 100,
+            0.0
+        )
+    denom = minutes * opp_poss
+    return (stl * team_minutes / 5) / denom * 100 if denom > 0 and minutes > 0 else 0.0
+
+
+def calc_blk_pct(blk: Union[pd.Series, float],
+                 minutes: Union[pd.Series, float],
+                 opp_fga: Union[pd.Series, float],
+                 opp_fg3a: Union[pd.Series, float],
+                 team_minutes: float = 200.0) -> Union[pd.Series, float]:
+    """
+    Block Percentage.
+
+    Formula: BLK% = (BLK * Team_Min / 5) / (Min * (Opp_FGA - Opp_3PA))
+
+    Percentage of opponent 2-point attempts blocked by this player.
+    """
+    opp_2pa = opp_fga - opp_fg3a
+    if isinstance(minutes, pd.Series):
+        denom = minutes * opp_2pa
+        return np.where(
+            (denom > 0) & (minutes > 0),
+            (blk * team_minutes / 5) / denom * 100,
+            0.0
+        )
+    denom = minutes * opp_2pa
+    return (blk * team_minutes / 5) / denom * 100 if denom > 0 and minutes > 0 else 0.0
+
+
+def calc_trb_pct(orb: Union[pd.Series, float],
+                 drb: Union[pd.Series, float],
+                 minutes: Union[pd.Series, float],
+                 team_orb: Union[pd.Series, float],
+                 team_drb: Union[pd.Series, float],
+                 opp_orb: Union[pd.Series, float],
+                 opp_drb: Union[pd.Series, float],
+                 team_minutes: float = 200.0) -> Union[pd.Series, float]:
+    """
+    Total Rebound Percentage.
+
+    Formula: TRB% = (TRB * Team_Min / 5) / (Min * (Team_TRB + Opp_TRB))
+
+    Percentage of available rebounds grabbed by this player.
+    """
+    trb = orb + drb
+    total_reb = team_orb + team_drb + opp_orb + opp_drb
+
+    if isinstance(minutes, pd.Series):
+        denom = minutes * total_reb
+        return np.where(
+            (denom > 0) & (minutes > 0),
+            (trb * team_minutes / 5) / denom * 100,
+            0.0
+        )
+    denom = minutes * total_reb
+    return (trb * team_minutes / 5) / denom * 100 if denom > 0 and minutes > 0 else 0.0
+
+
+def calc_floor_pct(fgm: Union[pd.Series, float],
+                   ast: Union[pd.Series, float],
+                   fga: Union[pd.Series, float],
+                   fta: Union[pd.Series, float],
+                   tov: Union[pd.Series, float],
+                   team_fgm: Union[pd.Series, float],
+                   orb: Union[pd.Series, float],
+                   team_orb: Union[pd.Series, float]) -> Union[pd.Series, float]:
+    """
+    Floor Percentage (simplified).
+
+    Formula: Floor% ≈ Scoring_Poss / Total_Poss
+
+    Simplified: (FGM + 0.5*AST) / (FGA + 0.44*FTA + TOV)
+
+    Percentage of a player's possessions that end in points scored.
+    """
+    # Simplified scoring possessions estimate
+    scoring_poss = fgm + 0.5 * ast
+
+    # Total possessions used
+    total_poss = fga + 0.44 * fta + tov
+
+    if isinstance(total_poss, pd.Series):
+        return np.where(total_poss > 0, scoring_poss / total_poss, 0.0)
+    return scoring_poss / total_poss if total_poss > 0 else 0.0
+
+
+def calc_ppp(pts: Union[pd.Series, float],
+             fga: Union[pd.Series, float],
+             fta: Union[pd.Series, float],
+             tov: Union[pd.Series, float]) -> Union[pd.Series, float]:
+    """
+    Points Per Possession (individual).
+
+    Formula: PPP = PTS / (FGA + 0.44*FTA + TOV)
+
+    Points scored per possession used.
+    """
+    poss = fga + 0.44 * fta + tov
+    if isinstance(poss, pd.Series):
+        return np.where(poss > 0, pts / poss, 0.0)
+    return pts / poss if poss > 0 else 0.0
+
+
+def calc_ppsa(pts: Union[pd.Series, float],
+              fga: Union[pd.Series, float],
+              fta: Union[pd.Series, float]) -> Union[pd.Series, float]:
+    """
+    Points Per Shot Attempt.
+
+    Formula: PPsA = PTS / (FGA + 0.44*FTA)
+
+    Similar to TS% but in points rather than percentage.
+    Expected range: 0.8-1.4 for efficient scorers.
+    """
+    attempts = fga + 0.44 * fta
+    if isinstance(attempts, pd.Series):
+        return np.where(attempts > 0, pts / attempts, 0.0)
+    return pts / attempts if attempts > 0 else 0.0
+
+
+def calc_player_ortg(pts: Union[pd.Series, float],
+                     fgm: Union[pd.Series, float],
+                     fga: Union[pd.Series, float],
+                     ftm: Union[pd.Series, float],
+                     fta: Union[pd.Series, float],
+                     orb: Union[pd.Series, float],
+                     ast: Union[pd.Series, float],
+                     tov: Union[pd.Series, float],
+                     team_pts: Union[pd.Series, float],
+                     team_fgm: Union[pd.Series, float],
+                     team_fga: Union[pd.Series, float],
+                     team_fta: Union[pd.Series, float],
+                     team_orb: Union[pd.Series, float],
+                     team_ast: Union[pd.Series, float]) -> Union[pd.Series, float]:
+    """
+    Individual Offensive Rating (simplified Dean Oliver method).
+
+    Formula: ORtg = 100 * Points_Produced / Possessions_Used
+
+    Simplified approximation:
+    - Points_Produced ≈ PTS + AST * (Team_PTS / Team_FGM) * 0.5
+    - Poss_Used ≈ FGA + 0.44*FTA + TOV - ORB_Contribution
+
+    Points produced per 100 possessions used.
+    """
+    # Estimate points from assists (half credit)
+    team_pts_per_fgm = np.where(
+        team_fgm > 0 if isinstance(team_fgm, pd.Series) else team_fgm > 0,
+        team_pts / team_fgm if not isinstance(team_pts, pd.Series) else np.where(team_fgm > 0, team_pts / team_fgm, 2.0),
+        2.0
+    )
+    if isinstance(team_fgm, pd.Series):
+        team_pts_per_fgm = np.where(team_fgm > 0, team_pts / team_fgm, 2.0)
+
+    points_produced = pts + ast * team_pts_per_fgm * 0.5
+
+    # Estimate possessions used
+    poss_used = fga + 0.44 * fta + tov
+
+    if isinstance(poss_used, pd.Series):
+        return np.where(poss_used > 0, 100 * points_produced / poss_used, 0.0)
+    return 100 * points_produced / poss_used if poss_used > 0 else 0.0
+
+
+def calc_player_drtg(opp_pts: Union[pd.Series, float],
+                     minutes: Union[pd.Series, float],
+                     team_minutes: float,
+                     team_poss: Union[pd.Series, float],
+                     stl: Union[pd.Series, float],
+                     blk: Union[pd.Series, float],
+                     drb: Union[pd.Series, float],
+                     pf: Union[pd.Series, float]) -> Union[pd.Series, float]:
+    """
+    Individual Defensive Rating (simplified estimate).
+
+    Note: True DRtg requires play-by-play data. This is an approximation
+    based on defensive box score stats.
+
+    Formula: DRtg ≈ Team_DRtg - Defensive_Contribution_Adjustment
+
+    The adjustment factors in steals, blocks, defensive rebounds, and fouls.
+    Lower is better (fewer points allowed per 100 possessions).
+    """
+    # Base team defensive rating
+    team_drtg = np.where(
+        team_poss > 0 if isinstance(team_poss, pd.Series) else team_poss > 0,
+        100 * opp_pts / team_poss if not isinstance(opp_pts, pd.Series) else np.where(team_poss > 0, 100 * opp_pts / team_poss, 100.0),
+        100.0
+    )
+    if isinstance(team_poss, pd.Series):
+        team_drtg = np.where(team_poss > 0, 100 * opp_pts / team_poss, 100.0)
+
+    # Defensive contribution (positive stats reduce rating)
+    # Weights are approximate based on typical impact
+    def_contribution = (stl * 2.0 + blk * 1.5 + drb * 0.5 - pf * 0.5)
+
+    # Scale by minutes played
+    if isinstance(minutes, pd.Series):
+        min_pct = np.where(team_minutes > 0, minutes / team_minutes, 0.0)
+        adjustment = np.where(min_pct > 0, def_contribution / (min_pct * 100 + 1), 0.0)
+        return team_drtg - adjustment
+    else:
+        min_pct = minutes / team_minutes if team_minutes > 0 else 0.0
+        adjustment = def_contribution / (min_pct * 100 + 1) if min_pct > 0 else 0.0
+        return team_drtg - adjustment
+
+
+# =============================================================================
+# ADVANCED PLAYER METRICS - BATCH CALCULATION
+# =============================================================================
+
+def calculate_advanced_player_metrics(player_df: pd.DataFrame,
+                                      team_df: pd.DataFrame = None,
+                                      opp_df: pd.DataFrame = None) -> pd.DataFrame:
+    """
+    Calculate all advanced player metrics from box score data.
+
+    Args:
+        player_df: DataFrame with player box scores
+        team_df: DataFrame with team totals (for PIE, STL%, etc.)
+        opp_df: DataFrame with opponent totals (for defensive metrics)
+
+    Returns:
+        DataFrame with advanced metrics added
+    """
+    df = player_df.copy()
+
+    # Ensure numeric columns
+    numeric_cols = [
+        'minutes', 'points', 'field_goals_made', 'field_goals_attempted',
+        'three_point_field_goals_made', 'three_point_field_goals_attempted',
+        'free_throws_made', 'free_throws_attempted',
+        'offensive_rebounds', 'defensive_rebounds', 'rebounds',
+        'assists', 'steals', 'blocks', 'turnovers', 'fouls'
+    ]
+
+    for col in numeric_cols:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
+
+    # Shorthand
+    pts = df['points']
+    fgm = df['field_goals_made']
+    fga = df['field_goals_attempted']
+    fg3m = df.get('three_point_field_goals_made', 0)
+    fg3a = df.get('three_point_field_goals_attempted', 0)
+    ftm = df['free_throws_made']
+    fta = df['free_throws_attempted']
+    orb = df['offensive_rebounds']
+    drb = df['defensive_rebounds']
+    ast = df['assists']
+    stl = df['steals']
+    blk = df['blocks']
+    tov = df['turnovers']
+    pf = df.get('fouls', 0)
+    minutes = df['minutes']
+
+    # Game Score - always calculable
+    df['game_score'] = calc_game_score(pts, fgm, fga, ftm, fta, orb, drb, stl, ast, blk, pf, tov)
+
+    # Points Per Possession
+    df['ppp'] = calc_ppp(pts, fga, fta, tov)
+
+    # Points Per Shot Attempt
+    df['ppsa'] = calc_ppsa(pts, fga, fta)
+
+    # Floor Percentage (simplified)
+    if team_df is not None and 'field_goals_made' in team_df.columns:
+        # Merge team data
+        team_fgm = pd.to_numeric(team_df.get('field_goals_made', 0), errors='coerce').fillna(0)
+        team_orb = pd.to_numeric(team_df.get('offensive_rebounds', 0), errors='coerce').fillna(0)
+        df['floor_pct'] = calc_floor_pct(fgm, ast, fga, fta, tov, team_fgm, orb, team_orb)
+    else:
+        # Simplified version without team context
+        df['floor_pct'] = calc_floor_pct(fgm, ast, fga, fta, tov, fgm, orb, orb)
+
+    return df
