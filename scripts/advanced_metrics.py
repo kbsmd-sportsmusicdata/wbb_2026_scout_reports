@@ -416,7 +416,7 @@ def calculate_points_off_turnovers(pbp_df: pd.DataFrame,
     # Find opponent turnovers
     opp_turnovers = df[
         (df['team_id'] != team_id) &
-        (df.get('type_text', '').str.lower().str.contains('turnover|steal', na=False))
+        (df.get('type_text', '').str.lower().str.contains('|'.join(TURNOVER_TYPES).lower(), na=False))
     ]
 
     # Find scoring plays immediately after turnovers
