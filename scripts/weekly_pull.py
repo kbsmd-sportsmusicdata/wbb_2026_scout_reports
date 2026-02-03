@@ -136,7 +136,6 @@ def load_player_box_data(season):
     print("  WARNING: No player box data available (remote or local)")
     return pd.DataFrame()
 
-
 def load_schedule_data(season):
     """Load schedule data to get game metadata."""
     url = f"{WEHOOP_BASE}/wbb_schedule/wbb_schedule_{season}.parquet"
