@@ -15,6 +15,18 @@ on:
         description: 'Force re-process all games in range'
         required: false
         default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+      rebuild_benchmarks:
+        description: 'Rebuild D1 benchmark tables'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
 
 jobs:
   pull-data:
@@ -38,15 +50,38 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run weekly pull
+        id: weekly_pull
         run: |
+          echo "Starting weekly data pull..."
           python scripts/weekly_pull.py \
             --start-date "${{ github.event.inputs.start_date || '' }}" \
             --force-refresh "${{ github.event.inputs.force_refresh || 'false' }}"
+          echo "Weekly pull completed"
+
+      - name: Rebuild benchmarks (if requested)
+        if: github.event.inputs.rebuild_benchmarks == 'true' || github.event.inputs.force_refresh == 'true'
+        run: |
+          echo "Rebuilding D1 benchmarks..."
+          python scripts/build_benchmarks.py --season 2025
+          echo "Benchmarks rebuilt"
+
+      - name: Run test validation
+        continue-on-error: true
+        run: |
+          echo "Running pipeline validation..."
+          python scripts/test_pipeline.py --build-benchmarks-only || echo "Validation completed with warnings"
 
       - name: Check for changes
         id: changes
         run: |
-          git diff --quiet data/ || echo "changes=true" >> $GITHUB_OUTPUT
+          if git diff --quiet data/; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "No data changes detected"
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "Data changes detected:"
+            git diff --stat data/
+          fi
 
       - name: Commit and push data updates
         if: steps.changes.outputs.changes == 'true'
@@ -57,14 +92,44 @@ jobs:
           git commit -m "chore: Weekly data update $(date +'%Y-%m-%d')"
           git push
 
-      - name: Summary
+      - name: Generate summary
         run: |
           echo "## Weekly Pull Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Run Date:** $(date +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          echo "### Configuration" >> $GITHUB_STEP_SUMMARY
+          echo "- Start Date: ${{ github.event.inputs.start_date || '(last 7 days)' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Force Refresh: ${{ github.event.inputs.force_refresh || 'false' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Rebuild Benchmarks: ${{ github.event.inputs.rebuild_benchmarks || 'false' }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          echo "### Pull Log (Recent)" >> $GITHUB_STEP_SUMMARY
           if [ -f data/tracking/pull_log.txt ]; then
-            echo "### Recent Pulls" >> $GITHUB_STEP_SUMMARY
-            tail -5 data/tracking/pull_log.txt >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            tail -10 data/tracking/pull_log.txt >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          else
+            echo "No pull log found" >> $GITHUB_STEP_SUMMARY
           fi
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Files Updated" >> $GITHUB_STEP_SUMMARY
-          ls -la data/processed/ >> $GITHUB_STEP_SUMMARY 2>/dev/null || echo "No processed files yet"
+
+          echo "### Processed Files" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          ls -lh data/processed/ 2>/dev/null || echo "No processed files yet"
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          echo "### Benchmark Files" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          ls -lh data/benchmarks/ 2>/dev/null || echo "No benchmark files yet"
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Data Changes" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.changes.outputs.changes }}" == "true" ]; then
+            echo "Changes were committed and pushed." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "No changes to commit." >> $GITHUB_STEP_SUMMARY
+          fi
