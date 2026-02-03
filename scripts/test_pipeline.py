@@ -21,6 +21,8 @@ import argparse
 from datetime import datetime
 from pathlib import Path
 
+from data_loader import load_team_box, load_player_box
+
 # Try to import requests for API access
 try:
     import requests
@@ -36,8 +38,8 @@ except ImportError:
 # ESPN API endpoint (unofficial but public)
 ESPN_SUMMARY_URL = "http://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/summary"
 
-# wehoop GitHub releases
-WEHOOP_BASE = "https://github.com/sportsdataverse/wehoop-wbb-data/releases/download"
+# Data directory
+DATA_DIR = Path("data")
 
 # Sample game IDs from 2024-25 season (known good games)
 SAMPLE_GAMES = {
@@ -52,92 +54,6 @@ OUTPUT_DIR = Path("test_output")
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 
-# ============================================================================
-# DATA LOADING FUNCTIONS
-# ============================================================================
-
-def load_wehoop_team_box(season=2025):
-    """
-    Load team box score data from wehoop releases or local fallback.
-
-    The wehoop repo uses this URL pattern:
-    https://github.com/sportsdataverse/wehoop-wbb-data/releases/download/
-    espn_womens_college_basketball_team_boxscore/team_box_{year}.parquet
-    """
-    # Try multiple URL patterns (wehoop has changed structure over time)
-    url_patterns = [
-        f"{WEHOOP_BASE}/espn_womens_college_basketball_team_boxscore/team_box_{season}.parquet",
-        f"{WEHOOP_BASE}/wbb_team_box/team_box_{season}.parquet",
-        f"{WEHOOP_BASE}/wbb_team_box/wbb_team_box_{season}.parquet",
-    ]
-
-    for url in url_patterns:
-        try:
-            print(f"Trying remote: {url}")
-            df = pd.read_parquet(url)
-            print(f"  ✓ Loaded {len(df)} rows from remote")
-            return df
-        except Exception as e:
-            print(f"  ✗ Remote failed: {e}")
-            continue
-
-    # Fall back to local files
-    raw_dir = Path("data/raw")
-    local_patterns = [
-        raw_dir / f"team_box_{season}.parquet",
-        raw_dir / f"wbb_team_box_{season}.parquet",
-    ]
-
-    for local_path in local_patterns:
-        if local_path.exists():
-            try:
-                print(f"Trying local: {local_path}")
-                df = pd.read_parquet(local_path)
-                print(f"  ✓ Loaded {len(df)} rows from local")
-                return df
-            except Exception as e:
-                print(f"  ✗ Local failed: {e}")
-
-    print("ERROR: Could not load wehoop data (remote or local)")
-    return pd.DataFrame()
-
-
-def load_wehoop_player_box(season=2025):
-    """Load player box score data from wehoop releases or local fallback."""
-    url_patterns = [
-        f"{WEHOOP_BASE}/espn_womens_college_basketball_player_boxscore/player_box_{season}.parquet",
-        f"{WEHOOP_BASE}/wbb_player_box/player_box_{season}.parquet",
-        f"{WEHOOP_BASE}/wbb_player_box/wbb_player_box_{season}.parquet",
-    ]
-
-    for url in url_patterns:
-        try:
-            print(f"Trying remote: {url}")
-            df = pd.read_parquet(url)
-            print(f"  ✓ Loaded {len(df)} rows from remote")
-            return df
-        except Exception as e:
-            print(f"  ✗ Remote failed: {e}")
-            continue
-
-    # Fall back to local files
-    raw_dir = Path("data/raw")
-    local_patterns = [
-        raw_dir / f"player_box_{season}.parquet",
-        raw_dir / f"wbb_player_box_{season}.parquet",
-    ]
-
-    for local_path in local_patterns:
-        if local_path.exists():
-            try:
-                print(f"Trying local: {local_path}")
-                df = pd.read_parquet(local_path)
-                print(f"  ✓ Loaded {len(df)} rows from local")
-                return df
-            except Exception as e:
-                print(f"  ✗ Local failed: {e}")
-
-    return pd.DataFrame()
 
 
 def fetch_espn_game(game_id):
@@ -548,12 +464,12 @@ def run_pipeline_test(game_id=None):
     
     # Step 1: Load wehoop data
     print("\n--- Step 1: Load wehoop Team Box Data ---")
-    team_box = load_wehoop_team_box(season=2025)
+    team_box = load_team_box(season=2025, data_dir=DATA_DIR)
     
     if team_box.empty:
         # Try 2024 as fallback
         print("Trying 2024 season as fallback...")
-        team_box = load_wehoop_team_box(season=2024)
+        team_box = load_team_box(season=2024, data_dir=DATA_DIR)
     
     if team_box.empty:
         print("ERROR: Could not load any wehoop data")
@@ -638,9 +554,9 @@ if __name__ == "__main__":
     
     if args.build_benchmarks_only:
         print("Building benchmarks only...")
-        team_box = load_wehoop_team_box(2025)
+        team_box = load_team_box(2025, DATA_DIR)
         if team_box.empty:
-            team_box = load_wehoop_team_box(2024)
+            team_box = load_team_box(2024, DATA_DIR)
         build_d1_benchmarks(team_box, OUTPUT_DIR / 'd1_benchmarks.csv')
     else:
         run_pipeline_test(game_id=args.game_id)
