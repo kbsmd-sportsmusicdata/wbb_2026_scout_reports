@@ -16,7 +16,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 import warnings
 
-from data_loader import load_team_box, load_player_box
+from data_loader import load_team_box, load_player_box, WEHOOP_BASE
 
 warnings.filterwarnings('ignore')
 
