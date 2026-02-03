@@ -305,8 +305,8 @@ This section provides comprehensive documentation of all metric calculations wit
 
 **Interpretation:** Points scored per 100 possessions. A tempo-free efficiency measure.
 
-- D1 Average: ~70-75
-- Elite offenses: 85+
+- D1 Average: ~92.6
+- Elite offenses: 115+
 
 ---
 
