@@ -5,7 +5,7 @@ Computes derived metrics and updates benchmark tables.
 
 Usage:
     python weekly_pull.py                          # Pull last 7 days
-    python weekly_pull.py --start-date 2025-01-01  # Pull from specific date
+    python weekly_pull.py --start-date 2026-02-01  # Pull from specific date
     python weekly_pull.py --force-refresh true     # Re-pull all games in range
 """
 
@@ -42,7 +42,7 @@ PULL_LOG_FILE = TRACKING_DIR / "pull_log.txt"
 WEHOOP_BASE = "https://github.com/sportsdataverse/wehoop-wbb-data/releases/download"
 
 # Current season (update annually)
-CURRENT_SEASON = 2025
+CURRENT_SEASON = 2026
 
 
 # ============================================================================
