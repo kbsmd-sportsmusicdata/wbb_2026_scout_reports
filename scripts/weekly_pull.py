@@ -14,8 +14,9 @@ import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 from pathlib import Path
-import json
 import warnings
+
+from data_loader import load_team_box, load_player_box
 
 warnings.filterwarnings('ignore')
 
@@ -37,9 +38,6 @@ for dir_path in [RAW_DIR, PROCESSED_DIR, BENCHMARKS_DIR, TRACKING_DIR]:
 # Tracking file for processed games
 PROCESSED_GAMES_FILE = TRACKING_DIR / "processed_games.parquet"
 PULL_LOG_FILE = TRACKING_DIR / "pull_log.txt"
-
-# wehoop data URLs
-WEHOOP_BASE = "https://github.com/sportsdataverse/wehoop-wbb-data/releases/download"
 
 # Current season (update annually)
 CURRENT_SEASON = 2025
@@ -63,85 +61,12 @@ def save_processed_games(game_ids):
     df.to_parquet(PROCESSED_GAMES_FILE, index=False)
 
 
-def load_team_box_data(season):
-    """Load team box score data from wehoop releases or local fallback."""
-    # Try remote URLs first
-    url_patterns = [
-        f"{WEHOOP_BASE}/wbb_team_box/wbb_team_box_{season}.parquet",
-        f"{WEHOOP_BASE}/wbb_team_box/team_box_{season}.parquet",
-    ]
-
-    for url in url_patterns:
-        print(f"Trying remote: {url}")
-        try:
-            df = pd.read_parquet(url)
-            print(f"  ✓ Loaded {len(df)} team-game rows from remote")
-            return df
-        except Exception as e:
-            print(f"  ✗ Remote failed: {e}")
-
-    # Fall back to local files
-    local_patterns = [
-        RAW_DIR / f"team_box_{season}.parquet",
-        RAW_DIR / f"wbb_team_box_{season}.parquet",
-    ]
-
-    for local_path in local_patterns:
-        print(f"Trying local: {local_path}")
-        if local_path.exists():
-            try:
-                df = pd.read_parquet(local_path)
-                print(f"  ✓ Loaded {len(df)} team-game rows from local")
-                return df
-            except Exception as e:
-                print(f"  ✗ Local failed: {e}")
-
-    print("  ERROR: No team box data available (remote or local)")
-    return pd.DataFrame()
-
-
-def load_player_box_data(season):
-    """Load player box score data from wehoop releases or local fallback."""
-    # Try remote URLs first
-    url_patterns = [
-        f"{WEHOOP_BASE}/wbb_player_box/wbb_player_box_{season}.parquet",
-        f"{WEHOOP_BASE}/wbb_player_box/player_box_{season}.parquet",
-    ]
-
-    for url in url_patterns:
-        print(f"Trying remote: {url}")
-        try:
-            df = pd.read_parquet(url)
-            print(f"  ✓ Loaded {len(df)} player-game rows from remote")
-            return df
-        except Exception as e:
-            print(f"  ✗ Remote failed: {e}")
-
-    # Fall back to local files
-    local_patterns = [
-        RAW_DIR / f"player_box_{season}.parquet",
-        RAW_DIR / f"wbb_player_box_{season}.parquet",
-    ]
-
-    for local_path in local_patterns:
-        print(f"Trying local: {local_path}")
-        if local_path.exists():
-            try:
-                df = pd.read_parquet(local_path)
-                print(f"  ✓ Loaded {len(df)} player-game rows from local")
-                return df
-            except Exception as e:
-                print(f"  ✗ Local failed: {e}")
-
-    print("  WARNING: No player box data available (remote or local)")
-    return pd.DataFrame()
-
-
 def load_schedule_data(season):
     """Load schedule data to get game metadata."""
+    from data_loader import WEHOOP_BASE
     url = f"{WEHOOP_BASE}/wbb_schedule/wbb_schedule_{season}.parquet"
     print(f"Loading schedule from: {url}")
-    
+
     try:
         df = pd.read_parquet(url)
         print(f"  Loaded {len(df)} scheduled games")
@@ -490,8 +415,8 @@ def process_games(start_date=None, force_refresh=False):
     
     # Load source data
     print("\n--- Loading source data ---")
-    team_box = load_team_box_data(CURRENT_SEASON)
-    player_box = load_player_box_data(CURRENT_SEASON)
+    team_box = load_team_box(CURRENT_SEASON, DATA_DIR)
+    player_box = load_player_box(CURRENT_SEASON, DATA_DIR)
     
     if team_box.empty:
         print("ERROR: No team box data loaded. Exiting.")
