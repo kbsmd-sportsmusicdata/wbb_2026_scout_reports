@@ -58,8 +58,8 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 
 def load_wehoop_team_box(season=2025):
     """
-    Load team box score data from wehoop releases.
-    
+    Load team box score data from wehoop releases or local fallback.
+
     The wehoop repo uses this URL pattern:
     https://github.com/sportsdataverse/wehoop-wbb-data/releases/download/
     espn_womens_college_basketball_team_boxscore/team_box_{year}.parquet
@@ -70,39 +70,73 @@ def load_wehoop_team_box(season=2025):
         f"{WEHOOP_BASE}/wbb_team_box/team_box_{season}.parquet",
         f"{WEHOOP_BASE}/wbb_team_box/wbb_team_box_{season}.parquet",
     ]
-    
+
     for url in url_patterns:
         try:
-            print(f"Trying: {url}")
+            print(f"Trying remote: {url}")
             df = pd.read_parquet(url)
-            print(f"✓ Loaded {len(df)} rows from wehoop")
+            print(f"  ✓ Loaded {len(df)} rows from remote")
             return df
         except Exception as e:
-            print(f"  ✗ Failed: {e}")
+            print(f"  ✗ Remote failed: {e}")
             continue
-    
-    print("ERROR: Could not load wehoop data from any URL pattern")
+
+    # Fall back to local files
+    raw_dir = Path("data/raw")
+    local_patterns = [
+        raw_dir / f"team_box_{season}.parquet",
+        raw_dir / f"wbb_team_box_{season}.parquet",
+    ]
+
+    for local_path in local_patterns:
+        if local_path.exists():
+            try:
+                print(f"Trying local: {local_path}")
+                df = pd.read_parquet(local_path)
+                print(f"  ✓ Loaded {len(df)} rows from local")
+                return df
+            except Exception as e:
+                print(f"  ✗ Local failed: {e}")
+
+    print("ERROR: Could not load wehoop data (remote or local)")
     return pd.DataFrame()
 
 
 def load_wehoop_player_box(season=2025):
-    """Load player box score data from wehoop releases."""
+    """Load player box score data from wehoop releases or local fallback."""
     url_patterns = [
         f"{WEHOOP_BASE}/espn_womens_college_basketball_player_boxscore/player_box_{season}.parquet",
         f"{WEHOOP_BASE}/wbb_player_box/player_box_{season}.parquet",
         f"{WEHOOP_BASE}/wbb_player_box/wbb_player_box_{season}.parquet",
     ]
-    
+
     for url in url_patterns:
         try:
-            print(f"Trying: {url}")
+            print(f"Trying remote: {url}")
             df = pd.read_parquet(url)
-            print(f"✓ Loaded {len(df)} rows from wehoop")
+            print(f"  ✓ Loaded {len(df)} rows from remote")
             return df
         except Exception as e:
-            print(f"  ✗ Failed: {e}")
+            print(f"  ✗ Remote failed: {e}")
             continue
-    
+
+    # Fall back to local files
+    raw_dir = Path("data/raw")
+    local_patterns = [
+        raw_dir / f"player_box_{season}.parquet",
+        raw_dir / f"wbb_player_box_{season}.parquet",
+    ]
+
+    for local_path in local_patterns:
+        if local_path.exists():
+            try:
+                print(f"Trying local: {local_path}")
+                df = pd.read_parquet(local_path)
+                print(f"  ✓ Loaded {len(df)} rows from local")
+                return df
+            except Exception as e:
+                print(f"  ✗ Local failed: {e}")
+
     return pd.DataFrame()
 
 
