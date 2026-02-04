@@ -29,6 +29,9 @@ on:
           - 'false'
           - 'true'
 
+permissions:
+  contents: write
+
 jobs:
   # Check if workflow should run (for scheduled triggers)
   check-date:
