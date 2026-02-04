@@ -44,7 +44,7 @@ def load_parquet_with_fallback(
             if verbose:
                 print(f"  ✓ Loaded {len(df)} {data_type} rows from remote")
             return df
-        except Exception as e:
+        except (IOError, ValueError) as e:
             if verbose:
                 print(f"  ✗ Remote failed: {e}")
 
@@ -58,7 +58,7 @@ def load_parquet_with_fallback(
                 if verbose:
                     print(f"  ✓ Loaded {len(df)} {data_type} rows from local")
                 return df
-            except Exception as e:
+            except (IOError, ValueError) as e:
                 if verbose:
                     print(f"  ✗ Local failed: {e}")
 
