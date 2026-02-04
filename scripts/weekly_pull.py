@@ -59,6 +59,9 @@ def save_processed_games(game_ids):
     """Save updated list of processed game IDs."""
     df = pd.DataFrame({'game_id': list(game_ids)})
     df.to_parquet(PROCESSED_GAMES_FILE, index=False)
+    # Also save as CSV
+    csv_path = PROCESSED_GAMES_FILE.with_suffix('.csv')
+    df.to_csv(csv_path, index=False)
 
 
 def load_schedule_data(season):
@@ -481,7 +484,10 @@ def process_games(start_date=None, force_refresh=False):
         team_final = team_processed
     
     team_final.to_parquet(team_output_file, index=False)
+    team_csv_file = team_output_file.with_suffix('.csv')
+    team_final.to_csv(team_csv_file, index=False)
     print(f"  Saved {len(team_final)} team-game rows to {team_output_file}")
+    print(f"  Saved {len(team_final)} team-game rows to {team_csv_file}")
     
     if not player_processed.empty:
         if player_output_file.exists() and not force_refresh:
@@ -494,7 +500,10 @@ def process_games(start_date=None, force_refresh=False):
             player_final = player_processed
         
         player_final.to_parquet(player_output_file, index=False)
+        player_csv_file = player_output_file.with_suffix('.csv')
+        player_final.to_csv(player_csv_file, index=False)
         print(f"  Saved {len(player_final)} player-game rows to {player_output_file}")
+        print(f"  Saved {len(player_final)} player-game rows to {player_csv_file}")
     
     # Update tracking
     all_processed = processed_games.union(new_game_ids)
