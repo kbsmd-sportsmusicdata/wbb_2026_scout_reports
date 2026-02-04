@@ -3,6 +3,7 @@ name: Weekly WBB Data Pull
 on:
   schedule:
     # Run every Monday at 6 AM EST (11 AM UTC)
+    # First scheduled run: Monday, February 9, 2026
     - cron: '0 11 * * 1'
 
   workflow_dispatch:
@@ -29,7 +30,32 @@ on:
           - 'true'
 
 jobs:
+  # Check if workflow should run (for scheduled triggers)
+  check-date:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
+    steps:
+      - name: Check activation date
+        id: check
+        run: |
+          ACTIVATION_DATE="2026-02-06"
+          CURRENT_DATE=$(date +%Y-%m-%d)
+
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "Manual trigger - always run"
+            echo "should_run=true" >> $GITHUB_OUTPUT
+          elif [[ "$CURRENT_DATE" < "$ACTIVATION_DATE" ]]; then
+            echo "Before activation date ($ACTIVATION_DATE) - skipping"
+            echo "should_run=false" >> $GITHUB_OUTPUT
+          else
+            echo "On or after activation date - running"
+            echo "should_run=true" >> $GITHUB_OUTPUT
+          fi
+
   pull-data:
+    needs: check-date
+    if: needs.check-date.outputs.should_run == 'true'
     runs-on: ubuntu-latest
 
     steps:
@@ -51,6 +77,8 @@ jobs:
 
       - name: Run weekly pull
         id: weekly_pull
+        env:
+          PYTHONPATH: scripts
         run: |
           echo "Starting weekly data pull..."
           python scripts/weekly_pull.py \
@@ -60,6 +88,8 @@ jobs:
 
       - name: Rebuild benchmarks (if requested)
         if: github.event.inputs.rebuild_benchmarks == 'true' || github.event.inputs.force_refresh == 'true'
+        env:
+          PYTHONPATH: scripts
         run: |
           echo "Rebuilding D1 benchmarks..."
           python scripts/build_benchmarks.py --season 2025
@@ -67,6 +97,8 @@ jobs:
 
       - name: Run test validation
         continue-on-error: true
+        env:
+          PYTHONPATH: scripts
         run: |
           echo "Running pipeline validation..."
           python scripts/test_pipeline.py --build-benchmarks-only || echo "Validation completed with warnings"
