@@ -4,13 +4,21 @@ WBB Scout Reports - Data Loading Utilities
 Centralized data loading functions with remote + local fallback support.
 
 Used by: weekly_pull.py, build_benchmarks.py, test_pipeline.py
+
+Data Sources:
+- Primary: sportsdataverse-data releases (parquet files)
+- Fallback: wehoop-wbb-data releases
+- Local: data/raw/ directory
 """
 
 import pandas as pd
 from pathlib import Path
 from typing import List, Optional
 
-# wehoop GitHub releases base URL
+# sportsdataverse GitHub releases (primary source - updated more frequently)
+SPORTSDATAVERSE_BASE = "https://github.com/sportsdataverse/sportsdataverse-data/releases/download"
+
+# wehoop-wbb-data releases (fallback source)
 WEHOOP_BASE = "https://github.com/sportsdataverse/wehoop-wbb-data/releases/download"
 
 # Default data directory (relative to repo root)
@@ -44,7 +52,7 @@ def load_parquet_with_fallback(
             if verbose:
                 print(f"  ✓ Loaded {len(df)} {data_type} rows from remote")
             return df
-        except (IOError, ValueError) as e:
+        except Exception as e:
             if verbose:
                 print(f"  ✗ Remote failed: {e}")
 
@@ -58,7 +66,7 @@ def load_parquet_with_fallback(
                 if verbose:
                     print(f"  ✓ Loaded {len(df)} {data_type} rows from local")
                 return df
-            except (IOError, ValueError) as e:
+            except Exception as e:
                 if verbose:
                     print(f"  ✗ Local failed: {e}")
 
@@ -85,9 +93,11 @@ def load_team_box(season: int = 2025, data_dir: Optional[Path] = None, verbose: 
     raw_dir = data_dir / "raw"
 
     remote_patterns = [
-        f"{WEHOOP_BASE}/espn_womens_college_basketball_team_boxscore/team_box_{season}.parquet",
-        f"{WEHOOP_BASE}/wbb_team_box/team_box_{season}.parquet",
+        # Primary: sportsdataverse-data releases (most up-to-date)
+        f"{SPORTSDATAVERSE_BASE}/espn_womens_college_basketball_team_boxscores/team_box_{season}.parquet",
+        # Fallback: wehoop-wbb-data releases
         f"{WEHOOP_BASE}/wbb_team_box/wbb_team_box_{season}.parquet",
+        f"{WEHOOP_BASE}/wbb_team_box/team_box_{season}.parquet",
     ]
 
     local_patterns = [
@@ -121,9 +131,11 @@ def load_player_box(season: int = 2025, data_dir: Optional[Path] = None, verbose
     raw_dir = data_dir / "raw"
 
     remote_patterns = [
-        f"{WEHOOP_BASE}/espn_womens_college_basketball_player_boxscore/player_box_{season}.parquet",
-        f"{WEHOOP_BASE}/wbb_player_box/player_box_{season}.parquet",
+        # Primary: sportsdataverse-data releases (most up-to-date)
+        f"{SPORTSDATAVERSE_BASE}/espn_womens_college_basketball_player_boxscores/player_box_{season}.parquet",
+        # Fallback: wehoop-wbb-data releases
         f"{WEHOOP_BASE}/wbb_player_box/wbb_player_box_{season}.parquet",
+        f"{WEHOOP_BASE}/wbb_player_box/player_box_{season}.parquet",
     ]
 
     local_patterns = [
@@ -157,8 +169,10 @@ def load_pbp(season: int = 2025, data_dir: Optional[Path] = None, verbose: bool 
     raw_dir = data_dir / "raw"
 
     remote_patterns = [
+        # Primary: sportsdataverse-data releases (most up-to-date)
+        f"{SPORTSDATAVERSE_BASE}/espn_womens_college_basketball_pbp/play_by_play_{season}.parquet",
+        # Fallback: wehoop-wbb-data releases
         f"{WEHOOP_BASE}/wbb_pbp/wbb_pbp_{season}.parquet",
-        f"{WEHOOP_BASE}/espn_womens_college_basketball_pbp/pbp_{season}.parquet",
     ]
 
     local_patterns = [
