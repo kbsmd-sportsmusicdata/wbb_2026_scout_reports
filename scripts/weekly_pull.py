@@ -40,7 +40,7 @@ PROCESSED_GAMES_FILE = TRACKING_DIR / "processed_games.parquet"
 PULL_LOG_FILE = TRACKING_DIR / "pull_log.txt"
 
 # Current season (update annually)
-CURRENT_SEASON = 2025
+CURRENT_SEASON = 2026
 
 
 # ============================================================================
