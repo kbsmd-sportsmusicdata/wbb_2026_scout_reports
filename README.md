@@ -45,13 +45,14 @@ wbb_2026_scout_reports/
 │
 ├── data/
 │   ├── raw/                     # Raw API data (JSON/parquet)
-│   ├── processed/               # Cleaned, analysis-ready tables
-│   │   ├── game_analysis.parquet
-│   │   └── player_game.parquet
+│   ├── processed/               # Tableau-ready analysis tables
+│   │   ├── game_summary.csv     # Team game stats + all derived metrics
+│   │   ├── player_game.csv      # Player stats + advanced metrics
+│   │   └── shooting_zones.csv   # Zone-level shooting (from PBP)
 │   ├── benchmarks/              # D1 reference tables
-│   │   └── d1_benchmarks.csv
+│   │   └── d1_benchmarks_current.csv
 │   └── tracking/                # Processing state
-│       └── processed_games.parquet
+│       └── processed_games.csv
 │
 ├── scripts/
 │   ├── weekly_pull.py           # Main data collection script
@@ -107,9 +108,43 @@ python scripts/weekly_pull.py --start-date 2025-01-06
 ### 4. Open in Tableau
 
 1. Open `tableau/wbb_scout_condensed.twbx`
-2. Connect to `data/processed/game_analysis.parquet`
+2. Connect to the Tableau-ready CSVs:
+   - `data/processed/game_summary.csv` - Team game data
+   - `data/processed/player_game.csv` - Player game data
+   - `data/processed/shooting_zones.csv` - Zone shooting (optional)
 3. Select games to analyze
 4. Publish to Tableau Public
+
+## Tableau-Ready Data
+
+The processed CSVs include all transformations needed for analysis:
+
+### game_summary.csv
+| Category | Metrics |
+|----------|---------|
+| **Identifiers** | game_id, team_id, team_name, opponent_name, game_date, is_home, result |
+| **Box Score** | pts, fgm, fga, fg2m, fg2a, fg3m, fg3a, ftm, fta, orb, drb, ast, stl, blk, tov |
+| **Opponent Stats** | opp_pts, opp_fgm, opp_fga, opp_orb, opp_drb, opp_tov, etc. |
+| **Efficiency** | efg_pct, ts_pct, fg2_pct, fg3_pct, ft_pct, fg3_rate, ftr |
+| **Ratings** | ortg, drtg, net_rtg, pace, poss_est |
+| **Four Factors** | efg_pct, tov_pct, oreb_pct, dreb_pct, ftr |
+| **Defense** | stl_pct, blk_pct |
+| **Rolling Avg** | last5_ortg, last5_drtg, last5_net_rtg, etc. |
+| **Percentiles** | ortg_pctile, efg_pct_pctile, etc. (vs D1 benchmarks) |
+| **Labels** | ortg_label, efg_pct_label, etc. (Elite/Great/Average/etc.) |
+| **Misc Scoring** | fb_pts, paint_pts, potov (if available) |
+
+### player_game.csv
+| Category | Metrics |
+|----------|---------|
+| **Identifiers** | game_id, player_id, player_name, team_name, position, starter |
+| **Box Score** | mp, pts, fgm, fga, fg2m, fg2a, fg3m, fg3a, ftm, fta, reb, ast, stl, blk, tov |
+| **Efficiency** | efg_pct, ts_pct, fg_pct, fg3_pct, ft_pct |
+| **Advanced** | usg_pct, ast_ratio, tov_pct, ast_tov, ftr, fg3_rate |
+| **Per 40 Min** | pts_40, reb_40, ast_40, stl_40, blk_40, tov_40 |
+| **Percentiles** | ts_pct_pctile, usg_pct_pctile, efg_pct_pctile |
+| **Labels** | ts_pct_label, usg_pct_label, efg_pct_label |
+| **Flags** | dnq (did not qualify, <5 min) |
 
 ## GitHub Action
 
