@@ -89,6 +89,7 @@ def join_opponent_stats(df):
     """
     Join opponent stats for each team-game row.
     Creates opp_* columns for all relevant stats.
+    Uses vectorized merge for O(N) performance.
     """
     print("Joining opponent stats...")
 
@@ -118,34 +119,10 @@ def join_opponent_stats(df):
     rename_map['team_abbreviation'] = 'opponent_abbrev'
     opp_data = opp_data.rename(columns=rename_map)
 
-    # For each game, match teams to their opponents
-    result_rows = []
-
-    for game_id, group in df.groupby('game_id'):
-        if len(group) != 2:
-            # Skip games without exactly 2 teams
-            result_rows.append(group)
-            continue
-
-        teams = group['team_id'].tolist()
-        opp_group = opp_data[opp_data['game_id'] == game_id]
-
-        for idx, row in group.iterrows():
-            row = row.copy()
-            opp_team_id = [t for t in teams if t != row['team_id']]
-
-            if opp_team_id:
-                opp_row = opp_group[opp_group['opponent_id'] == opp_team_id[0]]
-                if not opp_row.empty:
-                    opp_row = opp_row.iloc[0]
-                    for col in opp_row.index:
-                        if col not in ['game_id']:
-                            row[col] = opp_row[col]
-
-            result_rows.append(pd.DataFrame([row]))
-
-    if result_rows:
-        df = pd.concat(result_rows, ignore_index=True)
+    # Vectorized join: merge df with opp_data on game_id, then filter where team_id != opponent_id
+    # This assumes exactly 2 teams per game_id
+    df = df.merge(opp_data, on='game_id', how='left')
+    df = df[df['team_id'] != df['opponent_id']]
 
     print(f"  Joined opponent stats for {df['game_id'].nunique()} games")
     return df
@@ -543,34 +520,24 @@ def calculate_percentiles_vs_benchmarks(df, benchmark_df, metrics):
             df[f'{metric}_pctile'] = df[metric].rank(pct=True) * 100
             continue
 
-        # Interpolate percentiles
+        # Interpolate percentiles using np.interp (optimized)
         breakpoints = sorted(breakpoints, key=lambda x: x[1])
+
+        # Extract x (benchmark values) and y (percentiles) for np.interp
+        xp = [b[1] for b in breakpoints]  # benchmark values (must be increasing)
+        fp = [b[0] for b in breakpoints]  # percentile values
 
         def interpolate_pctile(value):
             if pd.isna(value):
                 return np.nan
 
-            # Handle inversion for metrics where lower is better
+            # np.interp handles edge cases with left/right bounds
+            pctile = np.interp(value, xp, fp, left=fp[0], right=fp[-1])
+
+            # Invert for metrics where lower is better
             if metric in INVERTED_METRICS:
-                # For inverted metrics, flip the logic
-                for i, (pct, bench_val) in enumerate(breakpoints):
-                    if value >= bench_val:
-                        if i == 0:
-                            return 100 - pct
-                        prev_pct, prev_val = breakpoints[i-1]
-                        # Linear interpolation
-                        ratio = (value - prev_val) / (bench_val - prev_val) if bench_val != prev_val else 0
-                        return 100 - (prev_pct + ratio * (pct - prev_pct))
-                return 100 - breakpoints[-1][0]
-            else:
-                for i, (pct, bench_val) in enumerate(breakpoints):
-                    if value <= bench_val:
-                        if i == 0:
-                            return pct
-                        prev_pct, prev_val = breakpoints[i-1]
-                        ratio = (value - prev_val) / (bench_val - prev_val) if bench_val != prev_val else 0
-                        return prev_pct + ratio * (pct - prev_pct)
-                return breakpoints[-1][0]
+                return 100 - pctile
+            return pctile
 
         df[f'{metric}_pctile'] = df[metric].apply(interpolate_pctile)
 
