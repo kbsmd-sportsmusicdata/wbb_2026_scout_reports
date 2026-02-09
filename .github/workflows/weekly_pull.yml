@@ -89,6 +89,14 @@ jobs:
             --force-refresh "${{ github.event.inputs.force_refresh || 'false' }}"
           echo "Weekly pull completed"
 
+      - name: Add rankings and create filtered datasets
+        env:
+          PYTHONPATH: scripts
+        run: |
+          echo "Adding rankings and creating Tableau-ready filtered datasets..."
+          python scripts/load_schedule_rankings.py --season 2026
+          echo "Rankings and filtered datasets created"
+
       - name: Rebuild benchmarks (if requested)
         if: github.event.inputs.rebuild_benchmarks == 'true' || github.event.inputs.force_refresh == 'true'
         env:
