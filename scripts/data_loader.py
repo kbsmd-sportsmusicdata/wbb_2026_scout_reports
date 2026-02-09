@@ -63,9 +63,10 @@ def load_parquet_with_fallback(
                 # RDS files need to be downloaded first
                 import tempfile
                 import urllib.request
-                with tempfile.NamedTemporaryFile(suffix='.rds', delete=False) as tmp:
-                    urllib.request.urlretrieve(url, tmp.name)
-                    df = load_rds_file(Path(tmp.name))
+                with tempfile.TemporaryDirectory() as tmpdir:
+                    filepath = Path(tmpdir) / "data.rds"
+                    urllib.request.urlretrieve(url, filepath)
+                    df = load_rds_file(filepath)
             else:
                 df = pd.read_parquet(url)
             if verbose:
