@@ -31,6 +31,8 @@ def load_rds_file(filepath: Path) -> pd.DataFrame:
         import pyreadr
         result = pyreadr.read_r(str(filepath))
         # RDS files contain a single object
+        if not result:
+            raise ValueError("RDS file is empty or contains no objects")
         return list(result.values())[0]
     except ImportError:
         raise ImportError("pyreadr package required to read RDS files. Install with: pip install pyreadr")
