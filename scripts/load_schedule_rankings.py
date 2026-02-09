@@ -7,12 +7,16 @@ This script:
 3. Creates a filtered game_summary with only ranked team games
 4. Creates a filtered player_game with only players from ranked games
 
+Usage:
+    python scripts/load_schedule_rankings.py --season 2026
+
 Output files:
 - data/raw/{SEASON}/wbb_schedule_{SEASON}.parquet (raw schedule with rankings)
 - data/processed/game_summary_ranked.csv (filtered: at least one ranked team)
 - data/processed/player_game_ranked.csv (filtered: players from ranked games only)
 """
 
+import argparse
 import os
 from datetime import datetime
 from pathlib import Path
@@ -22,17 +26,15 @@ import requests
 import tempfile
 
 # Configuration
-SEASON = 2026  # Update this for new seasons
+DEFAULT_SEASON = 2026
 DATA_DIR = Path("data")
-RAW_DIR = DATA_DIR / "raw" / str(SEASON)
 PROCESSED_DIR = DATA_DIR / "processed"
 
-# Ensure directories exist
-RAW_DIR.mkdir(parents=True, exist_ok=True)
+# Ensure processed directory exists
 PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 
 
-def download_schedule_data(season: int = SEASON):
+def download_schedule_data(season: int = DEFAULT_SEASON):
     """Download the WBB Schedule Parquet file with rankings."""
     url = f"https://raw.githubusercontent.com/sportsdataverse/wehoop-wbb-raw/main/wbb/schedules/parquet/wbb_schedule_{season}.parquet"
     print(f"Downloading schedule data from: {url}")
@@ -148,20 +150,41 @@ def filter_ranked_games(df):
     return filtered
 
 
+def parse_args():
+    """Parse command-line arguments."""
+    parser = argparse.ArgumentParser(
+        description="Load WBB schedule data with rankings and create filtered datasets."
+    )
+    parser.add_argument(
+        "--season",
+        type=int,
+        default=DEFAULT_SEASON,
+        help=f"Season year (default: {DEFAULT_SEASON})"
+    )
+    return parser.parse_args()
+
+
 def main():
+    args = parse_args()
+    season = args.season
+
+    # Set up season-specific raw directory
+    raw_dir = DATA_DIR / "raw" / str(season)
+    raw_dir.mkdir(parents=True, exist_ok=True)
+
     print("=" * 60)
-    print("Loading Schedule Data with Rankings")
+    print(f"Loading Schedule Data with Rankings (Season {season})")
     print("=" * 60)
 
     # 1. Download schedule data
     try:
-        schedule_df = download_schedule_data(SEASON)
+        schedule_df = download_schedule_data(season)
     except Exception as e:
         print(f"Error downloading schedule: {e}")
         return
 
     # Save raw schedule
-    schedule_path = RAW_DIR / f"wbb_schedule_{SEASON}.parquet"
+    schedule_path = raw_dir / f"wbb_schedule_{season}.parquet"
     schedule_df.to_parquet(schedule_path, index=False)
     print(f"  ✓ Saved schedule to {schedule_path}")
 
