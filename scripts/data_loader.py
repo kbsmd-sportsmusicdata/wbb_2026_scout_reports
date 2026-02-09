@@ -7,8 +7,8 @@ Used by: weekly_pull.py, build_benchmarks.py, test_pipeline.py
 
 Data Sources:
 - Primary: sportsdataverse-data releases (parquet files)
-- Fallback: wehoop-wbb-data releases
-- Local: data/raw/ directory
+- Fallback: wehoop-wbb-data releases (parquet or RDS)
+- Local: data/raw/ or data/raw/{season}/ directory
 """
 
 import pandas as pd
@@ -23,6 +23,17 @@ WEHOOP_BASE = "https://github.com/sportsdataverse/wehoop-wbb-data/releases/downl
 
 # Default data directory (relative to repo root)
 DEFAULT_DATA_DIR = Path("data")
+
+
+def load_rds_file(filepath: Path) -> pd.DataFrame:
+    """Load an RDS file (R data format) into a pandas DataFrame."""
+    try:
+        import pyreadr
+        result = pyreadr.read_r(str(filepath))
+        # RDS files contain a single object
+        return list(result.values())[0]
+    except ImportError:
+        raise ImportError("pyreadr package required to read RDS files. Install with: pip install pyreadr")
 
 
 def load_parquet_with_fallback(
@@ -48,7 +59,15 @@ def load_parquet_with_fallback(
         try:
             if verbose:
                 print(f"Trying remote: {url}")
-            df = pd.read_parquet(url)
+            if url.endswith('.rds'):
+                # RDS files need to be downloaded first
+                import tempfile
+                import urllib.request
+                with tempfile.NamedTemporaryFile(suffix='.rds', delete=False) as tmp:
+                    urllib.request.urlretrieve(url, tmp.name)
+                    df = load_rds_file(Path(tmp.name))
+            else:
+                df = pd.read_parquet(url)
             if verbose:
                 print(f"  ✓ Loaded {len(df)} {data_type} rows from remote")
             return df
@@ -62,7 +81,10 @@ def load_parquet_with_fallback(
             try:
                 if verbose:
                     print(f"Trying local: {local_path}")
-                df = pd.read_parquet(local_path)
+                if str(local_path).endswith('.rds'):
+                    df = load_rds_file(local_path)
+                else:
+                    df = pd.read_parquet(local_path)
                 if verbose:
                     print(f"  ✓ Loaded {len(df)} {data_type} rows from local")
                 return df
@@ -91,6 +113,7 @@ def load_team_box(season: int = 2025, data_dir: Optional[Path] = None, verbose: 
         data_dir = DEFAULT_DATA_DIR
 
     raw_dir = data_dir / "raw"
+    season_dir = raw_dir / str(season)
 
     remote_patterns = [
         # Primary: sportsdataverse-data releases (most up-to-date)
@@ -101,8 +124,15 @@ def load_team_box(season: int = 2025, data_dir: Optional[Path] = None, verbose: 
     ]
 
     local_patterns = [
+        # Season subdirectory first (e.g., data/raw/2026/)
+        season_dir / f"team_box_{season}.parquet",
+        season_dir / f"wbb_team_box_{season}.parquet",
+        # Then flat raw directory
         raw_dir / f"team_box_{season}.parquet",
         raw_dir / f"wbb_team_box_{season}.parquet",
+        # RDS files
+        season_dir / f"team_box_{season}.rds",
+        raw_dir / f"team_box_{season}.rds",
     ]
 
     return load_parquet_with_fallback(
@@ -129,6 +159,7 @@ def load_player_box(season: int = 2025, data_dir: Optional[Path] = None, verbose
         data_dir = DEFAULT_DATA_DIR
 
     raw_dir = data_dir / "raw"
+    season_dir = raw_dir / str(season)
 
     remote_patterns = [
         # Primary: sportsdataverse-data releases (most up-to-date)
@@ -139,8 +170,15 @@ def load_player_box(season: int = 2025, data_dir: Optional[Path] = None, verbose
     ]
 
     local_patterns = [
+        # Season subdirectory first (e.g., data/raw/2026/)
+        season_dir / f"player_box_{season}.parquet",
+        season_dir / f"wbb_player_box_{season}.parquet",
+        # Then flat raw directory
         raw_dir / f"player_box_{season}.parquet",
         raw_dir / f"wbb_player_box_{season}.parquet",
+        # RDS files
+        season_dir / f"player_box_{season}.rds",
+        raw_dir / f"player_box_{season}.rds",
     ]
 
     return load_parquet_with_fallback(
@@ -167,17 +205,29 @@ def load_pbp(season: int = 2025, data_dir: Optional[Path] = None, verbose: bool 
         data_dir = DEFAULT_DATA_DIR
 
     raw_dir = data_dir / "raw"
+    season_dir = raw_dir / str(season)
 
     remote_patterns = [
-        # Primary: sportsdataverse-data releases (most up-to-date)
+        # Primary: sportsdataverse-data releases (parquet)
         f"{SPORTSDATAVERSE_BASE}/espn_womens_college_basketball_pbp/play_by_play_{season}.parquet",
         # Fallback: wehoop-wbb-data releases
         f"{WEHOOP_BASE}/wbb_pbp/wbb_pbp_{season}.parquet",
+        # RDS format (used by wehoop R package)
+        f"{SPORTSDATAVERSE_BASE}/espn_womens_college_basketball_pbp/play_by_play_{season}.rds",
     ]
 
     local_patterns = [
+        # Season subdirectory first (e.g., data/raw/2026/)
+        season_dir / f"play_by_play_{season}.parquet",
+        season_dir / f"pbp_{season}.parquet",
+        season_dir / f"wbb_pbp_{season}.parquet",
+        # Then flat raw directory
+        raw_dir / f"play_by_play_{season}.parquet",
         raw_dir / f"pbp_{season}.parquet",
         raw_dir / f"wbb_pbp_{season}.parquet",
+        # RDS files
+        season_dir / f"play_by_play_{season}.rds",
+        raw_dir / f"play_by_play_{season}.rds",
     ]
 
     return load_parquet_with_fallback(
@@ -186,3 +236,4 @@ def load_pbp(season: int = 2025, data_dir: Optional[Path] = None, verbose: bool 
         data_type="play-by-play",
         verbose=verbose
     )
+
