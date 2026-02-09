@@ -31,6 +31,8 @@ def load_rds_file(filepath: Path) -> pd.DataFrame:
         import pyreadr
         result = pyreadr.read_r(str(filepath))
         # RDS files contain a single object
+        if not result:
+            raise ValueError("RDS file is empty or contains no objects")
         return list(result.values())[0]
     except ImportError:
         raise ImportError("pyreadr package required to read RDS files. Install with: pip install pyreadr")
@@ -63,9 +65,10 @@ def load_parquet_with_fallback(
                 # RDS files need to be downloaded first
                 import tempfile
                 import urllib.request
-                with tempfile.NamedTemporaryFile(suffix='.rds', delete=False) as tmp:
-                    urllib.request.urlretrieve(url, tmp.name)
-                    df = load_rds_file(Path(tmp.name))
+                with tempfile.TemporaryDirectory() as tmpdir:
+                    filepath = Path(tmpdir) / "data.rds"
+                    urllib.request.urlretrieve(url, filepath)
+                    df = load_rds_file(filepath)
             else:
                 df = pd.read_parquet(url)
             if verbose:
@@ -81,7 +84,7 @@ def load_parquet_with_fallback(
             try:
                 if verbose:
                     print(f"Trying local: {local_path}")
-                if str(local_path).endswith('.rds'):
+                if local_path.suffix == '.rds':
                     df = load_rds_file(local_path)
                 else:
                     df = pd.read_parquet(local_path)
