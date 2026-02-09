@@ -1,0 +1,618 @@
+import React, { useState } from 'react';
+import { TrendingUp, TrendingDown, Trophy, Target, Users, BarChart3, Activity } from 'lucide-react';
+
+// ==============================================================================
+// WBB 2026 SCOUT REPORTS - TABLEAU DASHBOARD MOCKUP
+// Visual reference for building the actual Tableau dashboard
+// Implements all Phase 2 requirements from the project tracker
+// ==============================================================================
+
+const DashboardMockup = () => {
+  const [selectedView, setSelectedView] = useState('game-summary');
+  const [selectedGame, setSelectedGame] = useState('game1');
+  const [selectedTeam, setSelectedTeam] = useState('teamA');
+
+  // Mock data for visualization
+  const games = {
+    game1: {
+      teamA: { name: 'South Carolina', logo: '🏀', score: 72, result: 'W' },
+      teamB: { name: 'Connecticut', logo: '🏀', score: 68, result: 'L' },
+      date: '2025-01-20',
+      tags: ['Close Game', 'Ranked Matchup'],
+      whyWon: [
+        'Dominated the glass (42% OREB vs 28%)',
+        'Protected the ball (12% TOV vs 18%)',
+        'Out-executed in paint (48% FG In Paint vs 38%)'
+      ]
+    }
+  };
+
+  const fourFactors = [
+    { metric: 'eFG%', teamA: { value: '52.3%', pctile: 78, label: 'Great' }, teamB: { value: '48.1%', pctile: 55, label: 'Average' } },
+    { metric: 'TOV%', teamA: { value: '12.1%', pctile: 82, label: 'Great' }, teamB: { value: '18.4%', pctile: 35, label: 'Below Avg' } },
+    { metric: 'OREB%', teamA: { value: '42.0%', pctile: 91, label: 'Elite' }, teamB: { value: '28.3%', pctile: 42, label: 'Average' } },
+    { metric: 'FT Rate', teamA: { value: '24.5%', pctile: 65, label: 'Above Avg' }, teamB: { value: '31.2%', pctile: 77, label: 'Great' } },
+    { metric: 'Net Rating', teamA: { value: '+8.5', pctile: 72, label: 'Great' }, teamB: { value: '-4.2', pctile: 38, label: 'Below Avg' } }
+  ];
+
+  const shootingMetrics = [
+    { metric: 'eFG%', teamA: { value: 52.3, pctile: 78 }, teamB: { value: 48.1, pctile: 55 } },
+    { metric: 'TS%', teamA: { value: 56.1, pctile: 82 }, teamB: { value: 51.8, pctile: 61 } },
+    { metric: '2P%', teamA: { value: 48.2, pctile: 65 }, teamB: { value: 42.1, pctile: 41 } },
+    { metric: '3P%', teamA: { value: 36.4, pctile: 71 }, teamB: { value: 33.3, pctile: 52 } }
+  ];
+
+  const topPlayers = [
+    { name: 'J. Smith', team: 'A', pts: 24, usg: 32.1, ts: 62.4, label: '★ High Volume + Efficient' },
+    { name: 'M. Johnson', team: 'B', pts: 22, usg: 35.8, ts: 48.2, label: '⚠ High Volume, Struggled' },
+    { name: 'K. Williams', team: 'A', pts: 18, usg: 24.2, ts: 58.1, label: '✓ Efficient Role Player' },
+    { name: 'A. Davis', team: 'B', pts: 15, usg: 21.5, ts: 55.3, label: '✓ Efficient Role Player' },
+    { name: 'T. Brown', team: 'A', pts: 12, usg: 18.1, ts: 61.2, label: '✓ Efficient Role Player' }
+  ];
+
+  const getPercentileColor = (pctile) => {
+    if (pctile >= 90) return 'bg-green-700 text-white';
+    if (pctile >= 75) return 'bg-green-500 text-white';
+    if (pctile >= 60) return 'bg-blue-400 text-white';
+    if (pctile >= 40) return 'bg-gray-300 text-gray-800';
+    if (pctile >= 25) return 'bg-orange-400 text-white';
+    return 'bg-red-600 text-white';
+  };
+
+  const getLabelColor = (label) => {
+    if (label === 'Elite') return 'text-green-700 font-bold';
+    if (label === 'Great') return 'text-green-600 font-semibold';
+    if (label === 'Above Avg') return 'text-blue-600';
+    if (label === 'Average') return 'text-gray-600';
+    if (label === 'Below Avg') return 'text-orange-600';
+    return 'text-red-600';
+  };
+
+  // VIEW 1: Game Summary Dashboard
+  const GameSummaryView = () => (
+    <div className="space-y-6">
+      {/* Header Section */}
+      <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg p-6">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-4">
+            <div className="text-6xl">{games[selectedGame].teamA.logo}</div>
+            <div>
+              <div className="text-3xl font-bold">{games[selectedGame].teamA.name}</div>
+              <div className="text-5xl font-bold mt-2">{games[selectedGame].teamA.score}</div>
+              <div className="text-lg font-semibold text-green-300 mt-1">{games[selectedGame].teamA.result}</div>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <div className="text-2xl font-bold opacity-75">VS</div>
+            <div className="text-sm mt-2">{games[selectedGame].date}</div>
+            <div className="flex gap-2 mt-3">
+              {games[selectedGame].tags.map((tag, i) => (
+                <span key={i} className="px-3 py-1 bg-white/20 rounded-full text-xs font-medium">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <div>
+              <div className="text-3xl font-bold text-right">{games[selectedGame].teamB.name}</div>
+              <div className="text-5xl font-bold mt-2 text-right">{games[selectedGame].teamB.score}</div>
+              <div className="text-lg font-semibold text-red-300 mt-1 text-right">{games[selectedGame].teamB.result}</div>
+            </div>
+            <div className="text-6xl">{games[selectedGame].teamB.logo}</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Why They Won Callout */}
+      <div className="bg-green-50 border-l-4 border-green-600 p-6 rounded-r-lg">
+        <div className="flex items-center gap-3 mb-3">
+          <Trophy className="w-6 h-6 text-green-700" />
+          <h3 className="text-xl font-bold text-green-900">WHY {games[selectedGame].teamA.name.toUpperCase()} WON</h3>
+        </div>
+        <ul className="space-y-2">
+          {games[selectedGame].whyWon.map((reason, i) => (
+            <li key={i} className="flex items-start gap-2 text-green-800">
+              <span className="text-green-600 font-bold mt-1">•</span>
+              <span className="text-lg">{reason}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Four Factors Comparison Table */}
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="bg-gray-800 text-white p-4">
+          <h3 className="text-xl font-bold">FOUR FACTORS COMPARISON</h3>
+          <p className="text-sm text-gray-300 mt-1">Percentile ranks vs. D1 season averages</p>
+        </div>
+        
+        <table className="w-full">
+          <thead className="bg-gray-100 border-b-2 border-gray-300">
+            <tr>
+              <th className="px-6 py-3 text-left text-sm font-bold text-gray-700">Metric</th>
+              <th className="px-6 py-3 text-center text-sm font-bold text-gray-700">Team A Value</th>
+              <th className="px-6 py-3 text-center text-sm font-bold text-gray-700">Pctl</th>
+              <th className="px-6 py-3 text-center text-sm font-bold text-gray-700">Label</th>
+              <th className="px-6 py-3 text-center text-sm font-bold text-gray-700">Team B Value</th>
+              <th className="px-6 py-3 text-center text-sm font-bold text-gray-700">Pctl</th>
+              <th className="px-6 py-3 text-center text-sm font-bold text-gray-700">Label</th>
+            </tr>
+          </thead>
+          <tbody>
+            {fourFactors.map((row, i) => (
+              <tr key={i} className={`border-b ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+                <td className="px-6 py-4 font-semibold text-gray-900">{row.metric}</td>
+                <td className="px-6 py-4 text-center text-lg font-bold text-indigo-700">{row.teamA.value}</td>
+                <td className="px-6 py-4 text-center">
+                  <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getPercentileColor(row.teamA.pctile)}`}>
+                    {row.teamA.pctile}
+                  </span>
+                </td>
+                <td className={`px-6 py-4 text-center font-semibold ${getLabelColor(row.teamA.label)}`}>
+                  {row.teamA.label}
+                </td>
+                <td className="px-6 py-4 text-center text-lg font-bold text-purple-700">{row.teamB.value}</td>
+                <td className="px-6 py-4 text-center">
+                  <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getPercentileColor(row.teamB.pctile)}`}>
+                    {row.teamB.pctile}
+                  </span>
+                </td>
+                <td className={`px-6 py-4 text-center font-semibold ${getLabelColor(row.teamB.label)}`}>
+                  {row.teamB.label}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Tooltip Example */}
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm">
+        <div className="flex items-start gap-2">
+          <div className="text-blue-600 font-bold">ℹ️</div>
+          <div>
+            <span className="font-semibold text-blue-900">Design Note:</span>
+            <span className="text-blue-800"> In Tableau, add tooltips explaining: "eFG% weights 3-pointers appropriately by adding 0.5 points per 3PM to account for the extra point value."</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  // VIEW 2: Metrics Breakdown
+  const MetricsBreakdownView = () => (
+    <div className="space-y-6">
+      {/* Shooting Efficiency */}
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <Target className="w-6 h-6 text-indigo-600" />
+          SHOOTING EFFICIENCY
+        </h3>
+        <div className="space-y-4">
+          {shootingMetrics.map((metric, i) => (
+            <div key={i}>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-semibold text-gray-700 w-16">{metric.metric}</span>
+                <div className="flex-1 mx-4">
+                  {/* Team A Bar */}
+                  <div className="mb-1">
+                    <div className="flex items-center gap-2">
+                      <div className="w-full bg-gray-200 rounded-full h-6">
+                        <div 
+                          className="bg-gradient-to-r from-indigo-500 to-indigo-600 h-6 rounded-full flex items-center justify-end pr-2"
+                          style={{ width: `${metric.teamA.pctile}%` }}
+                        >
+                          <span className="text-white text-xs font-bold">{metric.teamA.value}%</span>
+                        </div>
+                      </div>
+                      <span className={`text-xs font-semibold px-2 py-1 rounded ${getPercentileColor(metric.teamA.pctile)}`}>
+                        {metric.teamA.pctile}th
+                      </span>
+                      <span className="text-xs text-gray-600 w-20">Team A</span>
+                    </div>
+                  </div>
+                  {/* Team B Bar */}
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-full bg-gray-200 rounded-full h-6">
+                        <div 
+                          className="bg-gradient-to-r from-purple-500 to-purple-600 h-6 rounded-full flex items-center justify-end pr-2"
+                          style={{ width: `${metric.teamB.pctile}%` }}
+                        >
+                          <span className="text-white text-xs font-bold">{metric.teamB.value}%</span>
+                        </div>
+                      </div>
+                      <span className={`text-xs font-semibold px-2 py-1 rounded ${getPercentileColor(metric.teamB.pctile)}`}>
+                        {metric.teamB.pctile}th
+                      </span>
+                      <span className="text-xs text-gray-600 w-20">Team B</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Ball Control & Rebounding Side by Side */}
+      <div className="grid grid-cols-2 gap-6">
+        {/* Ball Control */}
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <Activity className="w-5 h-5 text-green-600" />
+            BALL CONTROL
+          </h3>
+          <div className="space-y-3">
+            <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+              <span className="font-semibold text-gray-700">TOV%</span>
+              <div className="text-right">
+                <div className="font-bold text-lg">12.1%</div>
+                <div className="text-xs text-green-600 font-semibold">(82nd) Great</div>
+              </div>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+              <span className="font-semibold text-gray-700">AST/TOV</span>
+              <div className="text-right">
+                <div className="font-bold text-lg">1.8x</div>
+                <div className="text-xs text-green-600 font-semibold">(75th) Great</div>
+              </div>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+              <span className="font-semibold text-gray-700">STL%</span>
+              <div className="text-right">
+                <div className="font-bold text-lg">11.2%</div>
+                <div className="text-xs text-blue-600 font-semibold">(70th) Above Avg</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Rebounding */}
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <TrendingUp className="w-5 h-5 text-purple-600" />
+            REBOUNDING
+          </h3>
+          <div className="space-y-3">
+            <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+              <span className="font-semibold text-gray-700">OREB%</span>
+              <div className="text-right">
+                <div className="font-bold text-lg">42.0%</div>
+                <div className="text-xs text-green-700 font-bold">(91st) Elite</div>
+              </div>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+              <span className="font-semibold text-gray-700">DREB%</span>
+              <div className="text-right">
+                <div className="font-bold text-lg">71.2%</div>
+                <div className="text-xs text-blue-600 font-semibold">(68th) Above Avg</div>
+              </div>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+              <span className="font-semibold text-gray-700">REB%</span>
+              <div className="text-right">
+                <div className="font-bold text-lg">56.1%</div>
+                <div className="text-xs text-green-600 font-semibold">(78th) Great</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Tempo Context */}
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <h3 className="text-xl font-bold text-gray-900 mb-4">TEMPO CONTEXT</h3>
+        <div className="space-y-3">
+          <div className="flex items-center gap-4">
+            <span className="font-semibold text-gray-700">Pace:</span>
+            <span className="text-2xl font-bold text-indigo-600">68.5</span>
+            <span className="text-sm text-gray-600">possessions/game</span>
+          </div>
+          <div className="relative">
+            <div className="w-full h-3 bg-gray-200 rounded-full">
+              <div className="absolute top-0 left-0 w-full h-3 flex items-center">
+                <div className="absolute left-[60%] w-1 h-6 bg-red-500 -mt-1.5"></div>
+              </div>
+            </div>
+            <div className="flex justify-between mt-2 text-xs text-gray-600">
+              <span>Slow (60)</span>
+              <span className="font-bold text-red-600">← Game Pace (68.5)</span>
+              <span>D1 Avg (72.1)</span>
+              <span>Fast (85)</span>
+            </div>
+          </div>
+          <div className="bg-blue-50 p-3 rounded mt-3 italic text-gray-700">
+            "Slower than average — this was a grind-it-out game"
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  // VIEW 3: Player Impact
+  const PlayerImpactView = () => (
+    <div className="space-y-6">
+      {/* Top Performers Table */}
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="bg-gray-800 text-white p-4">
+          <h3 className="text-xl font-bold flex items-center gap-2">
+            <Users className="w-6 h-6" />
+            TOP PERFORMERS
+          </h3>
+        </div>
+        <table className="w-full">
+          <thead className="bg-gray-100 border-b-2 border-gray-300">
+            <tr>
+              <th className="px-6 py-3 text-left text-sm font-bold text-gray-700">Player</th>
+              <th className="px-6 py-3 text-center text-sm font-bold text-gray-700">Team</th>
+              <th className="px-6 py-3 text-center text-sm font-bold text-gray-700">PTS</th>
+              <th className="px-6 py-3 text-center text-sm font-bold text-gray-700">USG%</th>
+              <th className="px-6 py-3 text-center text-sm font-bold text-gray-700">TS%</th>
+              <th className="px-6 py-3 text-left text-sm font-bold text-gray-700">Label</th>
+            </tr>
+          </thead>
+          <tbody>
+            {topPlayers.map((player, i) => (
+              <tr key={i} className={`border-b ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'} hover:bg-blue-50`}>
+                <td className="px-6 py-4 font-semibold text-gray-900">{player.name}</td>
+                <td className="px-6 py-4 text-center">
+                  <span className={`px-3 py-1 rounded ${player.team === 'A' ? 'bg-indigo-100 text-indigo-700' : 'bg-purple-100 text-purple-700'} font-semibold`}>
+                    {player.team}
+                  </span>
+                </td>
+                <td className="px-6 py-4 text-center text-lg font-bold text-gray-900">{player.pts}</td>
+                <td className="px-6 py-4 text-center font-semibold text-gray-700">{player.usg}%</td>
+                <td className="px-6 py-4 text-center font-semibold text-gray-700">{player.ts}%</td>
+                <td className="px-6 py-4 text-sm font-medium text-gray-700">{player.label}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Efficiency vs Volume Scatterplot */}
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <BarChart3 className="w-6 h-6 text-indigo-600" />
+          EFFICIENCY vs VOLUME SCATTERPLOT
+        </h3>
+        
+        <div className="relative h-96 bg-gray-50 rounded-lg p-6">
+          {/* Y-axis label */}
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 -rotate-90 font-bold text-gray-700 text-sm">
+            True Shooting % (TS%)
+          </div>
+          
+          {/* Chart area */}
+          <div className="ml-12 h-full relative border-l-2 border-b-2 border-gray-400">
+            {/* Grid lines */}
+            <div className="absolute inset-0">
+              <div className="absolute w-full h-px bg-gray-300 top-0"></div>
+              <div className="absolute w-full h-px bg-gray-300 top-1/4"></div>
+              <div className="absolute w-full h-px bg-gray-300 top-1/2"></div>
+              <div className="absolute w-full h-px bg-gray-300 top-3/4"></div>
+              
+              <div className="absolute h-full w-px bg-gray-300 left-1/4"></div>
+              <div className="absolute h-full w-px bg-gray-300 left-1/2"></div>
+              <div className="absolute h-full w-px bg-gray-300 left-3/4"></div>
+            </div>
+            
+            {/* D1 Average reference line */}
+            <div className="absolute w-full h-px bg-orange-400 border-dashed" style={{ top: '40%' }}>
+              <span className="absolute -top-5 right-2 text-xs text-orange-600 font-semibold bg-white px-2">
+                D1 Avg TS% (52%)
+              </span>
+            </div>
+            
+            {/* Data points */}
+            {/* Team A players - upper region (efficient) */}
+            <div className="absolute w-4 h-4 bg-indigo-600 rounded-full" style={{ left: '70%', top: '20%' }} title="J. Smith">
+              <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-semibold text-indigo-700 bg-white px-1 rounded">A</span>
+            </div>
+            <div className="absolute w-4 h-4 bg-indigo-600 rounded-full" style={{ left: '50%', top: '30%' }} title="K. Williams">
+              <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-semibold text-indigo-700 bg-white px-1 rounded">A</span>
+            </div>
+            <div className="absolute w-4 h-4 bg-indigo-600 rounded-full" style={{ left: '35%', top: '25%' }} title="T. Brown">
+              <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-semibold text-indigo-700 bg-white px-1 rounded">A</span>
+            </div>
+            
+            {/* Team B players - mixed */}
+            <div className="absolute w-4 h-4 bg-purple-600 rounded-full" style={{ left: '75%', top: '65%' }} title="M. Johnson">
+              <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-semibold text-purple-700 bg-white px-1 rounded">B</span>
+            </div>
+            <div className="absolute w-4 h-4 bg-purple-600 rounded-full" style={{ left: '45%', top: '35%' }} title="A. Davis">
+              <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-semibold text-purple-700 bg-white px-1 rounded">B</span>
+            </div>
+            
+            {/* Y-axis labels */}
+            <div className="absolute -left-12 top-0 text-xs font-semibold text-gray-700">70%</div>
+            <div className="absolute -left-12 top-1/4 text-xs font-semibold text-gray-700">60%</div>
+            <div className="absolute -left-12 top-1/2 text-xs font-semibold text-gray-700">50%</div>
+            <div className="absolute -left-12 top-3/4 text-xs font-semibold text-gray-700">40%</div>
+            <div className="absolute -left-12 bottom-0 text-xs font-semibold text-gray-700">30%</div>
+            
+            {/* X-axis labels */}
+            <div className="absolute -bottom-8 left-0 text-xs font-semibold text-gray-700">15%</div>
+            <div className="absolute -bottom-8 left-1/4 text-xs font-semibold text-gray-700">20%</div>
+            <div className="absolute -bottom-8 left-1/2 text-xs font-semibold text-gray-700">25%</div>
+            <div className="absolute -bottom-8 left-3/4 text-xs font-semibold text-gray-700">30%</div>
+            <div className="absolute -bottom-8 right-0 text-xs font-semibold text-gray-700">35%</div>
+          </div>
+          
+          {/* X-axis label */}
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 font-bold text-gray-700 text-sm mt-12">
+            Usage Rate (USG%)
+          </div>
+        </div>
+
+        {/* Legend */}
+        <div className="mt-8 grid grid-cols-2 gap-4 bg-gray-50 p-4 rounded">
+          <div>
+            <div className="font-semibold text-gray-900 mb-2">Legend:</div>
+            <div className="flex items-center gap-2 mb-1">
+              <div className="w-3 h-3 bg-indigo-600 rounded-full"></div>
+              <span className="text-sm text-gray-700">Team A players</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-purple-600 rounded-full"></div>
+              <span className="text-sm text-gray-700">Team B players</span>
+            </div>
+          </div>
+          <div>
+            <div className="font-semibold text-gray-900 mb-2">Quadrants:</div>
+            <div className="text-sm text-gray-700 space-y-1">
+              <div>• <span className="font-semibold">Upper-right:</span> Stars (high usage + efficient)</div>
+              <div>• <span className="font-semibold">Upper-left:</span> Efficient role players</div>
+              <div>• <span className="font-semibold">Lower-right:</span> Volume scorers struggling</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen bg-gray-100 p-6">
+      <div className="max-w-7xl mx-auto">
+        {/* Dashboard Header */}
+        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">WBB 2026 Scout Reports</h1>
+              <p className="text-gray-600 mt-1">Condensed Weekly Game Analysis Dashboard - Mockup</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="text-right">
+                <div className="text-sm text-gray-600">Dashboard Type</div>
+                <div className="text-lg font-bold text-indigo-600">Tableau Visual Reference</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Filters Section */}
+          <div className="grid grid-cols-3 gap-4 mt-6 p-4 bg-gray-50 rounded-lg">
+            <div>
+              <label className="text-sm font-semibold text-gray-700 mb-2 block">Game Selector</label>
+              <select 
+                className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500"
+                value={selectedGame}
+                onChange={(e) => setSelectedGame(e.target.value)}
+              >
+                <option value="game1">Jan 20: South Carolina vs Connecticut (72-68)</option>
+              </select>
+            </div>
+            <div>
+              <label className="text-sm font-semibold text-gray-700 mb-2 block">Team Toggle</label>
+              <select 
+                className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500"
+                value={selectedTeam}
+                onChange={(e) => setSelectedTeam(e.target.value)}
+              >
+                <option value="teamA">Team A Perspective</option>
+                <option value="teamB">Team B Perspective</option>
+              </select>
+            </div>
+            <div>
+              <label className="text-sm font-semibold text-gray-700 mb-2 block">Metric Toggles</label>
+              <div className="flex gap-2">
+                <button className="px-3 py-2 bg-indigo-600 text-white rounded text-sm font-medium">All</button>
+                <button className="px-3 py-2 bg-gray-200 text-gray-700 rounded text-sm font-medium">Elite Only</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* View Selector */}
+        <div className="bg-white rounded-xl shadow-lg mb-6">
+          <div className="flex border-b">
+            <button
+              onClick={() => setSelectedView('game-summary')}
+              className={`flex-1 px-6 py-4 font-semibold transition-colors ${
+                selectedView === 'game-summary'
+                  ? 'bg-indigo-600 text-white'
+                  : 'bg-white text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              View 1: Game Summary
+            </button>
+            <button
+              onClick={() => setSelectedView('metrics-breakdown')}
+              className={`flex-1 px-6 py-4 font-semibold transition-colors ${
+                selectedView === 'metrics-breakdown'
+                  ? 'bg-indigo-600 text-white'
+                  : 'bg-white text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              View 2: Metrics Breakdown
+            </button>
+            <button
+              onClick={() => setSelectedView('player-impact')}
+              className={`flex-1 px-6 py-4 font-semibold transition-colors ${
+                selectedView === 'player-impact'
+                  ? 'bg-indigo-600 text-white'
+                  : 'bg-white text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              View 3: Player Impact
+            </button>
+          </div>
+        </div>
+
+        {/* Main Content Area */}
+        <div className="bg-white rounded-xl shadow-lg p-6">
+          {selectedView === 'game-summary' && <GameSummaryView />}
+          {selectedView === 'metrics-breakdown' && <MetricsBreakdownView />}
+          {selectedView === 'player-impact' && <PlayerImpactView />}
+        </div>
+
+        {/* Design Notes Footer */}
+        <div className="mt-6 bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-xl p-6">
+          <h3 className="text-lg font-bold text-indigo-900 mb-3">📋 Tableau Implementation Checklist</h3>
+          <div className="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <div className="font-semibold text-indigo-800 mb-2">✓ Color Encoding:</div>
+              <ul className="space-y-1 text-gray-700">
+                <li>• Percentile diverging scale (red → gray → green)</li>
+                <li>• Neutral palette for data (no team colors)</li>
+                <li>• Green = positive, Red = negative semantics</li>
+              </ul>
+            </div>
+            <div>
+              <div className="font-semibold text-indigo-800 mb-2">✓ Interactive Features:</div>
+              <ul className="space-y-1 text-gray-700">
+                <li>• Game selector dropdown</li>
+                <li>• Team perspective toggle</li>
+                <li>• Metric category filters</li>
+                <li>• Tooltips with metric definitions</li>
+              </ul>
+            </div>
+            <div>
+              <div className="font-semibold text-indigo-800 mb-2">✓ Annotations:</div>
+              <ul className="space-y-1 text-gray-700">
+                <li>• "Why They Won" auto-generated callout</li>
+                <li>• D1 average reference lines</li>
+                <li>• Percentile rank badges</li>
+                <li>• Categorical tier labels</li>
+              </ul>
+            </div>
+            <div>
+              <div className="font-semibold text-indigo-800 mb-2">✓ Visual Hierarchy:</div>
+              <ul className="space-y-1 text-gray-700">
+                <li>• Title: 24pt bold</li>
+                <li>• Section headers: 18pt semibold</li>
+                <li>• Data labels: 12pt</li>
+                <li>• Annotations: 10pt</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default DashboardMockup;
