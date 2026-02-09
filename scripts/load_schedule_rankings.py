@@ -8,7 +8,7 @@ This script:
 4. Creates a filtered player_game with only players from ranked games
 
 Output files:
-- data/raw/2026/wbb_schedule_2026.parquet (raw schedule with rankings)
+- data/raw/{SEASON}/wbb_schedule_{SEASON}.parquet (raw schedule with rankings)
 - data/processed/game_summary_ranked.csv (filtered: at least one ranked team)
 - data/processed/player_game_ranked.csv (filtered: players from ranked games only)
 """
@@ -22,8 +22,9 @@ import requests
 import tempfile
 
 # Configuration
+SEASON = 2026  # Update this for new seasons
 DATA_DIR = Path("data")
-RAW_DIR = DATA_DIR / "raw" / "2026"
+RAW_DIR = DATA_DIR / "raw" / str(SEASON)
 PROCESSED_DIR = DATA_DIR / "processed"
 
 # Ensure directories exist
@@ -31,7 +32,7 @@ RAW_DIR.mkdir(parents=True, exist_ok=True)
 PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 
 
-def download_schedule_data(season: int = 2026):
+def download_schedule_data(season: int = SEASON):
     """Download the WBB Schedule Parquet file with rankings."""
     url = f"https://raw.githubusercontent.com/sportsdataverse/wehoop-wbb-raw/main/wbb/schedules/parquet/wbb_schedule_{season}.parquet"
     print(f"Downloading schedule data from: {url}")
@@ -154,13 +155,13 @@ def main():
 
     # 1. Download schedule data
     try:
-        schedule_df = download_schedule_data(2026)
+        schedule_df = download_schedule_data(SEASON)
     except Exception as e:
         print(f"Error downloading schedule: {e}")
         return
 
     # Save raw schedule
-    schedule_path = RAW_DIR / "wbb_schedule_2026.parquet"
+    schedule_path = RAW_DIR / f"wbb_schedule_{SEASON}.parquet"
     schedule_df.to_parquet(schedule_path, index=False)
     print(f"  ✓ Saved schedule to {schedule_path}")
 
