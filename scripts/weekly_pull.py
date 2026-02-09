@@ -259,8 +259,20 @@ def calculate_defensive_metrics(df):
     print("Calculating defensive metrics...")
     df = df.copy()
 
+    # Get opponent points - handle various column names from join
+    opp_pts_col = None
+    for col in ['opp_team_score', 'opp_pts_y', 'opp_pts_x', 'opp_pts', 'opponent_team_score']:
+        if col in df.columns and df[col].notna().sum() > 0:
+            opp_pts_col = col
+            break
+
+    if opp_pts_col:
+        df['opp_pts'] = pd.to_numeric(df[opp_pts_col], errors='coerce').fillna(0)
+    else:
+        df['opp_pts'] = 0
+
     # Opponent possessions
-    if 'opp_poss_est' not in df.columns:
+    if 'opp_poss_est' not in df.columns or df['opp_poss_est'].isna().all():
         # Estimate from opponent stats
         if all(c in df.columns for c in ['opp_field_goals_attempted', 'opp_free_throws_attempted',
                                           'opp_offensive_rebounds']):
@@ -310,6 +322,11 @@ def calculate_defensive_metrics(df):
     elif 'opp_field_goals_attempted' in df.columns:
         opp_fga = df['opp_field_goals_attempted']
         df['blk_pct'] = np.where(opp_fga > 0, df['blk'] / opp_fga, 0)
+
+    # Clean up merge artifacts
+    drop_cols = [c for c in df.columns if c.endswith('_x') or c.endswith('_y')]
+    if drop_cols:
+        df = df.drop(columns=drop_cols, errors='ignore')
 
     print(f"  Added defensive metrics (DRtg, Net Rtg, OREB%, DREB%, etc.)")
     return df
