@@ -40,12 +40,10 @@ def download_schedule_data(season: int = SEASON):
     response = requests.get(url, timeout=60)
     response.raise_for_status()
 
-    with tempfile.NamedTemporaryFile(suffix=".parquet", delete=False) as tmp:
+    with tempfile.NamedTemporaryFile(suffix=".parquet") as tmp:
         tmp.write(response.content)
-        tmp_path = tmp.name
-
-    df = pd.read_parquet(tmp_path)
-    os.unlink(tmp_path)
+        tmp.seek(0)
+        df = pd.read_parquet(tmp)
 
     print(f"  ✓ Downloaded {len(df)} schedule rows")
     return df
