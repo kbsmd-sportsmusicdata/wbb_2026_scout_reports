@@ -260,11 +260,11 @@ def calculate_defensive_metrics(df):
     df = df.copy()
 
     # Get opponent points - handle various column names from join
-    opp_pts_col = None
-    for col in ['opp_team_score', 'opp_pts_y', 'opp_pts_x', 'opp_pts', 'opponent_team_score']:
-        if col in df.columns and df[col].notna().sum() > 0:
-            opp_pts_col = col
-            break
+    opp_pts_cols = ['opp_team_score', 'opp_pts_y', 'opp_pts_x', 'opp_pts', 'opponent_team_score']
+    opp_pts_col = next(
+        (col for col in opp_pts_cols if col in df.columns and df[col].notna().any()),
+        None
+    )
 
     if opp_pts_col:
         df['opp_pts'] = pd.to_numeric(df[opp_pts_col], errors='coerce').fillna(0)
