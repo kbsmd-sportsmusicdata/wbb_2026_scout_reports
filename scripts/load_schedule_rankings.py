@@ -5,10 +5,12 @@ This script:
 1. Downloads schedule parquet data from GitHub (contains rankings)
 2. Saves raw schedule data
 3. Creates a filtered game_summary with only ranked team games
+4. Creates a filtered player_game with only players from ranked games
 
 Output files:
 - data/raw/2026/wbb_schedule_2026.parquet (raw schedule with rankings)
 - data/processed/game_summary_ranked.csv (filtered: at least one ranked team)
+- data/processed/player_game_ranked.csv (filtered: players from ranked games only)
 """
 
 import os
@@ -195,12 +197,44 @@ def main():
     df_ranked.to_csv(ranked_path, index=False)
     print(f"✓ Saved filtered ranked games to {ranked_path} ({len(df_ranked)} rows)")
 
+    # 7. Filter player_game to only include players from ranked games
+    print(f"\nFiltering player_game to ranked games...")
+    player_game_path = PROCESSED_DIR / "player_game.csv"
+    if player_game_path.exists():
+        player_game = pd.read_csv(player_game_path)
+        print(f"  Loaded {len(player_game)} player rows")
+
+        # Get unique game_ids from ranked games
+        ranked_game_ids = set(df_ranked['game_id'].unique())
+        print(f"  Ranked games: {len(ranked_game_ids)} unique game_ids")
+
+        # Filter to ranked games only
+        player_ranked = player_game[player_game['game_id'].isin(ranked_game_ids)].copy()
+        filtered_count = len(player_ranked)
+        removed = len(player_game) - filtered_count
+        print(f"  Filtered: {len(player_game)} -> {filtered_count} rows ({removed} removed)")
+
+        # Save filtered version
+        player_ranked_path = PROCESSED_DIR / "player_game_ranked.csv"
+        player_ranked.to_csv(player_ranked_path, index=False)
+        print(f"✓ Saved filtered player data to {player_ranked_path} ({len(player_ranked)} rows)")
+    else:
+        print(f"  WARNING: {player_game_path} not found. Skipping player filtering.")
+
     # Show file sizes
     full_size = game_summary_path.stat().st_size / (1024 * 1024)
     ranked_size = ranked_path.stat().st_size / (1024 * 1024)
     print(f"\nFile sizes:")
     print(f"  game_summary.csv: {full_size:.1f} MB")
     print(f"  game_summary_ranked.csv: {ranked_size:.1f} MB")
+
+    if player_game_path.exists():
+        player_full_size = player_game_path.stat().st_size / (1024 * 1024)
+        player_ranked_path = PROCESSED_DIR / "player_game_ranked.csv"
+        if player_ranked_path.exists():
+            player_ranked_size = player_ranked_path.stat().st_size / (1024 * 1024)
+            print(f"  player_game.csv: {player_full_size:.1f} MB")
+            print(f"  player_game_ranked.csv: {player_ranked_size:.1f} MB")
 
 
 if __name__ == "__main__":
