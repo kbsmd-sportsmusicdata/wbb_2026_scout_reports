@@ -1,0 +1,275 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2867
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # NCAA D1 WBB Roster Analytics \'96 Project Overview\
+\
+This project explores roster analytics for NCAA Division I women\'92s basketball, with an initial focus on exploratory analysis of AP Top 25 teams in the 2025\'9626 season.[web:10][web:25][web:26]\
+\
+---\
+\
+## 1. Conceptual Overview: Roster Analytics for NCAA D1 WBB\
+\
+### 1.1 Core Questions\
+\
+For this project, roster analytics focuses on:\
+\
+- **Age / experience**  \
+  - How \'93old\'94 are Top 25 rotations relative to peers? (minutes\uc0\u8209 weighted experience, class minutes shares).[web:2]\
+- **Portal usage and origin**  \
+  - Do contenders rely more on transfers or homegrown HS recruits? (minutes from transfers, freshmen, internationals).[web:1][web:4][web:16]\
+- **Size and positional profile**  \
+  - Are Top 25 teams undersized or oversized at key positions vs the broader D1 landscape? (height by role, minutes by archetype).[web:1][web:4][web:17]\
+- **Bench depth and rotation**  \
+  - How deep are successful teams? (rotation size, bench minutes share).[web:10][web:34]\
+- **Performance linkage (EDA only)**  \
+  - How do these roster traits align with season offensive/defensive efficiency, pace, and margin?[web:10][web:32][web:33]\
+\
+For this first phase, the emphasis is **descriptive and comparative EDA** (no predictive modeling yet).\
+\
+---\
+\
+## 2. Project Framing: AP Top 25 EDA\
+\
+### 2.1 Unit of Analysis\
+\
+- Primary grain: **team\'96season** (2025\'9626), filtered to teams that appear in the AP Top 25 poll for a chosen week/date.[web:25][web:26][web:29]\
+- Supporting grain: **player\'96season**, used to derive team\uc0\u8209 level roster metrics from aggregated player stats and roster attributes.[web:1][web:4][web:17][web:42]\
+\
+### 2.2 Data Sources\
+\
+- **Rosters (identity, class, height, origin)**  \
+  - 2025\'9626 roster CSV from the Sports\uc0\u8209 Roster\u8209 Data / Derek Willis ecosystem.[web:1][web:4][web:17][web:42]\
+- **Team & player box scores (performance)**  \
+  - wehoop / ESPN\uc0\u8209 style `wbb_team_box` and `wbb_player_box` for the 2025\'9626 season (parquet), already used in the WBB scout\u8209 reports project.[file:43]\
+- **Team metadata & mapping**  \
+  - `teams_sports_roster_data.csv` with team name, NCAA ID, conference, state, and other metadata.[file:44]\
+- **Rankings (AP Top 25)**  \
+  - AP Top 25 women\'92s rankings from NCAA/ESPN/CBS pages.[web:25][web:26][web:27]\
+\
+---\
+\
+## 3. Recommended Schema \'96 Top 25 Focus\
+\
+### 3.1 `ap_polls` (Top 25 metadata)\
+\
+**Grain:** one row per poll entry (team per poll date)  \
+**Fields:**\
+\
+- `season` (int) \'96 season year, e.g., 2026.[web:29]\
+- `poll_date` (date) \'96 date of the AP poll.[web:25][web:26]\
+- `ap_rank` (int) \'96 AP rank 1\'9625.\
+- `team_name_poll` (string) \'96 name as shown in poll.\
+- `poll_source` (string) \'96 \'93AP\'94.\
+\
+You can standardize `team_name_poll` to your internal `team_id` via a lookup.\
+\
+---\
+\
+### 3.2 `team_season_analytic` (primary Tableau table)\
+\
+**Grain:** one row per team\'96season (D1 WBB)  \
+**Join keys:** `season`, `team_id` (your wehoop/ESPN team ID)\
+\
+#### Identity / join\
+\
+- `season` (int)\
+- `team_id` (int or string)\
+- `team_name` (string) \'96 standardized display name.\
+- `conference` (string) \'96 from `teams_sports_roster_data.csv`.[file:44]\
+- `ap_rank` (int, nullable) \'96 for the selected poll date.\
+- `ap_poll_date` (date, nullable)\
+\
+#### Performance summary (from team\uc0\u8209 level metrics)\
+\
+Derived either from `team_box` or from an existing `game_analysis` / `game_summary` table that already computes ortg, drtg, pace, net rating.[file:43][web:32][web:33]\
+\
+- `games_played` (int)\
+- `offensive_eff` (float) \'96 season average offensive rating.\
+- `defensive_eff` (float)\
+- `margin` (float) \'96 net rating or points per game margin.\
+- `tempo` (float) \'96 possessions per game.\
+\
+#### Experience and age\
+\
+Computed from player\uc0\u8209 season minutes by class.[web:2]\
+\
+- `exp_minutes_weighted` (float) \'96 minutes\uc0\u8209 weighted experience index.\
+- `minutes_share_freshman` (float, 0\'961)\
+- `minutes_share_sophomore` (float)\
+- `minutes_share_junior` (float)\
+- `minutes_share_senior_plus` (float)\
+- `continuity_minutes_share` (float) \'96 share of minutes from returning players.\
+\
+#### Portal / origin profile\
+\
+Using flags derived from roster data.[web:1][web:4][web:16][web:17]\
+\
+- `minutes_share_transfer` (float)\
+- `minutes_share_freshmen` (float)\
+- `minutes_share_intl` (float)\
+- `num_transfers_in_rotation` (int) \'96 transfers playing \uc0\u8805 10 mpg.\
+\
+#### Positional / size profile\
+\
+Requires an archetype for each player (Guard/Wing/Big) and height in inches.[web:1][web:4][web:17]\
+\
+- `minutes_share_guard` (float)\
+- `minutes_share_wing` (float)\
+- `minutes_share_big` (float)\
+- `avg_height_team` (float)\
+- `avg_height_guard` (float)\
+- `avg_height_wing` (float)\
+- `avg_height_big` (float)\
+- `height_gap_vs_league` (float) \'96 team avg minus D1 league avg height.\
+\
+#### Bench depth / rotation\
+\
+Derived from player\uc0\u8209 season minutes and games played.\
+\
+- `rotation_size_10mpg` (int) \'96 number of players with \uc0\u8805 10 mpg.\
+- `bench_minutes_share` (float) \'96 minutes from players ranked 6+ by minutes.\
+- `bench_minutes_share_10mpg` (float) \'96 minutes from bench players who also average \uc0\u8805 10 mpg.\
+\
+---\
+\
+### 3.3 `player_season_analytic`\
+\
+**Grain:** one row per player\'96season (D1 WBB)\
+\
+Key fields:\
+\
+- Identifiers: `season`, `team_id`, `athlete_id`, `athlete_display_name`.[file:43]\
+- Usage: `games_played`, `minutes` (sum of minutes across games), `minutes_per_game`.\
+- Counting stats: points, FGM/FGA, 3PM/3PA, FTM/FTA, rebounds, assists, steals, blocks, turnovers.[file:43]\
+- Roster attributes (from Sports\uc0\u8209 Roster\u8209 Data + mapping): class label, numeric experience, height in inches, position, archetype (Guard/Wing/Big), transfer flag, international flag.[web:1][web:4][web:17][web:42][file:44]\
+\
+This table is primarily an input to build `team_season_analytic` and to power player\uc0\u8209 level visuals (e.g., minutes vs value).\
+\
+---\
+\
+## 4. Tableau Views & Outlines\
+\
+### 4.1 Age vs Portal Usage (Top 25 focus)\
+\
+**Grain:** team\'96season (`team_season_analytic`)  \
+\
+View ideas:\
+\
+- Scatter plot:\
+  - X: `minutes_share_transfer`\
+  - Y: `exp_minutes_weighted`\
+  - Color: `conference`\
+  - Size: `margin`\
+  - Label: `team_name` or `ap_rank`\
+- Filters:\
+  - AP Top 25 only (non\uc0\u8209 null `ap_rank`).\
+  - Conference, season type (regular vs full season).\
+\
+### 4.2 Size and Positional Profile vs Performance\
+\
+**Grain:** team\'96season  \
+\
+Views:\
+\
+- Scatter: `avg_height_big` vs `offensive_eff`, color by `minutes_share_big`.\
+- Bar chart: for a selected team, stacked bar of `minutes_share_guard`, `minutes_share_wing`, `minutes_share_big`.\
+- Highlight table: `height_gap_vs_league` vs `margin`, conditioned on `ap_rank`.\
+\
+### 4.3 Bench Depth vs Success\
+\
+**Grain:** team\'96season  \
+\
+Views:\
+\
+- Scatter: `bench_minutes_share` vs `margin`.\
+- Bar: `rotation_size_10mpg` sorted by `ap_rank` (Top 25).\
+- Tooltip: show `bench_minutes_share_10mpg` and `minutes_share_transfer`.\
+\
+### 4.4 Team Roster Strip (per\uc0\u8209 team detail)\
+\
+**Grain:** player\'96season (filtered to one team)  \
+\
+Views:\
+\
+- Horizontal bar chart:\
+  - X: `minutes`\
+  - Y: player (sorted by minutes).\
+  - Color: class group (FR/SO/JR/SR+).\
+  - Shape or label: transfer vs non\uc0\u8209 transfer.\
+  - Tooltip: height, position, minutes_per_game, key per\uc0\u8209 game stats.\
+\
+---\
+\
+## 5. Code / Scripts \'96 Logical Breakdown\
+\
+### 5.1 New scripts\
+\
+You can add:\
+\
+- `scripts/build_roster_analytics.py`  \
+  Purpose:\
+  - Load 2025\'9626 rosters, `teams_sports_roster_data.csv`, `player_box_2026.parquet`, `team_box_2026.parquet`.\
+  - Build `player_season_analytic` and `team_season_analytic`.\
+  - Export to `data/processed/` as CSV or parquet for Tableau.\
+\
+- Optional: `scripts/build_ap_polls.py`  \
+  - Scrape or manually assemble AP Top 25 table for a chosen date.\
+  - Save as `data/processed/ap_polls_2026.csv`.\
+\
+### 5.2 High\uc0\u8209 level build order\
+\
+1. **Load base tables**\
+   - Team mapping (`teams_sports_roster_data.csv`).\
+   - Team and player box (`team_box_2026.parquet`, `player_box_2026.parquet`).\
+   - Rosters (`wbb_rosters_2025_26.csv` copied into your repo).\
+2. **Normalize IDs and names**\
+   - Map roster teams to your `team_id` (wehoop/ESPN) via NCAA IDs or standardized names using `teams_sports_roster_data.csv`.[file:44]\
+3. **Build `player_season_analytic`**\
+   - Aggregate player box to season level.\
+   - Join roster attributes (class, height, origin, position \uc0\u8594  archetype).\
+   - Compute class groups, experience level, flags (transfer, intl), minutes share within team.\
+4. **Build `team_performance`**\
+   - Aggregate your existing game\uc0\u8209 level metrics (ortg, drtg, net_rtg, pace) or compute from `team_box`.\
+   - Produce one row per team\'96season with performance metrics.\
+5. **Compute roster metrics**\
+   - From `player_season_analytic`, groupby `season + team_id` to compute:\
+     - Experience metrics.\
+     - Origin/portal metrics.\
+     - Positional minutes and height profile.\
+     - Bench depth metrics.\
+6. **Assemble `team_season_analytic`**\
+   - Join roster metrics + performance metrics + team metadata + AP Top 25 rankings.\
+7. **Export for Tableau**\
+   - `data/processed/player_season_analytic_2026.csv`\
+   - `data/processed/team_season_analytic_2026.csv`\
+\
+---\
+\
+## 6. Mapping & Join Strategy\
+\
+### 6.1 Team Mapping\
+\
+- Roster `team_name` / `ncaa_id` \uc0\u8594  `teams_sports_roster_data.ncaa_id` \u8594  `team_id` used in box scores.\
+- Ensure you maintain a single canonical `team_id` across all analytic tables.\
+\
+### 6.2 Player Mapping\
+\
+- Box scores: `athlete_id` is already stable; use it as the primary key for player\uc0\u8209 season tables.[file:43]\
+- Rosters may not have `athlete_id`; use `athlete_display_name` + `team_id` for the 2025\'9626 season with some name cleaning, or add an ID alignment step if you choose.\
+\
+---\
+\
+## 7. Future Extensions\
+\
+Later phases can extend this infrastructure:\
+\
+- Predictive models: efficiency vs roster features, injury\uc0\u8209 robustness, portal strategies.\
+- Lineup\uc0\u8209 level models using your play\u8209 by\u8209 play and stint tables.\
+- Team style and shot profile integration (from pbp zone data).\
+- Integration of external rating systems (CBB Analytics, EvanMiya, etc.) as light benchmarking layers.\
+\
+}
