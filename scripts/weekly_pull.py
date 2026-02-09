@@ -121,8 +121,15 @@ def join_opponent_stats(df):
 
     # Vectorized join: merge df with opp_data on game_id, then filter where team_id != opponent_id
     # This assumes exactly 2 teams per game_id
-    df = df.merge(opp_data, on='game_id', how='left')
-    df = df[df['team_id'] != df['opponent_id']]
+    # Handle games without exactly 2 teams to prevent data loss or duplication.
+    game_counts = df.groupby('game_id')['team_id'].transform('nunique')
+    
+    # Vectorized join for games with 2 teams
+    merged = df.loc[game_counts == 2].merge(opp_data, on='game_id', how='left')
+    merged = merged.query('team_id != opponent_id')
+    
+    # Combine with unprocessed games
+    df = pd.concat([merged, df.loc[game_counts != 2]], ignore_index=True)
 
     print(f"  Joined opponent stats for {df['game_id'].nunique()} games")
     return df
