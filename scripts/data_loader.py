@@ -84,7 +84,7 @@ def load_parquet_with_fallback(
             try:
                 if verbose:
                     print(f"Trying local: {local_path}")
-                if str(local_path).endswith('.rds'):
+                if local_path.suffix == '.rds':
                     df = load_rds_file(local_path)
                 else:
                     df = pd.read_parquet(local_path)
