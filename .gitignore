@@ -208,3 +208,5 @@ __marimo__/
 
 # Test output
 test_output/
+data/processed/*.csv
+data/processed/*.parquet
