@@ -179,7 +179,7 @@ def main():
     # 1. Download schedule data
     try:
         schedule_df = download_schedule_data(season)
-    except Exception as e:
+    except requests.exceptions.RequestException as e:
         print(f"Error downloading schedule: {e}")
         return
 
