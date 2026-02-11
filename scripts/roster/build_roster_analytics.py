@@ -41,6 +41,30 @@ YEAR_MAP = {
     'Redshirt Senior': 4, 'RS Sr.': 4, 'R-Sr.': 4,
 }
 
+# Team name standardization mapping (source -> canonical)
+TEAM_NAME_MAP = {
+    'Connecticut': 'UConn',
+    'Louisiana State': 'LSU',
+    'Southern California': 'USC',
+    'Mississippi': 'Ole Miss',
+    'North Carolina': 'UNC',
+    'Michigan St.': 'Michigan State',
+    'Ohio St.': 'Ohio State',
+    'Oklahoma St.': 'Oklahoma State',
+    'Iowa St.': 'Iowa State',
+    'Mississippi St.': 'Mississippi State',
+    'Miami': 'Miami (FL)',
+    'Arizona St.': 'Arizona State',
+    'Brigham Young': 'BYU',
+}
+
+
+def standardize_team_name(name):
+    """Standardize team name using mapping."""
+    if pd.isna(name):
+        return name
+    return TEAM_NAME_MAP.get(name, name)
+
 
 def load_data():
     """Load all required data sources."""
@@ -139,7 +163,7 @@ def build_player_season_analytics(player_box, rosters, ap_teams):
 
     player_season = played.groupby([
         'athlete_id', 'athlete_display_name', 'team_id', 'team_name',
-        'team_display_name', 'athlete_position_name', 'athlete_position_abbreviation'
+        'team_display_name', 'team_location', 'athlete_position_name', 'athlete_position_abbreviation'
     ]).agg(agg_cols).reset_index()
 
     # Rename columns
@@ -192,12 +216,13 @@ def build_player_season_analytics(player_box, rosters, ap_teams):
     ).round(1)
 
     # Add AP Top 25 flag
-    # Ensure team_id types match
+    # Ensure team_id types match (operate on copy to avoid side effects)
     player_season['team_id'] = pd.to_numeric(player_season['team_id'], errors='coerce').fillna(0).astype(int)
-    ap_teams['team_id'] = pd.to_numeric(ap_teams['team_id'], errors='coerce').fillna(0).astype(int)
+    ap_teams_copy = ap_teams.copy()
+    ap_teams_copy['team_id'] = pd.to_numeric(ap_teams_copy['team_id'], errors='coerce').fillna(0).astype(int)
 
     player_season = player_season.merge(
-        ap_teams[['team_id', 'best_ap_rank']],
+        ap_teams_copy[['team_id', 'best_ap_rank']],
         on='team_id',
         how='left'
     )
@@ -213,7 +238,7 @@ def build_player_season_analytics(player_box, rosters, ap_teams):
     ]].copy()
 
     roster_info = roster_info.rename(columns={
-        'team': 'roster_team',
+        'team': 'roster_team_location',  # Will be used for join
         'name': 'roster_name',
         'total_inches': 'height_inches',
         'year_clean': 'class_year',
@@ -228,8 +253,11 @@ def build_player_season_analytics(player_box, rosters, ap_teams):
     # Add portal flag (has previous school)
     roster_info['is_transfer'] = roster_info['previous_school'].notna()
 
-    # Try to match by name (fuzzy-ish join)
-    # First normalize names for matching
+    # Apply team name standardization for better matching
+    player_season['team_location_std'] = player_season['team_location'].apply(standardize_team_name)
+    roster_info['team_location_std'] = roster_info['roster_team_location'].apply(standardize_team_name)
+
+    # Normalize names for matching
     player_season['name_normalized'] = (
         player_season['athlete_display_name']
         .str.lower()
@@ -244,15 +272,15 @@ def build_player_season_analytics(player_box, rosters, ap_teams):
         .str.replace(r'[^a-z\s]', '', regex=True)
     )
 
-    # Join on normalized name (this is imperfect but works for most)
+    # Join on both team AND name to avoid false matches for common names
     player_season = player_season.merge(
-        roster_info.drop(columns=['roster_name']),
-        on='name_normalized',
+        roster_info.drop(columns=['roster_name', 'roster_team_location']),
+        on=['team_location_std', 'name_normalized'],
         how='left'
     )
 
-    # Clean up
-    player_season = player_season.drop(columns=['name_normalized'])
+    # Clean up temporary columns
+    player_season = player_season.drop(columns=['name_normalized', 'team_location_std'])
 
     # Fill missing values
     player_season['is_transfer'] = player_season['is_transfer'].fillna(False)
@@ -265,12 +293,146 @@ def build_player_season_analytics(player_box, rosters, ap_teams):
     return player_season
 
 
-def build_team_season_analytics(player_box, team_box, rosters, ap_teams, schedule):
+def compute_minutes_weighted_team_metrics(player_season):
+    """
+    Compute minutes-weighted roster metrics per team from player_season data.
+
+    Returns DataFrame with one row per team containing:
+    - exp_minutes_weighted: minutes-weighted experience index
+    - minutes_share_freshman/sophomore/junior/senior_plus: class distribution
+    - minutes_share_transfer: share of minutes from transfers
+    - num_transfers_in_rotation: count of transfers with ≥10 mpg
+    - minutes_share_guard/wing/big: positional distribution
+    - avg_height_guard/wing/big: height by position
+    - rotation_size_10mpg: count of players with ≥10 mpg
+    """
+    print("  Computing minutes-weighted team metrics...")
+
+    # Filter to players with meaningful minutes
+    players = player_season[player_season['minutes'] > 0].copy()
+
+    # Map positions to archetypes (Guard/Wing/Big)
+    def get_archetype(pos):
+        if pd.isna(pos):
+            return 'Unknown'
+        pos = str(pos).upper()
+        if 'GUARD' in pos or pos in ['G', 'PG', 'SG', 'POINT GUARD', 'SHOOTING GUARD']:
+            return 'Guard'
+        elif 'FORWARD' in pos or pos in ['F', 'SF', 'PF', 'SMALL FORWARD', 'POWER FORWARD', 'WING']:
+            return 'Wing'
+        elif 'CENTER' in pos or pos in ['C', 'POST']:
+            return 'Big'
+        else:
+            return 'Unknown'
+
+    # Use roster_position if available, otherwise athlete_position_name
+    players['archetype'] = players['roster_position'].fillna(
+        players['athlete_position_name']
+    ).apply(get_archetype)
+
+    # Map class year to numeric (1-5)
+    players['exp_numeric'] = players['year_numeric'].fillna(0)
+
+    # Class groupings
+    players['is_freshman'] = players['exp_numeric'] == 1
+    players['is_sophomore'] = players['exp_numeric'] == 2
+    players['is_junior'] = players['exp_numeric'] == 3
+    players['is_senior_plus'] = players['exp_numeric'] >= 4
+
+    # Calculate per-team metrics
+    def team_minutes_metrics(group):
+        total_minutes = group['minutes'].sum()
+        total_players = len(group)
+
+        if total_minutes == 0:
+            return pd.Series({})
+
+        # Minutes-weighted experience
+        exp_weighted = (group['minutes'] * group['exp_numeric']).sum() / total_minutes
+
+        # Class minute shares
+        fr_minutes = group[group['is_freshman']]['minutes'].sum()
+        so_minutes = group[group['is_sophomore']]['minutes'].sum()
+        jr_minutes = group[group['is_junior']]['minutes'].sum()
+        sr_minutes = group[group['is_senior_plus']]['minutes'].sum()
+
+        # Transfer metrics
+        transfer_minutes = group[group['is_transfer'] == True]['minutes'].sum()
+
+        # Rotation (≥10 mpg)
+        group['mpg'] = group['minutes'] / group['games_played'].replace(0, np.nan)
+        rotation_players = group[group['mpg'] >= 10]
+        rotation_size = len(rotation_players)
+        transfers_in_rotation = len(rotation_players[rotation_players['is_transfer'] == True])
+
+        # Positional minutes
+        guard_minutes = group[group['archetype'] == 'Guard']['minutes'].sum()
+        wing_minutes = group[group['archetype'] == 'Wing']['minutes'].sum()
+        big_minutes = group[group['archetype'] == 'Big']['minutes'].sum()
+
+        # Height by position
+        guards = group[group['archetype'] == 'Guard']
+        wings = group[group['archetype'] == 'Wing']
+        bigs = group[group['archetype'] == 'Big']
+
+        avg_height_guard = guards['height_inches'].mean() if len(guards) > 0 else np.nan
+        avg_height_wing = wings['height_inches'].mean() if len(wings) > 0 else np.nan
+        avg_height_big = bigs['height_inches'].mean() if len(bigs) > 0 else np.nan
+
+        return pd.Series({
+            'exp_minutes_weighted': exp_weighted,
+            'minutes_share_freshman': fr_minutes / total_minutes,
+            'minutes_share_sophomore': so_minutes / total_minutes,
+            'minutes_share_junior': jr_minutes / total_minutes,
+            'minutes_share_senior_plus': sr_minutes / total_minutes,
+            'minutes_share_transfer': transfer_minutes / total_minutes,
+            'num_transfers_in_rotation': transfers_in_rotation,
+            'rotation_size_10mpg': rotation_size,
+            'minutes_share_guard': guard_minutes / total_minutes,
+            'minutes_share_wing': wing_minutes / total_minutes,
+            'minutes_share_big': big_minutes / total_minutes,
+            'avg_height_guard': avg_height_guard,
+            'avg_height_wing': avg_height_wing,
+            'avg_height_big': avg_height_big,
+        })
+
+    # Group by team and compute metrics
+    team_metrics = players.groupby('team_id').apply(team_minutes_metrics).reset_index()
+
+    # Round percentages
+    pct_cols = [c for c in team_metrics.columns if 'share' in c]
+    for col in pct_cols:
+        team_metrics[col] = (team_metrics[col] * 100).round(1)
+
+    team_metrics['exp_minutes_weighted'] = team_metrics['exp_minutes_weighted'].round(2)
+    height_cols = [c for c in team_metrics.columns if 'avg_height' in c]
+    for col in height_cols:
+        team_metrics[col] = team_metrics[col].round(1)
+
+    # Compute league average height for height_gap calculation
+    all_heights = players[players['height_inches'].notna()]['height_inches']
+    league_avg_height = all_heights.mean() if len(all_heights) > 0 else 70.0
+
+    print(f"    League avg height: {league_avg_height:.1f} inches")
+    print(f"    Computed metrics for {len(team_metrics)} teams")
+
+    return team_metrics, league_avg_height
+
+
+def build_team_season_analytics(player_box, team_box, rosters, ap_teams, schedule, player_season=None):
     """
     Build team_season_analytic_2026 table.
     Aggregates team performance and roster composition metrics.
+
+    If player_season is provided, computes minutes-weighted metrics.
     """
     print("\nBuilding team_season_analytic_2026...")
+
+    # Compute minutes-weighted metrics if player_season available
+    minutes_weighted_metrics = None
+    league_avg_height = 70.0
+    if player_season is not None:
+        minutes_weighted_metrics, league_avg_height = compute_minutes_weighted_team_metrics(player_season)
 
     # Get team game-level aggregates
     team_games = team_box.groupby('team_id').agg({
@@ -479,6 +641,29 @@ def build_team_season_analytics(player_box, team_box, rosters, ap_teams, schedul
     if 'team' in team_season.columns:
         team_season = team_season.drop(columns=['team'])
 
+    # =====================
+    # Merge Minutes-Weighted Metrics
+    # =====================
+    if minutes_weighted_metrics is not None:
+        print("  Merging minutes-weighted metrics...")
+        # Ensure team_id types match
+        minutes_weighted_metrics['team_id'] = pd.to_numeric(
+            minutes_weighted_metrics['team_id'], errors='coerce'
+        ).fillna(0).astype(int)
+
+        team_season = team_season.merge(
+            minutes_weighted_metrics,
+            on='team_id',
+            how='left'
+        )
+
+        # Calculate height gap vs league
+        team_season['height_gap_vs_league'] = (
+            team_season['avg_height_inches'] - league_avg_height
+        ).round(1)
+
+        print(f"    Added {len(minutes_weighted_metrics.columns) - 1} minutes-weighted metrics")
+
     print(f"  Final team_season_analytic: {len(team_season)} rows")
     print(f"  AP Top 25 teams: {team_season['is_ap_top25'].sum()}")
 
@@ -539,8 +724,10 @@ def main():
     # Build player season analytics
     player_season = build_player_season_analytics(player_box, rosters, ap_teams)
 
-    # Build team season analytics
-    team_season = build_team_season_analytics(player_box, team_box, rosters, ap_teams, schedule)
+    # Build team season analytics (pass player_season for minutes-weighted metrics)
+    team_season = build_team_season_analytics(
+        player_box, team_box, rosters, ap_teams, schedule, player_season=player_season
+    )
 
     # Run validation
     validate_data(player_season, team_season)
