@@ -41,6 +41,30 @@ YEAR_MAP = {
     'Redshirt Senior': 4, 'RS Sr.': 4, 'R-Sr.': 4,
 }
 
+# Team name standardization mapping (source -> canonical)
+TEAM_NAME_MAP = {
+    'Connecticut': 'UConn',
+    'Louisiana State': 'LSU',
+    'Southern California': 'USC',
+    'Mississippi': 'Ole Miss',
+    'North Carolina': 'UNC',
+    'Michigan St.': 'Michigan State',
+    'Ohio St.': 'Ohio State',
+    'Oklahoma St.': 'Oklahoma State',
+    'Iowa St.': 'Iowa State',
+    'Mississippi St.': 'Mississippi State',
+    'Miami': 'Miami (FL)',
+    'Arizona St.': 'Arizona State',
+    'Brigham Young': 'BYU',
+}
+
+
+def standardize_team_name(name):
+    """Standardize team name using mapping."""
+    if pd.isna(name):
+        return name
+    return TEAM_NAME_MAP.get(name, name)
+
 
 def load_data():
     """Load all required data sources."""
@@ -139,7 +163,7 @@ def build_player_season_analytics(player_box, rosters, ap_teams):
 
     player_season = played.groupby([
         'athlete_id', 'athlete_display_name', 'team_id', 'team_name',
-        'team_display_name', 'athlete_position_name', 'athlete_position_abbreviation'
+        'team_display_name', 'team_location', 'athlete_position_name', 'athlete_position_abbreviation'
     ]).agg(agg_cols).reset_index()
 
     # Rename columns
@@ -192,12 +216,13 @@ def build_player_season_analytics(player_box, rosters, ap_teams):
     ).round(1)
 
     # Add AP Top 25 flag
-    # Ensure team_id types match
+    # Ensure team_id types match (operate on copy to avoid side effects)
     player_season['team_id'] = pd.to_numeric(player_season['team_id'], errors='coerce').fillna(0).astype(int)
-    ap_teams['team_id'] = pd.to_numeric(ap_teams['team_id'], errors='coerce').fillna(0).astype(int)
+    ap_teams_copy = ap_teams.copy()
+    ap_teams_copy['team_id'] = pd.to_numeric(ap_teams_copy['team_id'], errors='coerce').fillna(0).astype(int)
 
     player_season = player_season.merge(
-        ap_teams[['team_id', 'best_ap_rank']],
+        ap_teams_copy[['team_id', 'best_ap_rank']],
         on='team_id',
         how='left'
     )
@@ -213,7 +238,7 @@ def build_player_season_analytics(player_box, rosters, ap_teams):
     ]].copy()
 
     roster_info = roster_info.rename(columns={
-        'team': 'roster_team',
+        'team': 'roster_team_location',  # Will be used for join
         'name': 'roster_name',
         'total_inches': 'height_inches',
         'year_clean': 'class_year',
@@ -228,8 +253,11 @@ def build_player_season_analytics(player_box, rosters, ap_teams):
     # Add portal flag (has previous school)
     roster_info['is_transfer'] = roster_info['previous_school'].notna()
 
-    # Try to match by name (fuzzy-ish join)
-    # First normalize names for matching
+    # Apply team name standardization for better matching
+    player_season['team_location_std'] = player_season['team_location'].apply(standardize_team_name)
+    roster_info['team_location_std'] = roster_info['roster_team_location'].apply(standardize_team_name)
+
+    # Normalize names for matching
     player_season['name_normalized'] = (
         player_season['athlete_display_name']
         .str.lower()
@@ -244,15 +272,15 @@ def build_player_season_analytics(player_box, rosters, ap_teams):
         .str.replace(r'[^a-z\s]', '', regex=True)
     )
 
-    # Join on normalized name (this is imperfect but works for most)
+    # Join on both team AND name to avoid false matches for common names
     player_season = player_season.merge(
-        roster_info.drop(columns=['roster_name']),
-        on='name_normalized',
+        roster_info.drop(columns=['roster_name', 'roster_team_location']),
+        on=['team_location_std', 'name_normalized'],
         how='left'
     )
 
-    # Clean up
-    player_season = player_season.drop(columns=['name_normalized'])
+    # Clean up temporary columns
+    player_season = player_season.drop(columns=['name_normalized', 'team_location_std'])
 
     # Fill missing values
     player_season['is_transfer'] = player_season['is_transfer'].fillna(False)
