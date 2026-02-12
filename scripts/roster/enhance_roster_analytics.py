@@ -149,7 +149,7 @@ def fix_missing_roster_metrics(team_top25, player_full, rosters):
                 'Senior': 4, 'Sr.': 4, 'SR': 4,
                 'Graduate': 5, 'Gr.': 5, 'GR': 5, 'Graduate Student': 5,
             }
-            team_roster['year_num'] = team_roster['year_clean'].map(year_map).fillna(0)
+            team_roster['year_num'] = team_roster['year_clean'].map(year_map)
             avg_year = team_roster['year_num'].mean()
 
             # Transfer count
