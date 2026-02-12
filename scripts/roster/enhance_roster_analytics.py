@@ -102,14 +102,16 @@ def find_polls_games_file():
 
     search_dirs = [RAW_DIR, PROCESSED_DIR, DATA_DIR]
 
+    all_matches = []
     for search_dir in search_dirs:
         if not search_dir.exists():
             continue
         for pattern in patterns:
-            matches = list(search_dir.glob(pattern))
-            if matches:
-                # Return most recently modified
-                return max(matches, key=lambda p: p.stat().st_mtime)
+            all_matches.extend(search_dir.glob(pattern))
+
+    if all_matches:
+        # Return the most recently modified file among all unique matches.
+        return max(set(all_matches), key=lambda p: p.stat().st_mtime)
 
     return None
 
