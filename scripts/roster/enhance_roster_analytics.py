@@ -125,7 +125,7 @@ def fix_missing_roster_metrics(team_top25, player_full, rosters):
         roster_name = standardize_for_roster(team_location)
         print(f"    Looking for roster: {roster_name}")
 
-        team_roster = rosters[rosters['team'].str.lower() == roster_name.lower()]
+        team_roster = rosters[rosters['team'].str.lower() == roster_name.lower()].copy()
 
         if len(team_roster) == 0:
             # Try partial match
