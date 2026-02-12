@@ -395,7 +395,7 @@ def add_transfer_impact_metrics(team_top25, player_full):
             row['transfer_minutes_top3'] = top3['minutes'].sum()
             row['transfer_ppg_leader'] = team_transfers['points_per_game'].max()
             row['has_star_transfer'] = (team_transfers['points_per_game'] >= 15).any()
-            row['num_transfers_10mpg'] = (team_transfers['minutes'] / team_transfers['games_played'] >= 10).sum()
+            row['num_transfers_10mpg'] = (team_transfers['minutes'] / team_transfers['games_played'].replace(0, np.nan) >= 10).sum()
         else:
             row['transfer_minutes_top3'] = 0
             row['transfer_ppg_leader'] = 0
