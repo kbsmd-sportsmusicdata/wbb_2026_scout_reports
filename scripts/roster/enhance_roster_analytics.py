@@ -12,11 +12,13 @@ This script enriches team_season_analytic_2026_top25 with:
 
 Usage:
     python scripts/roster/enhance_roster_analytics.py
+    python scripts/roster/enhance_roster_analytics.py --polls-games path/to/file.csv
 
 Output:
     data/processed/roster/team_season_analytic_2026_top25_enriched.csv
 """
 
+import argparse
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -26,6 +28,9 @@ DATA_DIR = Path("data")
 RAW_DIR = DATA_DIR / "raw" / "2026"
 PROCESSED_DIR = DATA_DIR / "processed"
 ROSTER_DIR = PROCESSED_DIR / "roster"
+
+# Allowed directories for file reads (security)
+ALLOWED_DATA_DIRS = [DATA_DIR.resolve(), Path(".").resolve()]
 
 # Extended team name mapping (box score team_location -> roster team name)
 TEAM_NAME_MAP = {
@@ -45,6 +50,70 @@ TEAM_NAME_MAP = {
     'Brigham Young': 'BYU',
     'TCU': 'Texas Christian',
 }
+
+
+def get_archetype(pos):
+    """
+    Map position string to archetype (Guard/Wing/Big).
+    Used for positional analysis across multiple functions.
+    """
+    if pd.isna(pos):
+        return 'Unknown'
+    pos = str(pos).upper()
+    if 'GUARD' in pos or pos in ['G', 'PG', 'SG', 'POINT GUARD', 'SHOOTING GUARD']:
+        return 'Guard'
+    elif 'FORWARD' in pos or pos in ['F', 'SF', 'PF', 'SMALL FORWARD', 'POWER FORWARD', 'WING']:
+        return 'Wing'
+    elif 'CENTER' in pos or pos in ['C', 'POST']:
+        return 'Big'
+    return 'Unknown'
+
+
+def validate_file_path(file_path, allowed_dirs=None):
+    """
+    Validate that a file path is within allowed directories.
+    Prevents path traversal attacks.
+    """
+    if allowed_dirs is None:
+        allowed_dirs = ALLOWED_DATA_DIRS
+
+    resolved = Path(file_path).resolve()
+
+    for allowed in allowed_dirs:
+        try:
+            resolved.relative_to(allowed)
+            return resolved
+        except ValueError:
+            continue
+
+    raise ValueError("File path is outside allowed directories")
+
+
+def find_polls_games_file():
+    """
+    Search for polls_games file using flexible pattern matching.
+    Returns path if found, None otherwise.
+    """
+    patterns = [
+        "joined_polls_games_*.csv",
+        "polls_games_joined*.csv",
+        "*polls*games*.csv",
+    ]
+
+    search_dirs = [RAW_DIR, PROCESSED_DIR, DATA_DIR]
+
+    all_matches = []
+    for search_dir in search_dirs:
+        if not search_dir.exists():
+            continue
+        for pattern in patterns:
+            all_matches.extend(search_dir.glob(pattern))
+
+    if all_matches:
+        # Return the most recently modified file among all unique matches.
+        return max(set(all_matches), key=lambda p: p.stat().st_mtime)
+
+    return None
 
 
 def load_data():
@@ -317,19 +386,7 @@ def add_role_weighted_experience(team_top25, player_full):
     players = player_full[player_full['team_id'].isin(team_ids)].copy()
     players = players[players['minutes'] > 0]
 
-    # Map positions to archetypes
-    def get_archetype(pos):
-        if pd.isna(pos):
-            return 'Unknown'
-        pos = str(pos).upper()
-        if 'GUARD' in pos or pos in ['G', 'PG', 'SG']:
-            return 'Guard'
-        elif 'FORWARD' in pos or pos in ['F', 'SF', 'PF']:
-            return 'Wing'
-        elif 'CENTER' in pos or pos in ['C']:
-            return 'Big'
-        return 'Unknown'
-
+    # Map positions to archetypes (using module-level function)
     players['archetype'] = players['roster_position'].fillna(
         players['athlete_position_name']
     ).apply(get_archetype)
@@ -427,19 +484,7 @@ def add_points_weighted_height(team_top25, player_full):
     players = player_full[player_full['team_id'].isin(team_ids)].copy()
     players = players[(players['points'] > 0) & (players['height_inches'].notna())]
 
-    # Map positions
-    def get_archetype(pos):
-        if pd.isna(pos):
-            return 'Unknown'
-        pos = str(pos).upper()
-        if 'GUARD' in pos or pos in ['G', 'PG', 'SG']:
-            return 'Guard'
-        elif 'FORWARD' in pos or pos in ['F', 'SF', 'PF']:
-            return 'Wing'
-        elif 'CENTER' in pos or pos in ['C']:
-            return 'Big'
-        return 'Unknown'
-
+    # Map positions (using module-level function)
     players['archetype'] = players['roster_position'].fillna(
         players['athlete_position_name']
     ).apply(get_archetype)
@@ -510,27 +555,34 @@ def add_guard_big_balance(team_top25):
 def add_poll_game_context(team_top25, polls_games_path=None):
     """
     Add poll/game context fields if polls_games data is available.
+
+    Args:
+        team_top25: DataFrame with team data
+        polls_games_path: Optional path to polls_games CSV. If provided, will be
+                         validated to ensure it's within allowed data directories.
     """
     print("\n" + "=" * 60)
     print("Adding Poll/Game Context")
     print("=" * 60)
 
     # Check for polls_games file
-    if polls_games_path is None:
-        # Try common locations
-        possible_paths = [
-            PROCESSED_DIR / "polls_games_joined.csv",
-            RAW_DIR / "polls_games_joined_02072026.csv",
-            DATA_DIR / "polls_games_joined_02072026.csv",
-        ]
-        for p in possible_paths:
-            if p.exists():
-                polls_games_path = p
-                break
+    if polls_games_path is not None:
+        # Validate provided path is within allowed directories
+        try:
+            polls_games_path = validate_file_path(polls_games_path)
+        except ValueError as e:
+            print(f"  ERROR: {e}")
+            return team_top25
+    else:
+        # Use flexible file finder to locate polls_games data
+        polls_games_path = find_polls_games_file()
 
     if polls_games_path is None or not Path(polls_games_path).exists():
         print("  No polls_games data found. Skipping poll context metrics.")
-        print("  To add these metrics, provide polls_games_joined_02072026.csv")
+        print("  To add these metrics, place a file matching pattern:")
+        print("    - data/raw/2026/joined_polls_games_*.csv")
+        print("    - data/raw/2026/polls_games_joined*.csv")
+        print("  Or specify path via --polls-games argument")
         return team_top25
 
     print(f"  Loading: {polls_games_path}")
@@ -616,6 +668,24 @@ def validate_enriched_data(team_top25):
 
 def main():
     """Main entry point."""
+    parser = argparse.ArgumentParser(
+        description="Enhance roster analytics with additional metrics.",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+    python scripts/roster/enhance_roster_analytics.py
+    python scripts/roster/enhance_roster_analytics.py --polls-games data/raw/2026/joined_polls_games_20260209.csv
+        """
+    )
+    parser.add_argument(
+        "--polls-games",
+        dest="polls_games_path",
+        type=str,
+        default=None,
+        help="Path to polls_games CSV file (optional). If not provided, script will search for matching files."
+    )
+    args = parser.parse_args()
+
     print("=" * 60)
     print("Enriching Roster Analytics")
     print("=" * 60)
@@ -642,7 +712,7 @@ def main():
     team_top25 = add_guard_big_balance(team_top25)
 
     # 7. Add poll/game context (if available)
-    team_top25 = add_poll_game_context(team_top25)
+    team_top25 = add_poll_game_context(team_top25, polls_games_path=args.polls_games_path)
 
     # Validate
     team_top25 = validate_enriched_data(team_top25)
