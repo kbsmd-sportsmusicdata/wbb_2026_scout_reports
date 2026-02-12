@@ -86,7 +86,7 @@ def validate_file_path(file_path, allowed_dirs=None):
         except ValueError:
             continue
 
-    raise ValueError(f"File path {file_path} is outside allowed directories")
+    raise ValueError("File path is outside allowed directories")
 
 
 def find_polls_games_file():
