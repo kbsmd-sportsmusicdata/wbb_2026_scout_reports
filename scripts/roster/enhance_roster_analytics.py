@@ -203,7 +203,7 @@ def fix_missing_roster_metrics(team_top25, player_full, rosters):
         total_minutes = team_players['minutes'].sum()
 
         # Minutes-weighted experience
-        team_players['year_num'] = team_players['year_numeric'].fillna(0)
+        team_players['year_num'] = team_players['year_numeric'].
         exp_weighted = (team_players['minutes'] * team_players['year_num']).sum() / total_minutes if total_minutes > 0 else 0
 
         # Transfer minutes share
@@ -334,7 +334,7 @@ def add_role_weighted_experience(team_top25, player_full):
         players['athlete_position_name']
     ).apply(get_archetype)
 
-    players['year_num'] = players['year_numeric'].fillna(0)
+    players['year_num'] = players['year_numeric'].
 
     # Compute per team
     results = []
