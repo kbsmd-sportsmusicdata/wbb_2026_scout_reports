@@ -19,6 +19,7 @@ Output:
 """
 
 import argparse
+from datetime import date
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -664,6 +665,92 @@ def add_poll_game_context(team_top25, polls_games_path=None):
     return team_top25
 
 
+def add_conference(team_top25, rosters):
+    """
+    Add conference field to team_top25 from raw roster data.
+
+    Maps team_location (box score name) to roster team name to look up conference.
+    Falls back to the TEAM_NAME_MAP for known mismatches (USC, Ole Miss, TCU, etc.).
+
+    After the roster lookup, applies master mapping overrides for teams whose
+    conference changed between the 2024-25 roster season and the current 2025-26
+    season (e.g. UCLA/USC/Washington moved Pac-12 -> Big Ten, Oklahoma/Texas
+    moved Big 12 -> SEC, Princeton Ivy League -> Ivy short name).
+    """
+    print("\n" + "=" * 60)
+    print("Adding Conference Field")
+    print("=" * 60)
+
+    # 2025-26 conference corrections from master_player_season_mapping
+    # These teams changed conferences after the raw roster was scraped
+    CONFERENCE_OVERRIDES = {
+        'UCLA': 'Big Ten',
+        'USC': 'Big Ten',
+        'Washington': 'Big Ten',
+        'Oklahoma': 'SEC',
+        'Texas': 'SEC',
+        'Princeton': 'Ivy',
+    }
+
+    # Build a team -> conference lookup from rosters (one conference per team)
+    roster_conf = rosters.drop_duplicates('team')[['team', 'conference', 'division']].copy()
+    roster_conf_dict = dict(zip(roster_conf['team'], roster_conf['conference']))
+    roster_div_dict = dict(zip(roster_conf['team'], roster_conf['division']))
+
+    conferences = []
+    divisions = []
+    for _, row in team_top25.iterrows():
+        team_loc = row['team_location']
+
+        # Direct match first
+        if team_loc in roster_conf_dict:
+            conferences.append(roster_conf_dict[team_loc])
+            divisions.append(roster_div_dict.get(team_loc))
+            continue
+
+        # Try mapped name
+        mapped = TEAM_NAME_MAP.get(team_loc, team_loc)
+        if mapped in roster_conf_dict:
+            conferences.append(roster_conf_dict[mapped])
+            divisions.append(roster_div_dict.get(mapped))
+            continue
+
+        # Try case-insensitive partial match
+        found = False
+        for roster_team in roster_conf_dict:
+            if roster_team.lower() == team_loc.lower() or team_loc.lower() in roster_team.lower():
+                conferences.append(roster_conf_dict[roster_team])
+                divisions.append(roster_div_dict.get(roster_team))
+                found = True
+                break
+        if not found:
+            conferences.append(None)
+            divisions.append(None)
+
+    team_top25['conference'] = conferences
+    team_top25['division'] = divisions
+
+    matched = sum(1 for c in conferences if c is not None)
+    print(f"  Matched conference for {matched}/{len(team_top25)} teams from roster")
+    if matched < len(team_top25):
+        missing = team_top25[team_top25['conference'].isna()]['team_location'].tolist()
+        print(f"  Missing: {missing}")
+
+    # Apply 2025-26 conference overrides from master mapping
+    overrides_applied = 0
+    for team_loc, new_conf in CONFERENCE_OVERRIDES.items():
+        mask = team_top25['team_location'] == team_loc
+        if mask.any():
+            old_conf = team_top25.loc[mask, 'conference'].iloc[0]
+            team_top25.loc[mask, 'conference'] = new_conf
+            overrides_applied += 1
+            print(f"  Override: {team_loc} conference {old_conf} -> {new_conf}")
+
+    print(f"  Applied {overrides_applied} conference overrides for 2025-26 realignment")
+
+    return team_top25
+
+
 def validate_enriched_data(team_top25):
     """Validate the enriched dataset."""
     print("\n" + "=" * 60)
@@ -742,6 +829,14 @@ Examples:
 
     # 7. Add poll/game context (if available)
     team_top25 = add_poll_game_context(team_top25, polls_games_path=args.polls_games_path)
+
+    # 8. Add conference from raw roster data
+    team_top25 = add_conference(team_top25, rosters)
+
+    # 9. Add run_date
+    run_date_str = date.today().isoformat()
+    team_top25['run_date'] = run_date_str
+    print(f"\n  Added run_date: {run_date_str}")
 
     # Validate
     team_top25 = validate_enriched_data(team_top25)
