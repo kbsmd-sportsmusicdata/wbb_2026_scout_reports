@@ -16,6 +16,8 @@ Output:
 """
 
 import argparse
+import re
+import unicodedata
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -324,20 +326,22 @@ def build_player_season_analytics(player_box, rosters, ap_teams):
     player_season['team_location_std'] = player_season['team_location'].apply(standardize_team_name)
     roster_info['team_location_std'] = roster_info['roster_team_location'].apply(standardize_team_name)
 
-    # Normalize names for matching
-    player_season['name_normalized'] = (
-        player_season['athlete_display_name']
-        .str.lower()
-        .str.strip()
-        .str.replace(r'[^a-z\s]', '', regex=True)
-    )
+    # Normalize names for matching:
+    # - Decompose unicode and strip diacritics (š->s, ú->u, ñ->n)
+    # - Remove embedded nicknames in quotes ("Bird", 'Chit-Chat')
+    # - Collapse whitespace
+    def normalize_name(name):
+        if pd.isna(name):
+            return name
+        decomposed = unicodedata.normalize('NFKD', name)
+        ascii_text = ''.join(c for c in decomposed if not unicodedata.combining(c))
+        ascii_text = re.sub(r'["\u201c\u201d][^""\u201c\u201d]*["\u201c\u201d]', '', ascii_text)
+        ascii_text = re.sub(r"['\u2018\u2019][^''\u2018\u2019]*['\u2018\u2019]", '', ascii_text)
+        result = re.sub(r'[^a-z\s]', '', ascii_text.lower().strip())
+        return re.sub(r'\s+', ' ', result).strip()
 
-    roster_info['name_normalized'] = (
-        roster_info['roster_name']
-        .str.lower()
-        .str.strip()
-        .str.replace(r'[^a-z\s]', '', regex=True)
-    )
+    player_season['name_normalized'] = player_season['athlete_display_name'].apply(normalize_name)
+    roster_info['name_normalized'] = roster_info['roster_name'].apply(normalize_name)
 
     # Join on both team AND name to avoid false matches for common names
     player_season = player_season.merge(
