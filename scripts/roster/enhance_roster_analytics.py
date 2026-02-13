@@ -589,13 +589,15 @@ def add_poll_game_context(team_top25, polls_games_path=None):
     polls_games = pd.read_csv(polls_games_path)
     print(f"  Loaded {len(polls_games)} rows")
 
-    # Build team location -> polls_games team name mapping
-    # Most match directly; handle known mismatches
-    location_to_pg = {}
-    for loc in team_top25['team_location'].unique():
-        location_to_pg[loc] = loc
-    # North Carolina in team_top25 maps to UNC in polls_games
-    location_to_pg['North Carolina'] = 'UNC'
+    # Known team name mismatches: team_top25 team_location -> polls_games team
+    TEAM_NAME_MAPPING = {
+        'North Carolina': 'UNC',
+        # Add other mismatches here in the future
+    }
+    location_to_pg = {
+        loc: TEAM_NAME_MAPPING.get(loc, loc)
+        for loc in team_top25['team_location'].unique()
+    }
 
     # Deduplicate game rows: each (team, game_id) should appear once
     if 'game_id' in polls_games.columns:
@@ -636,13 +638,19 @@ def add_poll_game_context(team_top25, polls_games_path=None):
 
         # Weeks in Top 25 (use pre-computed max from poll-level column)
         if 'weeks_in_top25' in team_games.columns:
-            row['weeks_in_top25'] = int(team_games['weeks_in_top25'].max())
+            weeks_in_top25 = team_games['weeks_in_top25'].max()
+            if pd.notna(weeks_in_top25):
+                row['weeks_in_top25'] = int(weeks_in_top25)
 
         # Best and worst rank (pre-computed in polls_games)
         if 'best_rank' in team_games.columns:
-            row['best_rank'] = int(team_games['best_rank'].min())
+            best_rank = team_games['best_rank'].min()
+            if pd.notna(best_rank):
+                row['best_rank'] = int(best_rank)
         if 'worst_rank' in team_games.columns:
-            row['worst_rank'] = int(team_games['worst_rank'].max())
+            worst_rank = team_games['worst_rank'].max()
+            if pd.notna(worst_rank):
+                row['worst_rank'] = int(worst_rank)
         if 'best_rank' in row and 'worst_rank' in row:
             row['rank_range'] = row['worst_rank'] - row['best_rank']
 
