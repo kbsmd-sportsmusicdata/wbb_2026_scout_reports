@@ -1,0 +1,797 @@
+season,athlete_id,athlete_display_name,team_id,ncaa_id_team,standardized_team_name,team,possible_team_name,team_state_long,team_state,conference_short_name,conference_name,groups_id_wehoop_espn,games_played,first_game,last_game
+2026,5311856,Aliyahna Morris,25,107,California,California,California,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5178591,Anastasia Drosouni,25,107,California,California,California,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,4899413,Claudia Langarita,25,107,California,California,California,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5124078,Gisella Maul,25,107,California,California,California,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5311855,Grace McCallop,25,107,California,California,California,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5311854,Isis Johnson-Musah,25,107,California,California,California,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5239495,Lola Donez,25,107,California,California,California,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5178589,Lulu Twidale,25,107,California,California,California,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5174270,Mjracle Sheppard,25,107,California,California,California,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5105749,Naya Ojukwu,25,107,California,California,California,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,4433745,Sakima Walker,25,107,California,California,California,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5239498,Sofia Bowes,25,107,California,California,California,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5311853,Taylor Barnes,25,107,California,California,California,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5311958,Amaia Jackson,228,147,Clemson,Clemson,Clemson,South Carolina,SC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,4596343,Demeara Hinds,228,147,Clemson,Clemson,Clemson,South Carolina,SC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5107597,Hadley Periman,228,147,Clemson,Clemson,Clemson,South Carolina,SC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5176511,Hannah Kohn,228,147,Clemson,Clemson,Clemson,South Carolina,SC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5311957,Holland Harris,228,147,Clemson,Clemson,Clemson,South Carolina,SC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5312088,Ja'Kerra Butler,228,147,Clemson,Clemson,Clemson,South Carolina,SC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5175410,Mia Moore,228,147,Clemson,Clemson,Clemson,South Carolina,SC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5106190,Morgan Lee,228,147,Clemson,Clemson,Clemson,South Carolina,SC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5238275,Morgan Miller,228,147,Clemson,Clemson,Clemson,South Carolina,SC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,4899622,Rachael Rose,228,147,Clemson,Clemson,Clemson,South Carolina,SC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5107910,Raven Thompson,228,147,Clemson,Clemson,Clemson,South Carolina,SC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5174417,Rusne Augustinaite,228,147,Clemson,Clemson,Clemson,South Carolina,SC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5109046,Taylor Johnson-Matthews,228,147,Clemson,Clemson,Clemson,South Carolina,SC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5311971,Anna Wikstrom,150,193,Duke,Duke,Duke,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,5238276,Arianna Roberson,150,193,Duke,Duke,Duke,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,5106232,Ashlon Jackson,150,193,Duke,Duke,Duke,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,5174409,Delaney Thomas,150,193,Duke,Duke,Duke,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,5311970,Emilee Skinner,150,193,Duke,Duke,Duke,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,5106233,Emma Koabel,150,193,Duke,Duke,Duke,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,5108593,Hailey Johnson,150,193,Duke,Duke,Duke,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,5174407,Jadyn Donovan,150,193,Duke,Duke,Duke,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,5174410,Jordan Wood,150,193,Duke,Duke,Duke,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,5195636,Olivia Martin,150,193,Duke,Duke,Duke,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,4894357,Riley Nelson,150,193,Duke,Duke,Duke,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,5106222,Taina Mair,150,193,Duke,Duke,Duke,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,5238277,Toby Fournier,150,193,Duke,Duke,Duke,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,4705046,Allie Kubek,52,234,Florida State,Florida State,Florida St.,Florida,FL,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,4698729,Amaya Bonner,52,234,Florida State,Florida State,Florida St.,Florida,FL,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,5174414,Avery Treadwell,52,234,Florida State,Florida State,Florida St.,Florida,FL,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,5174673,Emma Risch,52,234,Florida State,Florida State,Florida St.,Florida,FL,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,4682765,Jasmine Shavers,52,234,Florida State,Florida State,Florida St.,Florida,FL,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,5311989,Mari Gerton,52,234,Florida State,Florida State,Florida St.,Florida,FL,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,5311990,Pania Davis,52,234,Florida State,Florida State,Florida St.,Florida,FL,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,5174305,Sole Williams,52,234,Florida State,Florida State,Florida St.,Florida,FL,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,4565518,Sydney Bowles,52,234,Florida State,Florida State,Florida St.,Florida,FL,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,5238274,Tatum Greene,52,234,Florida State,Florida State,Florida St.,Florida,FL,ACC,Atlantic Coast Conference,2,24,2025-11-03,2026-02-08
+2026,5238291,Anaya Hardy,97,367,Louisville,Louisville,Louisville,Kentucky,KY,ACC,Atlantic Coast Conference,2,26,2025-11-04,2026-02-08
+2026,5174420,Elif Istanbulluoglu,97,367,Louisville,Louisville,Louisville,Kentucky,KY,ACC,Atlantic Coast Conference,2,26,2025-11-04,2026-02-08
+2026,5312384,Grace Mbugua,97,367,Louisville,Louisville,Louisville,Kentucky,KY,ACC,Atlantic Coast Conference,2,26,2025-11-04,2026-02-08
+2026,5238288,Imari Berry,97,367,Louisville,Louisville,Louisville,Kentucky,KY,ACC,Atlantic Coast Conference,2,26,2025-11-04,2026-02-08
+2026,5238292,Isla Juffermans,97,367,Louisville,Louisville,Louisville,Kentucky,KY,ACC,Atlantic Coast Conference,2,26,2025-11-04,2026-02-08
+2026,5107515,Laura Ziegler,97,367,Louisville,Louisville,Louisville,Kentucky,KY,ACC,Atlantic Coast Conference,2,26,2025-11-04,2026-02-08
+2026,5238289,Mackenly Randolph,97,367,Louisville,Louisville,Louisville,Kentucky,KY,ACC,Atlantic Coast Conference,2,26,2025-11-04,2026-02-08
+2026,5312383,Peyton Bradley,97,367,Louisville,Louisville,Louisville,Kentucky,KY,ACC,Atlantic Coast Conference,2,26,2025-11-04,2026-02-08
+2026,5238293,Reagan Bender,97,367,Louisville,Louisville,Louisville,Kentucky,KY,ACC,Atlantic Coast Conference,2,26,2025-11-04,2026-02-08
+2026,5238290,Rebekah Graves,97,367,Louisville,Louisville,Louisville,Kentucky,KY,ACC,Atlantic Coast Conference,2,26,2025-11-04,2026-02-08
+2026,5106166,Reyna Scott,97,367,Louisville,Louisville,Louisville,Kentucky,KY,ACC,Atlantic Coast Conference,2,26,2025-11-04,2026-02-08
+2026,5175869,Skylar Jones,97,367,Louisville,Louisville,Louisville,Kentucky,KY,ACC,Atlantic Coast Conference,2,26,2025-11-04,2026-02-08
+2026,5238294,Tajianna Roberts,97,367,Louisville,Louisville,Louisville,Kentucky,KY,ACC,Atlantic Coast Conference,2,26,2025-11-04,2026-02-08
+2026,5312382,Yevheniia Putra,97,367,Louisville,Louisville,Louisville,Kentucky,KY,ACC,Atlantic Coast Conference,2,26,2025-11-04,2026-02-08
+2026,5312398,Adelaide Jernigan,152,490,NC State,NC State,NC State,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5312397,Destiny Lunan,152,490,NC State,NC State,NC State,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5238298,Devyn Quigley,152,490,NC State,NC State,NC State,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5174309,Khamil Pierre,152,490,NC State,NC State,NC State,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5238299,Lorena Awou,152,490,NC State,NC State,NC State,North Carolina,NC,ACC,Atlantic Coast Conference,2,22,2025-11-04,2026-02-02
+2026,5174354,Maddie Cox,152,490,NC State,NC State,NC State,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5174357,Mallory Collier,152,490,NC State,NC State,NC State,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5174492,Qadence Samuels,152,490,NC State,NC State,NC State,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5238301,Tilda Trygger,152,490,NC State,NC State,NC State,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5238300,Zamareya Jones,152,490,NC State,NC State,NC State,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5174356,Zoe Brooks,152,490,NC State,NC State,NC State,North Carolina,NC,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5238304,Blanca Thomas,153,457,North Carolina,North Carolina,UNC,North Carolina,NC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5174425,Ciera Toomey,153,457,North Carolina,North Carolina,UNC,North Carolina,NC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5239704,Elina Aarnisalo,153,457,North Carolina,North Carolina,UNC,North Carolina,NC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5105740,Indya Nivar,153,457,North Carolina,North Carolina,UNC,North Carolina,NC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5238303,Jordan Zubich,153,457,North Carolina,North Carolina,UNC,North Carolina,NC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5174422,Laila Hull,153,457,North Carolina,North Carolina,UNC,North Carolina,NC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5238302,Lanie Grant,153,457,North Carolina,North Carolina,UNC,North Carolina,NC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5312401,Liza Astakhova,153,457,North Carolina,North Carolina,UNC,North Carolina,NC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5312402,Nyla Brooks,153,457,North Carolina,North Carolina,UNC,North Carolina,NC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,4565510,Nyla Harris,153,457,North Carolina,North Carolina,UNC,North Carolina,NC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5174423,Reniya Kelly,153,457,North Carolina,North Carolina,UNC,North Carolina,NC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5174424,Sydney Barker,153,457,North Carolina,North Carolina,UNC,North Carolina,NC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5312403,Taissa Queiroz,153,457,North Carolina,North Carolina,UNC,North Carolina,NC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5312400,Taliyah Henderson,153,457,North Carolina,North Carolina,UNC,North Carolina,NC,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5095015,Bella Tehrani,87,513,Notre Dame,Notre Dame,Notre Dame,Indiana,IN,ACC,Atlantic Coast Conference,2,24,2025-11-05,2026-02-08
+2026,5122345,Cassandre Prosper,87,513,Notre Dame,Notre Dame,Notre Dame,Indiana,IN,ACC,Atlantic Coast Conference,2,24,2025-11-05,2026-02-08
+2026,4898411,Gisela Sanchez,87,513,Notre Dame,Notre Dame,Notre Dame,Indiana,IN,ACC,Atlantic Coast Conference,2,24,2025-11-05,2026-02-08
+2026,5174674,Hannah Hidalgo,87,513,Notre Dame,Notre Dame,Notre Dame,Indiana,IN,ACC,Atlantic Coast Conference,2,24,2025-11-05,2026-02-08
+2026,4433536,Iyana Moore,87,513,Notre Dame,Notre Dame,Notre Dame,Indiana,IN,ACC,Atlantic Coast Conference,2,24,2025-11-05,2026-02-08
+2026,5312309,Jordyn Smith,87,513,Notre Dame,Notre Dame,Notre Dame,Indiana,IN,ACC,Atlantic Coast Conference,2,24,2025-11-05,2026-02-08
+2026,4565508,KK Bransford,87,513,Notre Dame,Notre Dame,Notre Dame,Indiana,IN,ACC,Atlantic Coast Conference,2,24,2025-11-05,2026-02-08
+2026,5109222,Kelly Ratigan,87,513,Notre Dame,Notre Dame,Notre Dame,Indiana,IN,ACC,Atlantic Coast Conference,2,24,2025-11-05,2026-02-08
+2026,5312310,Leah Macy,87,513,Notre Dame,Notre Dame,Notre Dame,Indiana,IN,ACC,Atlantic Coast Conference,2,24,2025-11-05,2026-02-08
+2026,5259684,Luci Jensen,87,513,Notre Dame,Notre Dame,Notre Dame,Indiana,IN,ACC,Atlantic Coast Conference,2,24,2025-11-05,2026-02-08
+2026,4433530,Malaya Cowles,87,513,Notre Dame,Notre Dame,Notre Dame,Indiana,IN,ACC,Atlantic Coast Conference,2,24,2025-11-05,2026-02-08
+2026,4702867,Vanessa de Jesus,87,513,Notre Dame,Notre Dame,Notre Dame,Indiana,IN,ACC,Atlantic Coast Conference,2,24,2025-11-05,2026-02-08
+2026,5106832,Anaya Brown,2567,663,SMU,SMU,Southern Methodist,Texas,TX,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5108566,Ayanna Thompson,2567,663,SMU,SMU,Southern Methodist,Texas,TX,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5175402,Elise Hill,2567,663,SMU,SMU,Southern Methodist,Texas,TX,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5312412,Elizaveta Filchagina,2567,663,SMU,SMU,Southern Methodist,Texas,TX,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,4691703,Grace Hall,2567,663,SMU,SMU,Southern Methodist,Texas,TX,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5312411,Jazzy Gipson,2567,663,SMU,SMU,Southern Methodist,Texas,TX,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,4433537,Jzaniya Harriel,2567,663,SMU,SMU,Southern Methodist,Texas,TX,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5108052,Kyla Deck,2567,663,SMU,SMU,Southern Methodist,Texas,TX,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5239442,Mailien Rolf,2567,663,SMU,SMU,Southern Methodist,Texas,TX,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,4899220,Miriam Ibezim,2567,663,SMU,SMU,Southern Methodist,Texas,TX,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,4698732,Paulina Paris,2567,663,SMU,SMU,Southern Methodist,Texas,TX,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5312413,Roxy White,2567,663,SMU,SMU,Southern Methodist,Texas,TX,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5174286,Sahnya Jah,2567,663,SMU,SMU,Southern Methodist,Texas,TX,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,4704510,Tyi Skinner,2567,663,SMU,SMU,Southern Methodist,Texas,TX,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5239494,Zahra King,2567,663,SMU,SMU,Southern Methodist,Texas,TX,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5312416,Alexandra Eschmeyer,24,674,Stanford,Stanford,Stanford,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5312418,Carly Amborn,24,674,Stanford,Stanford,Stanford,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5175935,Chloe Clardy,24,674,Stanford,Stanford,Stanford,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5175936,Courtney Ogden,24,674,Stanford,Stanford,Stanford,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5312414,Hailee Swain,24,674,Stanford,Stanford,Stanford,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5238310,Harper Peterson,24,674,Stanford,Stanford,Stanford,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5238311,Kennedy Umeh,24,674,Stanford,Stanford,Stanford,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5312419,Lara Somfai,24,674,Stanford,Stanford,Stanford,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5105738,Lauren Green,24,674,Stanford,Stanford,Stanford,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5175723,Mary Ashley Stevenson,24,674,Stanford,Stanford,Stanford,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5312420,Nora Ezike,24,674,Stanford,Stanford,Stanford,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5175934,Nunu Agara,24,674,Stanford,Stanford,Stanford,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5238309,Shay Ijiwoye,24,674,Stanford,Stanford,Stanford,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5105741,Stavi Papadaki,24,674,Stanford,Stanford,Stanford,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5105739,Talana Lepolo,24,674,Stanford,Stanford,Stanford,California,CA,ACC,Atlantic Coast Conference,2,25,2025-11-03,2026-02-08
+2026,5174266,Angelica Velez,183,688,Syracuse,Syracuse,Syracuse,New York,NY,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5174421,Aurora Almón,183,688,Syracuse,Syracuse,Syracuse,New York,NY,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5312421,Camdyn Nelson,183,688,Syracuse,Syracuse,Syracuse,New York,NY,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,4711802,Dominique Darius,183,688,Syracuse,Syracuse,Syracuse,New York,NY,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5312423,Jasmyn Cooper,183,688,Syracuse,Syracuse,Syracuse,New York,NY,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5105723,Journey Thompson,183,688,Syracuse,Syracuse,Syracuse,New York,NY,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5312422,Justus Fitzgerald,183,688,Syracuse,Syracuse,Syracuse,New York,NY,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5238312,Keira Scott,183,688,Syracuse,Syracuse,Syracuse,New York,NY,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,4433541,Laila Phelia,183,688,Syracuse,Syracuse,Syracuse,New York,NY,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5194083,Madeline Potts,183,688,Syracuse,Syracuse,Syracuse,New York,NY,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5238313,Olivia Schmitt,183,688,Syracuse,Syracuse,Syracuse,New York,NY,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5105397,Oyindamola Akinbolawa,183,688,Syracuse,Syracuse,Syracuse,New York,NY,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5238314,Shy Hawkins,183,688,Syracuse,Syracuse,Syracuse,New York,NY,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5174431,Sophie Burrows,183,688,Syracuse,Syracuse,Syracuse,New York,NY,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5312424,Uche Izoje,183,688,Syracuse,Syracuse,Syracuse,New York,NY,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5239477,Adeang Ring,258,746,Virginia,Virginia,Virginia,Virginia,VA,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5238318,Breona Hurd,258,746,Virginia,Virginia,Virginia,Virginia,VA,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,4704495,Caitlin Weimar,258,746,Virginia,Virginia,Virginia,Virginia,VA,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,4704396,Danelle Arigbabu,258,746,Virginia,Virginia,Virginia,Virginia,VA,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5312434,Gabby White,258,746,Virginia,Virginia,Virginia,Virginia,VA,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,4683032,Jillian Brown,258,746,Virginia,Virginia,Virginia,Virginia,VA,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5174436,Kymora Johnson,258,746,Virginia,Virginia,Virginia,Virginia,VA,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5174434,Olivia McGhee,258,746,Virginia,Virginia,Virginia,Virginia,VA,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5105715,Paris Clark,258,746,Virginia,Virginia,Virginia,Virginia,VA,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5238279,Raiane Dias Dos Santos,258,746,Virginia,Virginia,Virginia,Virginia,VA,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,4703785,Romi Levy,258,746,Virginia,Virginia,Virginia,Virginia,VA,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,4565520,Sa'Myah Smith,258,746,Virginia,Virginia,Virginia,Virginia,VA,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,4698733,Tabitha Amanze,258,746,Virginia,Virginia,Virginia,Virginia,VA,ACC,Atlantic Coast Conference,2,24,2025-11-04,2026-02-08
+2026,5312437,Amani Jenkins,259,742,Virginia Tech,Virginia Tech,Virginia Tech,Virginia,VA,ACC,Atlantic Coast Conference,2,25,2025-11-04,2026-02-08
+2026,5312438,Aniya Trent,259,742,Virginia Tech,Virginia Tech,Virginia Tech,Virginia,VA,ACC,Atlantic Coast Conference,2,25,2025-11-04,2026-02-08
+2026,4683000,Carleigh Wenzel,259,742,Virginia Tech,Virginia Tech,Virginia Tech,Virginia,VA,ACC,Atlantic Coast Conference,2,25,2025-11-04,2026-02-08
+2026,5174440,Carys Baker,259,742,Virginia Tech,Virginia Tech,Virginia Tech,Virginia,VA,ACC,Atlantic Coast Conference,2,25,2025-11-04,2026-02-08
+2026,5312436,Kate Sears,259,742,Virginia Tech,Virginia Tech,Virginia Tech,Virginia,VA,ACC,Atlantic Coast Conference,2,25,2025-11-04,2026-02-08
+2026,5238322,Kayl Petersen,259,742,Virginia Tech,Virginia Tech,Virginia Tech,Virginia,VA,ACC,Atlantic Coast Conference,2,25,2025-11-04,2026-02-08
+2026,5106171,Kilah Freelon,259,742,Virginia Tech,Virginia Tech,Virginia Tech,Virginia,VA,ACC,Atlantic Coast Conference,2,25,2025-11-04,2026-02-08
+2026,5238319,Leila Wells,259,742,Virginia Tech,Virginia Tech,Virginia Tech,Virginia,VA,ACC,Atlantic Coast Conference,2,25,2025-11-04,2026-02-08
+2026,5174438,Mackenzie Nelson,259,742,Virginia Tech,Virginia Tech,Virginia Tech,Virginia,VA,ACC,Atlantic Coast Conference,2,25,2025-11-04,2026-02-08
+2026,4899059,Mel Daley,259,742,Virginia Tech,Virginia Tech,Virginia Tech,Virginia,VA,ACC,Atlantic Coast Conference,2,25,2025-11-04,2026-02-08
+2026,5174441,Samyha Suffren,259,742,Virginia Tech,Virginia Tech,Virginia Tech,Virginia,VA,ACC,Atlantic Coast Conference,2,25,2025-11-04,2026-02-08
+2026,5175725,Sophie Swanson,259,742,Virginia Tech,Virginia Tech,Virginia Tech,Virginia,VA,ACC,Atlantic Coast Conference,2,25,2025-11-04,2026-02-08
+2026,5312435,Spela Brecelj,259,742,Virginia Tech,Virginia Tech,Virginia Tech,Virginia,VA,ACC,Atlantic Coast Conference,2,25,2025-11-04,2026-02-08
+2026,5240395,Alicia Newell,257,575,Richmond,Richmond,Richmond,Virginia,VA,Atlantic 10,Atlantic 10 Conference,3,24,2025-11-04,2026-02-07
+2026,5174384,Ally Sweeney,257,575,Richmond,Richmond,Richmond,Virginia,VA,Atlantic 10,Atlantic 10 Conference,3,24,2025-11-04,2026-02-07
+2026,5315269,Aneisha Scott,257,575,Richmond,Richmond,Richmond,Virginia,VA,Atlantic 10,Atlantic 10 Conference,3,24,2025-11-04,2026-02-07
+2026,5240397,Annika Manthy,257,575,Richmond,Richmond,Richmond,Virginia,VA,Atlantic 10,Atlantic 10 Conference,3,24,2025-11-04,2026-02-07
+2026,5315268,Ava Persichetti,257,575,Richmond,Richmond,Richmond,Virginia,VA,Atlantic 10,Atlantic 10 Conference,3,24,2025-11-04,2026-02-07
+2026,5107502,Jada Green,257,575,Richmond,Richmond,Richmond,Virginia,VA,Atlantic 10,Atlantic 10 Conference,3,24,2025-11-04,2026-02-07
+2026,5107506,Maggie Doogan,257,575,Richmond,Richmond,Richmond,Virginia,VA,Atlantic 10,Atlantic 10 Conference,3,24,2025-11-04,2026-02-07
+2026,5240396,Payton Richard,257,575,Richmond,Richmond,Richmond,Virginia,VA,Atlantic 10,Atlantic 10 Conference,3,24,2025-11-04,2026-02-07
+2026,5107504,Rachel Ullstrom,257,575,Richmond,Richmond,Richmond,Virginia,VA,Atlantic 10,Atlantic 10 Conference,3,24,2025-11-04,2026-02-07
+2026,5315267,Rayne Wright,257,575,Richmond,Richmond,Richmond,Virginia,VA,Atlantic 10,Atlantic 10 Conference,3,24,2025-11-04,2026-02-07
+2026,5107833,Sam Dewey,257,575,Richmond,Richmond,Richmond,Virginia,VA,Atlantic 10,Atlantic 10 Conference,3,24,2025-11-04,2026-02-07
+2026,5315270,Shaneka Campbell,257,575,Richmond,Richmond,Richmond,Virginia,VA,Atlantic 10,Atlantic 10 Conference,3,24,2025-11-04,2026-02-07
+2026,4704517,Skylah Travis,257,575,Richmond,Richmond,Richmond,Virginia,VA,Atlantic 10,Atlantic 10 Conference,3,24,2025-11-04,2026-02-07
+2026,4900556,Tierra Simon,257,575,Richmond,Richmond,Richmond,Virginia,VA,Atlantic 10,Atlantic 10 Conference,3,24,2025-11-04,2026-02-07
+2026,5175799,Achol Magot,12,29,Arizona,Arizona,Arizona,Arizona,AZ,Big 12,Big 12 Conference,8,23,2025-11-06,2026-02-07
+2026,5312666,Blessing Adebanjo,12,29,Arizona,Arizona,Arizona,Arizona,AZ,Big 12,Big 12 Conference,8,23,2025-11-06,2026-02-07
+2026,5312667,Daniah Trammell,12,29,Arizona,Arizona,Arizona,Arizona,AZ,Big 12,Big 12 Conference,8,23,2025-11-06,2026-02-07
+2026,5239464,Fredriecka Wallace,12,29,Arizona,Arizona,Arizona,Arizona,AZ,Big 12,Big 12 Conference,8,23,2025-11-06,2026-02-07
+2026,5238316,Kamryn Kitchen,12,29,Arizona,Arizona,Arizona,Arizona,AZ,Big 12,Big 12 Conference,8,23,2025-11-06,2026-02-07
+2026,4705385,Mickayla Perdue,12,29,Arizona,Arizona,Arizona,Arizona,AZ,Big 12,Big 12 Conference,8,23,2025-11-06,2026-02-07
+2026,5312665,Mireia Jurado,12,29,Arizona,Arizona,Arizona,Arizona,AZ,Big 12,Big 12 Conference,8,23,2025-11-06,2026-02-07
+2026,5312664,Molly Ladwig,12,29,Arizona,Arizona,Arizona,Arizona,AZ,Big 12,Big 12 Conference,8,23,2025-11-06,2026-02-07
+2026,5175868,Montaya Dew,12,29,Arizona,Arizona,Arizona,Arizona,AZ,Big 12,Big 12 Conference,8,23,2025-11-06,2026-02-07
+2026,5108598,Noelani Cornfield,12,29,Arizona,Arizona,Arizona,Arizona,AZ,Big 12,Big 12 Conference,8,23,2025-11-06,2026-02-07
+2026,5108628,Nora Francois,12,29,Arizona,Arizona,Arizona,Arizona,AZ,Big 12,Big 12 Conference,8,23,2025-11-06,2026-02-07
+2026,5177875,Sumayah Sugapong,12,29,Arizona,Arizona,Arizona,Arizona,AZ,Big 12,Big 12 Conference,8,23,2025-11-06,2026-02-07
+2026,5107560,Tanyuel Welch,12,29,Arizona,Arizona,Arizona,Arizona,AZ,Big 12,Big 12 Conference,8,23,2025-11-06,2026-02-07
+2026,5108356,Acacia Hayes,9,28,Arizona State,Arizona State,Arizona St.,Arizona,AZ,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5313600,Amaya Williams,9,28,Arizona State,Arizona State,Arizona St.,Arizona,AZ,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5313602,Deborah Davenport,9,28,Arizona State,Arizona State,Arizona St.,Arizona,AZ,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,4702864,Gabby Elliott,9,28,Arizona State,Arizona State,Arizona St.,Arizona,AZ,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,4433459,Heavenly Greer,9,28,Arizona State,Arizona State,Arizona St.,Arizona,AZ,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5239098,Heloisa Carrera,9,28,Arizona State,Arizona State,Arizona St.,Arizona,AZ,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5109125,Jordan Jones,9,28,Arizona State,Arizona State,Arizona St.,Arizona,AZ,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5178151,Jyah LoVett,9,28,Arizona State,Arizona State,Arizona St.,Arizona,AZ,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5105441,Last-Tear Poa,9,28,Arizona State,Arizona State,Arizona St.,Arizona,AZ,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5108018,Makayla Moore,9,28,Arizona State,Arizona State,Arizona St.,Arizona,AZ,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5107733,Marley Washenitz,9,28,Arizona State,Arizona State,Arizona St.,Arizona,AZ,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5313601,Martina Fantini,9,28,Arizona State,Arizona State,Arizona St.,Arizona,AZ,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5178157,McKinna Brackens,9,28,Arizona State,Arizona State,Arizona St.,Arizona,AZ,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5239444,Timya Grice,9,28,Arizona State,Arizona State,Arizona St.,Arizona,AZ,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5106147,Bella Fontleroy,239,51,Baylor,Baylor,Baylor,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5106145,Darianna Littlepage-Buggs,239,51,Baylor,Baylor,Baylor,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5107570,Ella Brow,239,51,Baylor,Baylor,Baylor,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5239451,Ines Goryanova,239,51,Baylor,Baylor,Baylor,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,4433434,Jana Van Gytenbeek,239,51,Baylor,Baylor,Baylor,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5239453,Kayla Nelms,239,51,Baylor,Baylor,Baylor,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5178457,Kiera Pemberton,239,51,Baylor,Baylor,Baylor,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5106165,Kiersten Johnson,239,51,Baylor,Baylor,Baylor,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5106146,Kyla Abraham,239,51,Baylor,Baylor,Baylor,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5238299,Lorena Awou,239,51,Baylor,Baylor,Baylor,Texas,TX,Big 12,Big 12 Conference,8,2,2026-02-04,2026-02-07
+2026,5313586,Marcayla Johnson,239,51,Baylor,Baylor,Baylor,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5174251,Taliah Scott,239,51,Baylor,Baylor,Baylor,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5263907,Yuting Deng,239,51,Baylor,Baylor,Baylor,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5110056,Anaëlle Dutat,38,157,Colorado,Colorado,Colorado,Colorado,CO,Big 12,Big 12 Conference,8,24,2025-11-06,2026-02-08
+2026,5174335,Claire O'Connor,38,157,Colorado,Colorado,Colorado,Colorado,CO,Big 12,Big 12 Conference,8,24,2025-11-06,2026-02-08
+2026,5108302,Desiree Wooten,38,157,Colorado,Colorado,Colorado,Colorado,CO,Big 12,Big 12 Conference,8,24,2025-11-06,2026-02-08
+2026,5313647,Erianna Gooden,38,157,Colorado,Colorado,Colorado,Colorado,CO,Big 12,Big 12 Conference,8,24,2025-11-06,2026-02-08
+2026,5313649,Isa Hämäläinen,38,157,Colorado,Colorado,Colorado,Colorado,CO,Big 12,Big 12 Conference,8,24,2025-11-06,2026-02-08
+2026,5313648,Jade Crook,38,157,Colorado,Colorado,Colorado,Colorado,CO,Big 12,Big 12 Conference,8,24,2025-11-06,2026-02-08
+2026,5109356,Jade Masogayo,38,157,Colorado,Colorado,Colorado,Colorado,CO,Big 12,Big 12 Conference,8,24,2025-11-06,2026-02-08
+2026,5106172,JoJo Nworie,38,157,Colorado,Colorado,Colorado,Colorado,CO,Big 12,Big 12 Conference,8,24,2025-11-06,2026-02-08
+2026,5175883,Kennedy Sanders,38,157,Colorado,Colorado,Colorado,Colorado,CO,Big 12,Big 12 Conference,8,24,2025-11-06,2026-02-08
+2026,5313650,Logyn Greer,38,157,Colorado,Colorado,Colorado,Colorado,CO,Big 12,Big 12 Conference,8,24,2025-11-06,2026-02-08
+2026,5106185,Maeve McErlane,38,157,Colorado,Colorado,Colorado,Colorado,CO,Big 12,Big 12 Conference,8,24,2025-11-06,2026-02-08
+2026,5313651,Sophia Zadel,38,157,Colorado,Colorado,Colorado,Colorado,CO,Big 12,Big 12 Conference,8,24,2025-11-06,2026-02-08
+2026,5239458,Tabitha Betson,38,157,Colorado,Colorado,Colorado,Colorado,CO,Big 12,Big 12 Conference,8,14,2025-12-14,2026-02-08
+2026,4565512,Zyanna Walker,38,157,Colorado,Colorado,Colorado,Colorado,CO,Big 12,Big 12 Conference,8,24,2025-11-06,2026-02-08
+2026,5175490,Addy Brown,66,311,Iowa State,Iowa State,Iowa St.,Iowa,IA,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5239462,Aili Tanke,66,311,Iowa State,Iowa State,Iowa St.,Iowa,IA,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5105443,Alisa Williams,66,311,Iowa State,Iowa State,Iowa St.,Iowa,IA,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5175488,Arianna Jackson,66,311,Iowa State,Iowa State,Iowa St.,Iowa,IA,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5175491,Audi Crooks,66,311,Iowa State,Iowa State,Iowa St.,Iowa,IA,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5177952,Evangelia Paulk,66,311,Iowa State,Iowa State,Iowa St.,Iowa,IA,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5314956,Freya Jensen,66,311,Iowa State,Iowa State,Iowa St.,Iowa,IA,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5175867,Jada Williams,66,311,Iowa State,Iowa State,Iowa St.,Iowa,IA,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5106193,Kenzie Hare,66,311,Iowa State,Iowa State,Iowa St.,Iowa,IA,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5174396,Lilly Taulelei,66,311,Iowa State,Iowa State,Iowa St.,Iowa,IA,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5239461,Reagan Wilson,66,311,Iowa State,Iowa State,Iowa St.,Iowa,IA,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5314955,Reese Beaty,66,311,Iowa State,Iowa State,Iowa St.,Iowa,IA,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5109086,Sydney Harris,66,311,Iowa State,Iowa State,Iowa St.,Iowa,IA,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5106181,Brittany Harshaw,2305,328,Kansas,Kansas,Kansas,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-05,2026-02-07
+2026,5109873,Elle Evans,2305,328,Kansas,Kansas,Kansas,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-05,2026-02-07
+2026,5312764,Jaliya Davis,2305,328,Kansas,Kansas,Kansas,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-05,2026-02-07
+2026,5312761,Keeley Parks,2305,328,Kansas,Kansas,Kansas,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-05,2026-02-07
+2026,5175747,Laia Conesa,2305,328,Kansas,Kansas,Kansas,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-05,2026-02-07
+2026,5312762,Libby Fandel,2305,328,Kansas,Kansas,Kansas,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-05,2026-02-07
+2026,5107835,Lilly Meister,2305,328,Kansas,Kansas,Kansas,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-05,2026-02-07
+2026,4898993,Nadira Eltayeb,2305,328,Kansas,Kansas,Kansas,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-05,2026-02-07
+2026,5239467,Regan Williams,2305,328,Kansas,Kansas,Kansas,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-05,2026-02-07
+2026,5175749,S'Mya Nichols,2305,328,Kansas,Kansas,Kansas,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-05,2026-02-07
+2026,5108548,Sania Copeland,2305,328,Kansas,Kansas,Kansas,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-05,2026-02-07
+2026,5312763,Tatyonna Brown,2305,328,Kansas,Kansas,Kansas,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-05,2026-02-07
+2026,5175752,Alexis Hess,2306,327,Kansas State,Kansas State,Kansas St.,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5312755,Aniya Foy,2306,327,Kansas State,Kansas State,Kansas St.,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5312753,Brandie Harrod,2306,327,Kansas State,Kansas State,Kansas St.,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5312756,Gina Garcia,2306,327,Kansas State,Kansas State,Kansas St.,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5329951,Ivona Scekic,2306,327,Kansas State,Kansas State,Kansas St.,Kansas,KS,Big 12,Big 12 Conference,8,11,2025-12-31,2026-02-07
+2026,5238287,Izela Arenas,2306,327,Kansas State,Kansas State,Kansas St.,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5238278,Jenessa Cotton,2306,327,Kansas State,Kansas State,Kansas St.,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5312757,Jordan Speiser,2306,327,Kansas State,Kansas State,Kansas St.,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5106157,Mikayla Parks,2306,327,Kansas State,Kansas State,Kansas St.,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5312754,Nastja Claessens,2306,327,Kansas State,Kansas State,Kansas St.,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5238321,Ramiya White,2306,327,Kansas State,Kansas State,Kansas St.,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5175751,Taryn Sides,2306,327,Kansas State,Kansas State,Kansas St.,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5108571,Tess Heal,2306,327,Kansas State,Kansas State,Kansas St.,Kansas,KS,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5175811,Achol Akot,197,521,Oklahoma State,Oklahoma State,Oklahoma St.,Oklahoma,OK,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5175474,Amari Whiting,197,521,Oklahoma State,Oklahoma State,Oklahoma St.,Oklahoma,OK,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5175534,Faith Acker,197,521,Oklahoma State,Oklahoma State,Oklahoma St.,Oklahoma,OK,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5312752,Favour Onoh,197,521,Oklahoma State,Oklahoma State,Oklahoma St.,Oklahoma,OK,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,4899819,Haleigh Timmer,197,521,Oklahoma State,Oklahoma State,Oklahoma St.,Oklahoma,OK,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5239469,Jadyn Wooten,197,521,Oklahoma State,Oklahoma State,Oklahoma St.,Oklahoma,OK,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5312751,Lena Girardi,197,521,Oklahoma State,Oklahoma State,Oklahoma St.,Oklahoma,OK,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5175995,Macey Huard,197,521,Oklahoma State,Oklahoma State,Oklahoma St.,Oklahoma,OK,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5109974,Micah Gray,197,521,Oklahoma State,Oklahoma State,Oklahoma St.,Oklahoma,OK,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5106161,Praise Egharevba,197,521,Oklahoma State,Oklahoma State,Oklahoma St.,Oklahoma,OK,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5175757,Stailee Heard,197,521,Oklahoma State,Oklahoma State,Oklahoma St.,Oklahoma,OK,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5240738,Tyla Heard,197,521,Oklahoma State,Oklahoma State,Oklahoma St.,Oklahoma,OK,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5108643,Wilnie Joseph,197,521,Oklahoma State,Oklahoma State,Oklahoma St.,Oklahoma,OK,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5106167,Aaliyah Roberson,2628,698,TCU,TCU,Texas Christian,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-06,2026-02-08
+2026,5312749,Clara Bielefeld,2628,698,TCU,TCU,Texas Christian,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-06,2026-02-08
+2026,5239079,Clara Silva,2628,698,TCU,TCU,Texas Christian,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-06,2026-02-08
+2026,5175915,Donovyn Hunter,2628,698,TCU,TCU,Texas Christian,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-06,2026-02-08
+2026,5312750,Emily Hunter,2628,698,TCU,TCU,Texas Christian,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-06,2026-02-08
+2026,5105728,Kennedy Basham,2628,698,TCU,TCU,Texas Christian,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-06,2026-02-08
+2026,4433420,Maddie Scherr,2628,698,TCU,TCU,Texas Christian,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-06,2026-02-08
+2026,4704594,Marta Suarez,2628,698,TCU,TCU,Texas Christian,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-06,2026-02-08
+2026,4704324,Natalie Mazurek,2628,698,TCU,TCU,Texas Christian,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-06,2026-02-08
+2026,4433791,Olivia Miles,2628,698,TCU,TCU,Texas Christian,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-06,2026-02-08
+2026,5312748,Sarah Portlock,2628,698,TCU,TCU,Texas Christian,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-06,2026-02-08
+2026,5239106,Taliyah Parker,2628,698,TCU,TCU,Texas Christian,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-06,2026-02-08
+2026,4433798,Taylor Bigby,2628,698,TCU,TCU,Texas Christian,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-06,2026-02-08
+2026,5108583,Veronica Sheffey,2628,698,TCU,TCU,Texas Christian,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-06,2026-02-08
+2026,5105733,Adlee Blacklock,2641,700,Texas Tech,Texas Tech,Texas Tech,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5106173,Bailey Maupin,2641,700,Texas Tech,Texas Tech,Texas Tech,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,4898394,Denae Fritz,2641,700,Texas Tech,Texas Tech,Texas Tech,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5107737,Gemma Nuñez,2641,700,Texas Tech,Texas Tech,Texas Tech,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,4433526,Jada Malone,2641,700,Texas Tech,Texas Tech,Texas Tech,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5175487,Jalynn Bristow,2641,700,Texas Tech,Texas Tech,Texas Tech,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5311816,Julie Nekolná,2641,700,Texas Tech,Texas Tech,Texas Tech,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5239472,Kalysta Martin,2641,700,Texas Tech,Texas Tech,Texas Tech,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5241765,Mariam Sanogo,2641,700,Texas Tech,Texas Tech,Texas Tech,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5239473,Sarengbe Sanogo,2641,700,Texas Tech,Texas Tech,Texas Tech,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5108349,Sidney Love,2641,700,Texas Tech,Texas Tech,Texas Tech,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,4704453,Snudda Collins,2641,700,Texas Tech,Texas Tech,Texas Tech,Texas,TX,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5331569,Stephanie Okechukwu,2641,700,Texas Tech,Texas Tech,Texas Tech,Texas,TX,Big 12,Big 12 Conference,8,8,2026-01-10,2026-02-07
+2026,5108575,Alyssa Blanck,254,732,Utah,Utah,Utah,Utah,UT,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5311811,Avery Hjelmstad,254,732,Utah,Utah,Utah,Utah,UT,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5239480,Brooke Walker,254,732,Utah,Utah,Utah,Utah,UT,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5107846,Chyra Evans,254,732,Utah,Utah,Utah,Utah,UT,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5311814,Ella Todd,254,732,Utah,Utah,Utah,Utah,UT,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5311813,Evelina Otto,254,732,Utah,Utah,Utah,Utah,UT,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5239482,Grace Foster,254,732,Utah,Utah,Utah,Utah,UT,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5239496,Kamryn Mafua,254,732,Utah,Utah,Utah,Utah,UT,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5311812,LA Sneed,254,732,Utah,Utah,Utah,Utah,UT,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5105748,Lani White,254,732,Utah,Utah,Utah,Utah,UT,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,4433551,Maty Wilke,254,732,Utah,Utah,Utah,Utah,UT,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5175964,Reese Ross,254,732,Utah,Utah,Utah,Utah,UT,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5109197,Samantha Crispe,254,732,Utah,Utah,Utah,Utah,UT,Big 12,Big 12 Conference,8,24,2025-11-03,2026-02-07
+2026,5178008,Carter McCray,277,768,West Virginia,West Virginia,West Virginia,West Virginia,WV,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5239486,Célia Rivière,277,768,West Virginia,West Virginia,West Virginia,West Virginia,WV,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,4607456,Gia Cooke,277,768,West Virginia,West Virginia,West Virginia,West Virginia,WV,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5108051,Jordan Harrison,277,768,West Virginia,West Virginia,West Virginia,West Virginia,WV,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5239485,Jordan Thomas,277,768,West Virginia,West Virginia,West Virginia,West Virginia,WV,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5109726,Kierra Wheeler,277,768,West Virginia,West Virginia,West Virginia,West Virginia,WV,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5175800,Loghan Johnson,277,768,West Virginia,West Virginia,West Virginia,West Virginia,WV,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5311809,Madison Parrish,277,768,West Virginia,West Virginia,West Virginia,West Virginia,WV,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5175046,Riley Makalusky,277,768,West Virginia,West Virginia,West Virginia,West Virginia,WV,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,4565511,Sydney Shaw,277,768,West Virginia,West Virginia,West Virginia,West Virginia,WV,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,4899646,Sydney Woodley,277,768,West Virginia,West Virginia,West Virginia,West Virginia,WV,Big 12,Big 12 Conference,8,25,2025-11-03,2026-02-07
+2026,5239591,Allie Ziebell,41,164,UConn,UConn,UConn,Connecticut,CT,Big East,Big East Conference,4,25,2025-11-04,2026-02-07
+2026,5174493,Ashlynn Shade,41,164,UConn,UConn,UConn,Connecticut,CT,Big East,Big East Conference,4,25,2025-11-04,2026-02-07
+2026,5106203,Ayanna Patterson,41,164,UConn,UConn,UConn,Connecticut,CT,Big East,Big East Conference,4,25,2025-11-04,2026-02-07
+2026,4433790,Azzi Fudd,41,164,UConn,UConn,UConn,Connecticut,CT,Big East,Big East Conference,4,25,2025-11-04,2026-02-07
+2026,5312306,Blanca Quiñonez,41,164,UConn,UConn,UConn,Connecticut,CT,Big East,Big East Conference,4,25,2025-11-04,2026-02-07
+2026,4433534,Caroline Ducharme,41,164,UConn,UConn,UConn,Connecticut,CT,Big East,Big East Conference,4,25,2025-11-04,2026-02-07
+2026,5312308,Gandy Malou-Mamel,41,164,UConn,UConn,UConn,Connecticut,CT,Big East,Big East Conference,4,25,2025-11-04,2026-02-07
+2026,5106202,Ice Brady,41,164,UConn,UConn,UConn,Connecticut,CT,Big East,Big East Conference,4,25,2025-11-04,2026-02-07
+2026,5125264,Jana El Alfy,41,164,UConn,UConn,UConn,Connecticut,CT,Big East,Big East Conference,4,25,2025-11-04,2026-02-07
+2026,5174491,KK Arnold,41,164,UConn,UConn,UConn,Connecticut,CT,Big East,Big East Conference,4,25,2025-11-04,2026-02-07
+2026,5239664,Kayleigh Heckel,41,164,UConn,UConn,UConn,Connecticut,CT,Big East,Big East Conference,4,25,2025-11-04,2026-02-07
+2026,5312307,Kelis Fisher,41,164,UConn,UConn,UConn,Connecticut,CT,Big East,Big East Conference,4,25,2025-11-04,2026-02-07
+2026,5239593,Morgan Cheli,41,164,UConn,UConn,UConn,Connecticut,CT,Big East,Big East Conference,4,25,2025-11-04,2026-02-07
+2026,5239592,Sarah Strong,41,164,UConn,UConn,UConn,Connecticut,CT,Big East,Big East Conference,4,25,2025-11-04,2026-02-07
+2026,5108550,Serah Williams,41,164,UConn,UConn,UConn,Connecticut,CT,Big East,Big East Conference,4,25,2025-11-04,2026-02-07
+2026,5240176,Aaliyah Guyton,356,301,Illinois,Illinois,Illinois,Illinois,IL,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5240169,Berry Wallace,356,301,Illinois,Illinois,Illinois,Illinois,IL,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5311539,Cearah Parchment,356,301,Illinois,Illinois,Illinois,Illinois,IL,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5311535,Destiny Jackson,356,301,Illinois,Illinois,Illinois,Illinois,IL,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5311536,Erica Finney,356,301,Illinois,Illinois,Illinois,Illinois,IL,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5243328,Gisela Segura,356,301,Illinois,Illinois,Illinois,Illinois,IL,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5175679,Gretchen Dolan,356,301,Illinois,Illinois,Illinois,Illinois,IL,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5240170,Hayven Smith,356,301,Illinois,Illinois,Illinois,Illinois,IL,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5240167,Irene Noya Catoira,356,301,Illinois,Illinois,Illinois,Illinois,IL,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5174271,Jasmine Brown-Hagger,356,301,Illinois,Illinois,Illinois,Illinois,IL,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5175473,Lety Vasconcelos,356,301,Illinois,Illinois,Illinois,Illinois,IL,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5174765,Maddie Webber,356,301,Illinois,Illinois,Illinois,Illinois,IL,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5311537,Manuella Alves,356,301,Illinois,Illinois,Illinois,Illinois,IL,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5240168,Mia Zenere,356,301,Illinois,Illinois,Illinois,Illinois,IL,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5311538,Naomi Benson,356,301,Illinois,Illinois,Illinois,Illinois,IL,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5239057,Chloe Spreen,84,306,Indiana,Indiana,Indiana,Indiana,IN,Big Ten,Big Ten Conference,7,25,2025-11-04,2026-02-08
+2026,5174435,Edessa Noyan,84,306,Indiana,Indiana,Indiana,Indiana,IN,Big Ten,Big Ten Conference,7,25,2025-11-04,2026-02-08
+2026,5240173,Faith Wiseman,84,306,Indiana,Indiana,Indiana,Indiana,IN,Big Ten,Big Ten Conference,7,25,2025-11-04,2026-02-08
+2026,5311542,Jade Ondineme,84,306,Indiana,Indiana,Indiana,Indiana,IN,Big Ten,Big Ten Conference,7,25,2025-11-04,2026-02-08
+2026,5109749,Jerni Kiaku,84,306,Indiana,Indiana,Indiana,Indiana,IN,Big Ten,Big Ten Conference,7,25,2025-11-04,2026-02-08
+2026,5175680,Lenée Beaumont,84,306,Indiana,Indiana,Indiana,Indiana,IN,Big Ten,Big Ten Conference,7,25,2025-11-04,2026-02-08
+2026,5311541,Maya Makalusky,84,306,Indiana,Indiana,Indiana,Indiana,IN,Big Ten,Big Ten Conference,7,25,2025-11-04,2026-02-08
+2026,5311540,Nevaeh Caffey,84,306,Indiana,Indiana,Indiana,Indiana,IN,Big Ten,Big Ten Conference,7,25,2025-11-04,2026-02-08
+2026,5239065,Phoenix Stotijn,84,306,Indiana,Indiana,Indiana,Indiana,IN,Big Ten,Big Ten Conference,7,25,2025-11-04,2026-02-08
+2026,4688629,Shay Ciezki,84,306,Indiana,Indiana,Indiana,Indiana,IN,Big Ten,Big Ten Conference,7,25,2025-11-04,2026-02-08
+2026,5240172,Sydney Fenn,84,306,Indiana,Indiana,Indiana,Indiana,IN,Big Ten,Big Ten Conference,7,25,2025-11-04,2026-02-08
+2026,5240171,Valentyna Kadlecova,84,306,Indiana,Indiana,Indiana,Indiana,IN,Big Ten,Big Ten Conference,7,25,2025-11-04,2026-02-08
+2026,5239703,Zania Socka-Nguemen,84,306,Indiana,Indiana,Indiana,Indiana,IN,Big Ten,Big Ten Conference,7,25,2025-11-04,2026-02-08
+2026,5329885,Zoe Jackson,84,306,Indiana,Indiana,Indiana,Indiana,IN,Big Ten,Big Ten Conference,7,12,2025-12-29,2026-02-08
+2026,5311543,Addie Deal,2294,312,Iowa,Iowa,Iowa,Iowa,IA,Big Ten,Big Ten Conference,7,23,2025-11-03,2026-02-05
+2026,5240175,Ava Heiden,2294,312,Iowa,Iowa,Iowa,Iowa,IA,Big Ten,Big Ten Conference,7,23,2025-11-03,2026-02-05
+2026,5240177,Callie Levin,2294,312,Iowa,Iowa,Iowa,Iowa,IA,Big Ten,Big Ten Conference,7,23,2025-11-03,2026-02-05
+2026,5238283,Chazadi Wright,2294,312,Iowa,Iowa,Iowa,Iowa,IA,Big Ten,Big Ten Conference,7,23,2025-11-03,2026-02-05
+2026,5239475,Emely Rodriguez,2294,312,Iowa,Iowa,Iowa,Iowa,IA,Big Ten,Big Ten Conference,7,23,2025-11-03,2026-02-05
+2026,4682968,Hannah Stuelke,2294,312,Iowa,Iowa,Iowa,Iowa,IA,Big Ten,Big Ten Conference,7,23,2025-11-03,2026-02-05
+2026,4858658,Jada Gyamfi,2294,312,Iowa,Iowa,Iowa,Iowa,IA,Big Ten,Big Ten Conference,7,23,2025-11-03,2026-02-05
+2026,5311544,Journey Houston,2294,312,Iowa,Iowa,Iowa,Iowa,IA,Big Ten,Big Ten Conference,7,23,2025-11-03,2026-02-05
+2026,5175682,Kennise Johnson,2294,312,Iowa,Iowa,Iowa,Iowa,IA,Big Ten,Big Ten Conference,7,23,2025-11-03,2026-02-05
+2026,4433985,Kylie Feuerbach,2294,312,Iowa,Iowa,Iowa,Iowa,IA,Big Ten,Big Ten Conference,7,23,2025-11-03,2026-02-05
+2026,5311545,Layla Hays,2294,312,Iowa,Iowa,Iowa,Iowa,IA,Big Ten,Big Ten Conference,7,23,2025-11-03,2026-02-05
+2026,4858677,Taylor McCabe,2294,312,Iowa,Iowa,Iowa,Iowa,IA,Big Ten,Big Ten Conference,7,23,2025-11-03,2026-02-05
+2026,5240174,Taylor Stremlow,2294,312,Iowa,Iowa,Iowa,Iowa,IA,Big Ten,Big Ten Conference,7,23,2025-11-03,2026-02-05
+2026,5240178,Teagan Mallegni,2294,312,Iowa,Iowa,Iowa,Iowa,IA,Big Ten,Big Ten Conference,7,23,2025-11-03,2026-02-05
+2026,5311551,Addi Mack,120,392,Maryland,Maryland,Maryland,Maryland,MD,Big Ten,Big Ten Conference,7,25,2025-11-03,2026-02-07
+2026,5240179,Ava McKennie,120,392,Maryland,Maryland,Maryland,Maryland,MD,Big Ten,Big Ten Conference,7,25,2025-11-03,2026-02-07
+2026,5240182,Breanna Williams,120,392,Maryland,Maryland,Maryland,Maryland,MD,Big Ten,Big Ten Conference,7,25,2025-11-03,2026-02-07
+2026,5107845,Bri McDaniel,120,392,Maryland,Maryland,Maryland,Maryland,MD,Big Ten,Big Ten Conference,7,25,2025-11-03,2026-02-07
+2026,5240181,Isimenme Ozzy-Momodu,120,392,Maryland,Maryland,Maryland,Maryland,MD,Big Ten,Big Ten Conference,7,25,2025-11-03,2026-02-07
+2026,4618080,Kaylene Smikle,120,392,Maryland,Maryland,Maryland,Maryland,MD,Big Ten,Big Ten Conference,7,25,2025-11-03,2026-02-07
+2026,5240180,Kyndal Walker,120,392,Maryland,Maryland,Maryland,Maryland,MD,Big Ten,Big Ten Conference,7,25,2025-11-03,2026-02-07
+2026,5311550,Lea Bartelme,120,392,Maryland,Maryland,Maryland,Maryland,MD,Big Ten,Big Ten Conference,7,25,2025-11-03,2026-02-07
+2026,5311552,Marya Boiko,120,392,Maryland,Maryland,Maryland,Maryland,MD,Big Ten,Big Ten Conference,7,25,2025-11-03,2026-02-07
+2026,4433737,Mir McLean,120,392,Maryland,Maryland,Maryland,Maryland,MD,Big Ten,Big Ten Conference,7,25,2025-11-03,2026-02-07
+2026,5311553,Nicole Fritea,120,392,Maryland,Maryland,Maryland,Maryland,MD,Big Ten,Big Ten Conference,7,25,2025-11-03,2026-02-07
+2026,5174408,Oluchi Okananwa,120,392,Maryland,Maryland,Maryland,Maryland,MD,Big Ten,Big Ten Conference,7,25,2025-11-03,2026-02-07
+2026,5311549,Rainey Welson,120,392,Maryland,Maryland,Maryland,Maryland,MD,Big Ten,Big Ten Conference,7,25,2025-11-03,2026-02-07
+2026,4433542,Saylor Poffenbarger,120,392,Maryland,Maryland,Maryland,Maryland,MD,Big Ten,Big Ten Conference,7,25,2025-11-03,2026-02-07
+2026,5107834,Yarden Garzon,120,392,Maryland,Maryland,Maryland,Maryland,MD,Big Ten,Big Ten Conference,7,25,2025-11-03,2026-02-07
+2026,5240187,Aaiyanna Dunbar,130,418,Michigan,Michigan,Michigan,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,4711798,Ally VanTimmeren,130,418,Michigan,Michigan,Michigan,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,4698726,Alyssa Crockett,130,418,Michigan,Michigan,Michigan,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5176903,Ashley Sofilkanich,130,418,Michigan,Michigan,Michigan,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5109820,Brooke Quarles Daniels,130,418,Michigan,Michigan,Michigan,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5311556,Ciara Byars,130,418,Michigan,Michigan,Michigan,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5311555,Jessica Fields,130,418,Michigan,Michigan,Michigan,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5239705,Kendall Dudley,130,418,Michigan,Michigan,Michigan,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5175688,Macy Brown,130,418,Michigan,Michigan,Michigan,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5311557,McKenzie Mathurin,130,418,Michigan,Michigan,Michigan,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5240184,Mila Holloway,130,418,Michigan,Michigan,Michigan,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5240183,Olivia Olson,130,418,Michigan,Michigan,Michigan,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5240185,Syla Swords,130,418,Michigan,Michigan,Michigan,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5240186,Te'Yala Delfosse,130,418,Michigan,Michigan,Michigan,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,4858662,Abbey Kimball,127,416,Michigan State,Michigan State,Michigan St.,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-07
+2026,5311565,Amy Terrian,127,416,Michigan State,Michigan State,Michigan St.,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-07
+2026,5311566,Anna Terrian,127,416,Michigan State,Michigan State,Michigan St.,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-07
+2026,5108531,Emma Shumate,127,416,Michigan State,Michigan State,Michigan St.,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-07
+2026,5105731,Grace VanSlooten,127,416,Michigan State,Michigan State,Michigan St.,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-07
+2026,5240191,Inés Sotelo,127,416,Michigan State,Michigan State,Michigan St.,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-07
+2026,4899051,Isaline Alexander,127,416,Michigan State,Michigan State,Michigan St.,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-07
+2026,4858671,Jalyn Brown,127,416,Michigan State,Michigan State,Michigan St.,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-07
+2026,5311563,Jordan Ode,127,416,Michigan State,Michigan State,Michigan St.,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-07
+2026,5240192,Juliann Woodard,127,416,Michigan State,Michigan State,Michigan St.,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-07
+2026,5175696,Kennedy Blair,127,416,Michigan State,Michigan State,Michigan St.,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-07
+2026,5107687,Marah Dykstra,127,416,Michigan State,Michigan State,Michigan St.,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-07
+2026,5175721,Rashunda Jones,127,416,Michigan State,Michigan State,Michigan St.,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-07
+2026,5311564,Sara Sambolic,127,416,Michigan State,Michigan State,Michigan St.,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-07
+2026,5107854,Theryn Hallock,127,416,Michigan State,Michigan State,Michigan St.,Michigan,MI,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-07
+2026,4682766,Amaya Battle,135,428,Minnesota,Minnesota,Minnesota,Minnesota,MN,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,4898995,Brylee Glenn,135,428,Minnesota,Minnesota,Minnesota,Minnesota,MN,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5175699,Brynn Senden,135,428,Minnesota,Minnesota,Minnesota,Minnesota,MN,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,4595843,Finau Tonga,135,428,Minnesota,Minnesota,Minnesota,Minnesota,MN,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5175701,Grace Grocholski,135,428,Minnesota,Minnesota,Minnesota,Minnesota,MN,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5175700,Kennedy Klick,135,428,Minnesota,Minnesota,Minnesota,Minnesota,MN,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5311570,Makena Christian,135,428,Minnesota,Minnesota,Minnesota,Minnesota,MN,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,4858655,Mallory Heyer,135,428,Minnesota,Minnesota,Minnesota,Minnesota,MN,Big Ten,Big Ten Conference,7,21,2025-11-04,2026-01-28
+2026,4858666,Mara Braun,135,428,Minnesota,Minnesota,Minnesota,Minnesota,MN,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5108516,Niamya Holloway,135,428,Minnesota,Minnesota,Minnesota,Minnesota,MN,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,4898385,Sophie Hart,135,428,Minnesota,Minnesota,Minnesota,Minnesota,MN,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5175689,Taylor Woodson,135,428,Minnesota,Minnesota,Minnesota,Minnesota,MN,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5240193,Tori McKinney,135,428,Minnesota,Minnesota,Minnesota,Minnesota,MN,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,4898426,Tracey Bershers,135,428,Minnesota,Minnesota,Minnesota,Minnesota,MN,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5311569,Zoey Bershers,135,428,Minnesota,Minnesota,Minnesota,Minnesota,MN,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5311590,Alanna Neale,158,463,Nebraska,Nebraska,Nebraska,Nebraska,NE,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-07
+2026,4683053,Allison Weidner,158,463,Nebraska,Nebraska,Nebraska,Nebraska,NE,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-07
+2026,5240196,Amiah Hargrove,158,463,Nebraska,Nebraska,Nebraska,Nebraska,NE,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-07
+2026,5240195,Britt Prince,158,463,Nebraska,Nebraska,Nebraska,Nebraska,NE,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-07
+2026,5108518,Callin Hake,158,463,Nebraska,Nebraska,Nebraska,Nebraska,NE,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-07
+2026,5243562,Claire Johnson,158,463,Nebraska,Nebraska,Nebraska,Nebraska,NE,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-07
+2026,5106158,Eliza Maupin,158,463,Nebraska,Nebraska,Nebraska,Nebraska,NE,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-07
+2026,5175687,Emily Fisher,158,463,Nebraska,Nebraska,Nebraska,Nebraska,NE,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-07
+2026,4611769,Hailey Weaver,158,463,Nebraska,Nebraska,Nebraska,Nebraska,NE,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-07
+2026,5175709,Jessica Petrie,158,463,Nebraska,Nebraska,Nebraska,Nebraska,NE,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-07
+2026,5240194,Kennadi Williams,158,463,Nebraska,Nebraska,Nebraska,Nebraska,NE,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-07
+2026,5175708,Logan Nissley,158,463,Nebraska,Nebraska,Nebraska,Nebraska,NE,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-07
+2026,5175710,Natalie Potts,158,463,Nebraska,Nebraska,Nebraska,Nebraska,NE,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-07
+2026,5240197,Petra Bozan,158,463,Nebraska,Nebraska,Nebraska,Nebraska,NE,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-07
+2026,5239679,Ava Watson,194,518,Ohio State,Ohio State,Ohio St.,Ohio,OH,Big Ten,Big Ten Conference,7,25,2025-11-09,2026-02-08
+2026,5311598,Bryn Martin,194,518,Ohio State,Ohio State,Ohio St.,Ohio,OH,Big Ten,Big Ten Conference,7,25,2025-11-09,2026-02-08
+2026,5105729,Chance Gray,194,518,Ohio State,Ohio State,Ohio St.,Ohio,OH,Big Ten,Big Ten Conference,7,25,2025-11-09,2026-02-08
+2026,5311597,Dasha Biriuk,194,518,Ohio State,Ohio State,Ohio St.,Ohio,OH,Big Ten,Big Ten Conference,7,25,2025-11-09,2026-02-08
+2026,5239681,Ella Hobbs,194,518,Ohio State,Ohio State,Ohio St.,Ohio,OH,Big Ten,Big Ten Conference,7,25,2025-11-09,2026-02-08
+2026,5239680,Elsa Lemmilä,194,518,Ohio State,Ohio State,Ohio St.,Ohio,OH,Big Ten,Big Ten Conference,7,25,2025-11-09,2026-02-08
+2026,5239683,Jaloni Cambridge,194,518,Ohio State,Ohio State,Ohio St.,Ohio,OH,Big Ten,Big Ten Conference,7,25,2025-11-09,2026-02-08
+2026,5105435,Kennedy Cambridge,194,518,Ohio State,Ohio State,Ohio St.,Ohio,OH,Big Ten,Big Ten Conference,7,25,2025-11-09,2026-02-08
+2026,5239069,Kylee Kitts,194,518,Ohio State,Ohio State,Ohio St.,Ohio,OH,Big Ten,Big Ten Conference,7,25,2025-11-09,2026-02-08
+2026,5239682,Seini Henry,194,518,Ohio State,Ohio State,Ohio St.,Ohio,OH,Big Ten,Big Ten Conference,7,25,2025-11-09,2026-02-08
+2026,5106223,T'yana Todd,194,518,Ohio State,Ohio State,Ohio St.,Ohio,OH,Big Ten,Big Ten Conference,7,25,2025-11-09,2026-02-08
+2026,5106169,Amina Muhammad,2483,529,Oregon,Oregon,Oregon,Oregon,OR,Big Ten,Big Ten Conference,7,26,2025-11-03,2026-02-08
+2026,5175967,Ari Long,2483,529,Oregon,Oregon,Oregon,Oregon,OR,Big Ten,Big Ten Conference,7,26,2025-11-03,2026-02-08
+2026,5105766,Astera Tuhina,2483,529,Oregon,Oregon,Oregon,Oregon,OR,Big Ten,Big Ten Conference,7,26,2025-11-03,2026-02-08
+2026,5239701,Avary Cain,2483,529,Oregon,Oregon,Oregon,Oregon,OR,Big Ten,Big Ten Conference,7,26,2025-11-03,2026-02-08
+2026,5240203,Ehis Etute,2483,529,Oregon,Oregon,Oregon,Oregon,OR,Big Ten,Big Ten Conference,7,26,2025-11-03,2026-02-08
+2026,5109410,Elisa Mevius,2483,529,Oregon,Oregon,Oregon,Oregon,OR,Big Ten,Big Ten Conference,7,26,2025-11-03,2026-02-08
+2026,5175892,Filippa Tilliander,2483,529,Oregon,Oregon,Oregon,Oregon,OR,Big Ten,Big Ten Conference,7,26,2025-11-03,2026-02-08
+2026,5311616,Janiyah Williams,2483,529,Oregon,Oregon,Oregon,Oregon,OR,Big Ten,Big Ten Conference,7,26,2025-11-03,2026-02-08
+2026,5240202,Katie Fiso,2483,529,Oregon,Oregon,Oregon,Oregon,OR,Big Ten,Big Ten Conference,7,26,2025-11-03,2026-02-08
+2026,4858655,Mallory Heyer,2483,529,Oregon,Oregon,Oregon,Oregon,OR,Big Ten,Big Ten Conference,7,4,2026-01-28,2026-02-08
+2026,5107484,Mia Jacobs,2483,529,Oregon,Oregon,Oregon,Oregon,OR,Big Ten,Big Ten Conference,7,26,2025-11-03,2026-02-08
+2026,5124668,Sammie Wagner,2483,529,Oregon,Oregon,Oregon,Oregon,OR,Big Ten,Big Ten Conference,7,26,2025-11-03,2026-02-08
+2026,5311617,Sara Barhoum,2483,529,Oregon,Oregon,Oregon,Oregon,OR,Big Ten,Big Ten Conference,7,26,2025-11-03,2026-02-08
+2026,5175894,Sarah Rambus,2483,529,Oregon,Oregon,Oregon,Oregon,OR,Big Ten,Big Ten Conference,7,26,2025-11-03,2026-02-08
+2026,5175891,Sofia Bell,2483,529,Oregon,Oregon,Oregon,Oregon,OR,Big Ten,Big Ten Conference,7,26,2025-11-03,2026-02-08
+2026,5175937,Amanda Muse,26,110,UCLA,UCLA,Ucla,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,4433411,Angela Dugalić,26,110,UCLA,UCLA,Ucla,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,5239702,Charlisse Leger-Walker,26,110,UCLA,UCLA,Ucla,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,5311744,Christina Karamouzi,26,110,UCLA,UCLA,Ucla,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,4858656,Gabriela Jaquez,26,110,UCLA,UCLA,Ucla,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,4898898,Gianna Kneepkens,26,110,UCLA,UCLA,Ucla,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,4565505,Kiki Rice,26,110,UCLA,UCLA,Ucla,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,5105737,Lauren Betts,26,110,UCLA,UCLA,Ucla,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,5311745,Lena Bilić,26,110,UCLA,UCLA,Ucla,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,5127965,Megan Grant,26,110,UCLA,UCLA,Ucla,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,5311746,Sienna Betts,26,110,UCLA,UCLA,Ucla,California,CA,Big Ten,Big Ten Conference,7,23,2025-11-06,2026-02-08
+2026,5105734,Timea Gardiner,26,110,UCLA,UCLA,Ucla,California,CA,Big Ten,Big Ten Conference,7,23,2025-11-06,2026-02-08
+2026,5239667,Brooklyn Shamblin,30,657,USC,USC,Southern California,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5241566,Dayana Mendes,30,657,USC,USC,Southern California,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5311753,Gerda Raulusaityte,30,657,USC,USC,Southern California,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5311754,Jazzy Davidson,30,657,USC,USC,Southern California,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5175946,JuJu Watkins,30,657,USC,USC,Southern California,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,4698730,Kara Dunn,30,657,USC,USC,Southern California,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5239665,Kennedy Smith,30,657,USC,USC,Southern California,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5239663,Laura Williams,30,657,USC,USC,Southern California,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,4565506,Londynn Jones,30,657,USC,USC,Southern California,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5175945,Malia Samuels,30,657,USC,USC,Southern California,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5239662,Rian Forestier,30,657,USC,USC,Southern California,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5331305,Sitaya Fagan,30,657,USC,USC,Southern California,California,CA,Big Ten,Big Ten Conference,7,9,2026-01-11,2026-02-08
+2026,5239661,Vivian Iwuchukwu,30,657,USC,USC,Southern California,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5174256,Yakiya Milton,30,657,USC,USC,Southern California,California,CA,Big Ten,Big Ten Conference,7,24,2025-11-04,2026-02-08
+2026,5239666,Avery Howell,264,756,Washington,Washington,Washington,Washington,WA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,5311756,Brynn McGaughy,264,756,Washington,Washington,Washington,Washington,WA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,5175966,Chloe Briggs,264,756,Washington,Washington,Washington,Washington,WA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,5311755,Daniella McLean,264,756,Washington,Washington,Washington,Washington,WA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,5240010,Devin Coppinger,264,756,Washington,Washington,Washington,Washington,WA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,5105756,Elle Ladine,264,756,Washington,Washington,Washington,Washington,WA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,5105753,Hannah Stines,264,756,Washington,Washington,Washington,Washington,WA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,5311757,Nina Cain,264,756,Washington,Washington,Washington,Washington,WA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,5175968,Olivia Anderson,264,756,Washington,Washington,Washington,Washington,WA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,5175965,Sayvia Sellers,264,756,Washington,Washington,Washington,Washington,WA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,5105755,Shayla Gillmer,264,756,Washington,Washington,Washington,Washington,WA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,5311758,Sienna Harvey,264,756,Washington,Washington,Washington,Washington,WA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,4894350,Teagan Brown,264,756,Washington,Washington,Washington,Washington,WA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,5240188,Yulia Grabovskaia,264,756,Washington,Washington,Washington,Washington,WA,Big Ten,Big Ten Conference,7,24,2025-11-03,2026-02-08
+2026,5240915,Emaya Lewis,338,1157,Kennesaw State,Kennesaw State,Kennesaw St.,Georgia,GA,CUSA,Conference USA,11,22,2025-11-04,2026-02-07
+2026,5178261,Fanta Daffe,338,1157,Kennesaw State,Kennesaw State,Kennesaw St.,Georgia,GA,CUSA,Conference USA,11,22,2025-11-04,2026-02-07
+2026,5239912,Gabriela Bendeck-Giron,338,1157,Kennesaw State,Kennesaw State,Kennesaw St.,Georgia,GA,CUSA,Conference USA,11,22,2025-11-04,2026-02-07
+2026,5240602,Kaelyn Flowers,338,1157,Kennesaw State,Kennesaw State,Kennesaw St.,Georgia,GA,CUSA,Conference USA,11,22,2025-11-04,2026-02-07
+2026,5175451,Kailyn Fields,338,1157,Kennesaw State,Kennesaw State,Kennesaw St.,Georgia,GA,CUSA,Conference USA,11,22,2025-11-04,2026-02-07
+2026,4683157,Keyarah Berry,338,1157,Kennesaw State,Kennesaw State,Kennesaw St.,Georgia,GA,CUSA,Conference USA,11,22,2025-11-04,2026-02-07
+2026,5174744,Latazia Williamson,338,1157,Kennesaw State,Kennesaw State,Kennesaw St.,Georgia,GA,CUSA,Conference USA,11,22,2025-11-04,2026-02-07
+2026,5312246,Madyson Elliott,338,1157,Kennesaw State,Kennesaw State,Kennesaw St.,Georgia,GA,CUSA,Conference USA,11,22,2025-11-04,2026-02-07
+2026,5239913,Mame Kane,338,1157,Kennesaw State,Kennesaw State,Kennesaw St.,Georgia,GA,CUSA,Conference USA,11,22,2025-11-04,2026-02-07
+2026,5312244,Marihya Hart,338,1157,Kennesaw State,Kennesaw State,Kennesaw St.,Georgia,GA,CUSA,Conference USA,11,22,2025-11-04,2026-02-07
+2026,5241118,Shania Nichols,338,1157,Kennesaw State,Kennesaw State,Kennesaw St.,Georgia,GA,CUSA,Conference USA,11,22,2025-11-04,2026-02-07
+2026,5312245,TaTianna Stovall,338,1157,Kennesaw State,Kennesaw State,Kennesaw St.,Georgia,GA,CUSA,Conference USA,11,22,2025-11-04,2026-02-07
+2026,5175452,Trynce Taylor,338,1157,Kennesaw State,Kennesaw State,Kennesaw St.,Georgia,GA,CUSA,Conference USA,11,22,2025-11-04,2026-02-07
+2026,5176454,Ashley Chea,163,554,Princeton,Princeton,Princeton,New Jersey,NJ,Ivy,Ivy League,12,21,2025-11-09,2026-02-06
+2026,5241872,Cristina Parrella,163,554,Princeton,Princeton,Princeton,New Jersey,NJ,Ivy,Ivy League,12,21,2025-11-09,2026-02-06
+2026,5241873,Emily Eadie,163,554,Princeton,Princeton,Princeton,New Jersey,NJ,Ivy,Ivy League,12,21,2025-11-09,2026-02-06
+2026,5176455,Fadima Tall,163,554,Princeton,Princeton,Princeton,New Jersey,NJ,Ivy,Ivy League,12,21,2025-11-09,2026-02-06
+2026,5313317,Grace O'Sullivan,163,554,Princeton,Princeton,Princeton,New Jersey,NJ,Ivy,Ivy League,12,21,2025-11-09,2026-02-06
+2026,4610162,Madison St. Rose,163,554,Princeton,Princeton,Princeton,New Jersey,NJ,Ivy,Ivy League,12,21,2025-11-09,2026-02-06
+2026,5176452,Olivia Hutcherson,163,554,Princeton,Princeton,Princeton,New Jersey,NJ,Ivy,Ivy League,12,21,2025-11-09,2026-02-06
+2026,5313318,Sarah Lessig,163,554,Princeton,Princeton,Princeton,New Jersey,NJ,Ivy,Ivy League,12,21,2025-11-09,2026-02-06
+2026,5176453,Skye Belker,163,554,Princeton,Princeton,Princeton,New Jersey,NJ,Ivy,Ivy League,12,21,2025-11-09,2026-02-06
+2026,5108956,Taylor Charles,163,554,Princeton,Princeton,Princeton,New Jersey,NJ,Ivy,Ivy League,12,21,2025-11-09,2026-02-06
+2026,5241874,Toby Nweke,163,554,Princeton,Princeton,Princeton,New Jersey,NJ,Ivy,Ivy League,12,21,2025-11-09,2026-02-06
+2026,5106086,Amelia Wood,2529,590,Sacred Heart,Sacred Heart,Sacred Heart,Connecticut,CT,MAAC,Metro Atlantic Athletic Conference,13,24,2025-11-03,2026-02-07
+2026,5242245,Dianne Crespo Lopez,2529,590,Sacred Heart,Sacred Heart,Sacred Heart,Connecticut,CT,MAAC,Metro Atlantic Athletic Conference,13,24,2025-11-03,2026-02-07
+2026,5178255,Emma Kirby,2529,590,Sacred Heart,Sacred Heart,Sacred Heart,Connecticut,CT,MAAC,Metro Atlantic Athletic Conference,13,24,2025-11-03,2026-02-07
+2026,5242244,Esther Kursite,2529,590,Sacred Heart,Sacred Heart,Sacred Heart,Connecticut,CT,MAAC,Metro Atlantic Athletic Conference,13,24,2025-11-03,2026-02-07
+2026,5107431,Faith Pappas,2529,590,Sacred Heart,Sacred Heart,Sacred Heart,Connecticut,CT,MAAC,Metro Atlantic Athletic Conference,13,24,2025-11-03,2026-02-07
+2026,5242243,Grace John,2529,590,Sacred Heart,Sacred Heart,Sacred Heart,Connecticut,CT,MAAC,Metro Atlantic Athletic Conference,13,24,2025-11-03,2026-02-07
+2026,5313632,Jordanna Schrecker,2529,590,Sacred Heart,Sacred Heart,Sacred Heart,Connecticut,CT,MAAC,Metro Atlantic Athletic Conference,13,24,2025-11-03,2026-02-07
+2026,5313631,Kristen Phelan,2529,590,Sacred Heart,Sacred Heart,Sacred Heart,Connecticut,CT,MAAC,Metro Atlantic Athletic Conference,13,24,2025-11-03,2026-02-07
+2026,5313629,Laisha Lazu,2529,590,Sacred Heart,Sacred Heart,Sacred Heart,Connecticut,CT,MAAC,Metro Atlantic Athletic Conference,13,24,2025-11-03,2026-02-07
+2026,5313630,Missy Nuku,2529,590,Sacred Heart,Sacred Heart,Sacred Heart,Connecticut,CT,MAAC,Metro Atlantic Athletic Conference,13,24,2025-11-03,2026-02-07
+2026,5178252,Montana Nicks,2529,590,Sacred Heart,Sacred Heart,Sacred Heart,Connecticut,CT,MAAC,Metro Atlantic Athletic Conference,13,24,2025-11-03,2026-02-07
+2026,5178254,Nalyce Dudley,2529,590,Sacred Heart,Sacred Heart,Sacred Heart,Connecticut,CT,MAAC,Metro Atlantic Athletic Conference,13,24,2025-11-03,2026-02-07
+2026,5106087,Sierra Johnson,2529,590,Sacred Heart,Sacred Heart,Sacred Heart,Connecticut,CT,MAAC,Metro Atlantic Athletic Conference,13,24,2025-11-03,2026-02-07
+2026,5313627,Sophie Nascimento,2529,590,Sacred Heart,Sacred Heart,Sacred Heart,Connecticut,CT,MAAC,Metro Atlantic Athletic Conference,13,24,2025-11-03,2026-02-07
+2026,5313628,Taaliyah Porter,2529,590,Sacred Heart,Sacred Heart,Sacred Heart,Connecticut,CT,MAAC,Metro Atlantic Athletic Conference,13,24,2025-11-03,2026-02-07
+2026,5242507,Aiyanna Culver,2130,136,Chicago State,Chicago State,Chicago St.,Illinois,IL,NEC,Northeast Conference,19,25,2025-11-03,2026-02-07
+2026,5174359,Brianna Hill,2130,136,Chicago State,Chicago State,Chicago St.,Illinois,IL,NEC,Northeast Conference,19,25,2025-11-03,2026-02-07
+2026,5315100,Chloe Sisco,2130,136,Chicago State,Chicago State,Chicago St.,Illinois,IL,NEC,Northeast Conference,19,25,2025-11-03,2026-02-07
+2026,5315105,Elani Randall,2130,136,Chicago State,Chicago State,Chicago St.,Illinois,IL,NEC,Northeast Conference,19,25,2025-11-03,2026-02-07
+2026,5315102,Jade Hamilton-Gill,2130,136,Chicago State,Chicago State,Chicago St.,Illinois,IL,NEC,Northeast Conference,19,25,2025-11-03,2026-02-07
+2026,5177990,Kacelyn Urlacher,2130,136,Chicago State,Chicago State,Chicago St.,Illinois,IL,NEC,Northeast Conference,19,25,2025-11-03,2026-02-07
+2026,5242511,Kayla Mount,2130,136,Chicago State,Chicago State,Chicago St.,Illinois,IL,NEC,Northeast Conference,19,25,2025-11-03,2026-02-07
+2026,5242509,Keona McGee,2130,136,Chicago State,Chicago State,Chicago St.,Illinois,IL,NEC,Northeast Conference,19,25,2025-11-03,2026-02-07
+2026,5315101,Kitali Youmans,2130,136,Chicago State,Chicago State,Chicago St.,Illinois,IL,NEC,Northeast Conference,19,25,2025-11-03,2026-02-07
+2026,5242510,Kyara Champagne,2130,136,Chicago State,Chicago State,Chicago St.,Illinois,IL,NEC,Northeast Conference,19,25,2025-11-03,2026-02-07
+2026,5315107,Leya Landin,2130,136,Chicago State,Chicago State,Chicago St.,Illinois,IL,NEC,Northeast Conference,19,25,2025-11-03,2026-02-07
+2026,5242508,Marisa Gant,2130,136,Chicago State,Chicago State,Chicago St.,Illinois,IL,NEC,Northeast Conference,19,25,2025-11-03,2026-02-07
+2026,5315104,Natalia Williams,2130,136,Chicago State,Chicago State,Chicago St.,Illinois,IL,NEC,Northeast Conference,19,25,2025-11-03,2026-02-07
+2026,5315103,Paris Bass,2130,136,Chicago State,Chicago State,Chicago St.,Illinois,IL,NEC,Northeast Conference,19,25,2025-11-03,2026-02-07
+2026,5175454,Tania Allen,2130,136,Chicago State,Chicago State,Chicago St.,Illinois,IL,NEC,Northeast Conference,19,25,2025-11-03,2026-02-07
+2026,5311721,Ace Austin,333,8,Alabama,Alabama,Alabama,Alabama,AL,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-08
+2026,5174728,Alancia Ramsey,333,8,Alabama,Alabama,Alabama,Alabama,AL,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-08
+2026,5175717,Diana Collins,333,8,Alabama,Alabama,Alabama,Alabama,AL,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-08
+2026,5239058,Eris Lester,333,8,Alabama,Alabama,Alabama,Alabama,AL,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-08
+2026,5174249,Essence Cody,333,8,Alabama,Alabama,Alabama,Alabama,AL,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-08
+2026,4433811,Jessica Timmons,333,8,Alabama,Alabama,Alabama,Alabama,AL,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-08
+2026,5311724,Joy Egbuna,333,8,Alabama,Alabama,Alabama,Alabama,AL,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-08
+2026,5105391,Karly Weathers,333,8,Alabama,Alabama,Alabama,Alabama,AL,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-08
+2026,5239059,Leah Brooks,333,8,Alabama,Alabama,Alabama,Alabama,AL,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-08
+2026,5311723,Lourdes Da Silva Costa,333,8,Alabama,Alabama,Alabama,Alabama,AL,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-08
+2026,5174250,Naomi Jones,333,8,Alabama,Alabama,Alabama,Alabama,AL,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-08
+2026,5174248,Reychel Douglas,333,8,Alabama,Alabama,Alabama,Alabama,AL,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-08
+2026,5107340,Ta'Mia Scott,333,8,Alabama,Alabama,Alabama,Alabama,AL,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-08
+2026,5311722,Tianna Chambers,333,8,Alabama,Alabama,Alabama,Alabama,AL,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-08
+2026,5239452,Waiata Jennings,333,8,Alabama,Alabama,Alabama,Alabama,AL,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-08
+2026,5174260,Alexia Dizeko,57,235,Florida,Florida,Florida,Florida,FL,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5311711,Caterina Piatti,57,235,Florida,Florida,Florida,Florida,FL,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5239071,Daviane Mindoudi Ongbakahoumb,57,235,Florida,Florida,Florida,Florida,FL,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5311710,Emilija Dakic,57,235,Florida,Florida,Florida,Florida,FL,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5311712,Gift Ezekiel,57,235,Florida,Florida,Florida,Florida,FL,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5175413,Jade Weathersby,57,235,Florida,Florida,Florida,Florida,FL,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,4711685,KN'isha Godfrey,57,235,Florida,Florida,Florida,Florida,FL,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5174261,Laila Reynolds,57,235,Florida,Florida,Florida,Florida,FL,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5239072,Liv McGill,57,235,Florida,Florida,Florida,Florida,FL,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5239070,Me'Arah O'Neal,57,235,Florida,Florida,Florida,Florida,FL,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5311709,Nyadieng Yiech,57,235,Florida,Florida,Florida,Florida,FL,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5311708,Sarah Deng,57,235,Florida,Florida,Florida,Florida,FL,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,4703770,Aicha Ndour,61,257,Georgia,Georgia,Georgia,Georgia,GA,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-08
+2026,5311703,Aubrey Beckham,61,257,Georgia,Georgia,Georgia,Georgia,GA,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-08
+2026,5238284,Dani Carnegie,61,257,Georgia,Georgia,Georgia,Georgia,GA,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-08
+2026,5107920,Enjulina Gonzalez,61,257,Georgia,Georgia,Georgia,Georgia,GA,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-08
+2026,5311701,Jocelyn Faison,61,257,Georgia,Georgia,Georgia,Georgia,GA,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-08
+2026,5239076,Mia Woolfolk,61,257,Georgia,Georgia,Georgia,Georgia,GA,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-08
+2026,5174262,Miyah Verse,61,257,Georgia,Georgia,Georgia,Georgia,GA,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-08
+2026,5174444,Rylie Theuerkauf,61,257,Georgia,Georgia,Georgia,Georgia,GA,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-08
+2026,4705138,Savannah Henderson,61,257,Georgia,Georgia,Georgia,Georgia,GA,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-08
+2026,5239073,Trinity Turner,61,257,Georgia,Georgia,Georgia,Georgia,GA,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-08
+2026,5239062,Vera Ojenuwa,61,257,Georgia,Georgia,Georgia,Georgia,GA,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-08
+2026,5311702,Zhen Craft,61,257,Georgia,Georgia,Georgia,Georgia,GA,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-08
+2026,5239080,Amelia Hassett,96,334,Kentucky,Kentucky,Kentucky,Kentucky,KY,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5177067,Asia Boone,96,334,Kentucky,Kentucky,Kentucky,Kentucky,KY,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5174442,Clara Strack,96,334,Kentucky,Kentucky,Kentucky,Kentucky,KY,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5175914,Dominika Paurová,96,334,Kentucky,Kentucky,Kentucky,Kentucky,KY,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5311618,Elsa Vadfors,96,334,Kentucky,Kentucky,Kentucky,Kentucky,KY,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5174437,Gabby Brooks,96,334,Kentucky,Kentucky,Kentucky,Kentucky,KY,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,4705226,Jordan Obi,96,334,Kentucky,Kentucky,Kentucky,Kentucky,KY,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5108355,Josie Gilvin,96,334,Kentucky,Kentucky,Kentucky,Kentucky,KY,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5311619,Kaelyn Carroll,96,334,Kentucky,Kentucky,Kentucky,Kentucky,KY,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5239077,Lexi Blue,96,334,Kentucky,Kentucky,Kentucky,Kentucky,KY,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,4434020,Teonni Key,96,334,Kentucky,Kentucky,Kentucky,Kentucky,KY,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,4565515,Tonie Morgan,96,334,Kentucky,Kentucky,Kentucky,Kentucky,KY,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,4565525,Amiya Joyner,99,365,LSU,LSU,Louisiana State University,Louisiana,LA,SEC,Southeastern Conference,23,25,2025-11-04,2026-02-08
+2026,5311612,Bella Hines,99,365,LSU,LSU,Louisiana State University,Louisiana,LA,SEC,Southeastern Conference,23,25,2025-11-04,2026-02-08
+2026,5311613,Divine Bourrage,99,365,LSU,LSU,Louisiana State University,Louisiana,LA,SEC,Southeastern Conference,23,25,2025-11-04,2026-02-08
+2026,4698736,Flau'jae Johnson,99,365,LSU,LSU,Louisiana State University,Louisiana,LA,SEC,Southeastern Conference,23,25,2025-11-04,2026-02-08
+2026,5311611,Grace Knox,99,365,LSU,LSU,Louisiana State University,Louisiana,LA,SEC,Southeastern Conference,23,25,2025-11-04,2026-02-08
+2026,5105442,Izzy Besselman,99,365,LSU,LSU,Louisiana State University,Louisiana,LA,SEC,Southeastern Conference,23,25,2025-11-04,2026-02-08
+2026,5239081,Jada Richard,99,365,LSU,LSU,Louisiana State University,Louisiana,LA,SEC,Southeastern Conference,23,25,2025-11-04,2026-02-08
+2026,5105714,Kailyn Gilbert,99,365,LSU,LSU,Louisiana State University,Louisiana,LA,SEC,Southeastern Conference,23,25,2025-11-04,2026-02-08
+2026,5238305,Kate Koval,99,365,LSU,LSU,Louisiana State University,Louisiana,LA,SEC,Southeastern Conference,23,25,2025-11-04,2026-02-08
+2026,5311615,Meghan Yarnevich,99,365,LSU,LSU,Louisiana State University,Louisiana,LA,SEC,Southeastern Conference,23,25,2025-11-04,2026-02-08
+2026,5174285,MiLaysia Fulwiley,99,365,LSU,LSU,Louisiana State University,Louisiana,LA,SEC,Southeastern Conference,23,25,2025-11-04,2026-02-08
+2026,5174267,Mikaylah Williams,99,365,LSU,LSU,Louisiana State University,Louisiana,LA,SEC,Southeastern Conference,23,25,2025-11-04,2026-02-08
+2026,5311614,ZaKiyah Johnson,99,365,LSU,LSU,Louisiana State University,Louisiana,LA,SEC,Southeastern Conference,23,25,2025-11-04,2026-02-08
+2026,5311600,Awa Fane,344,430,Mississippi State,Mississippi State,Mississippi St.,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,4433140,Chandler Prater,344,430,Mississippi State,Mississippi State,Mississippi St.,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,4610043,Destiney McPhaul,344,430,Mississippi State,Mississippi State,Mississippi St.,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,5239429,Faith Wylder,344,430,Mississippi State,Mississippi State,Mississippi St.,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,5311604,Favour Nwaedozi,344,430,Mississippi State,Mississippi State,Mississippi St.,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,5311601,Jaylah Lampley,344,430,Mississippi State,Mississippi State,Mississippi St.,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,5105400,Kharyssa Richardson,344,430,Mississippi State,Mississippi State,Mississippi St.,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,5311605,Madison Francis,344,430,Mississippi State,Mississippi State,Mississippi St.,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,5329887,Melissa Guillet,344,430,Mississippi State,Mississippi State,Mississippi St.,Mississippi,MS,SEC,Southeastern Conference,23,10,2026-01-01,2026-02-05
+2026,5311603,Nataliyah Gray,344,430,Mississippi State,Mississippi State,Mississippi St.,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,5196381,Rocio Jimenez,344,430,Mississippi State,Mississippi State,Mississippi St.,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,5242432,Saniyah King,344,430,Mississippi State,Mississippi State,Mississippi St.,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,5105721,Trayanna Crisp,344,430,Mississippi State,Mississippi State,Mississippi St.,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,5174277,Abbey Schreacke,142,434,Missouri,Missouri,Missouri,Missouri,MO,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,4858657,Averi Kroenke,142,434,Missouri,Missouri,Missouri,Missouri,MO,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5240803,Chloe Sotell,142,434,Missouri,Missouri,Missouri,Missouri,MO,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5174274,Grace Slaughter,142,434,Missouri,Missouri,Missouri,Missouri,MO,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5174278,Hannah Linthacum,142,434,Missouri,Missouri,Missouri,Missouri,MO,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,4899061,Jayla Smith,142,434,Missouri,Missouri,Missouri,Missouri,MO,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5108646,Jordana Reisma,142,434,Missouri,Missouri,Missouri,Missouri,MO,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5175730,Lisa Thompson,142,434,Missouri,Missouri,Missouri,Missouri,MO,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5239092,Ma'Riya Vincent,142,434,Missouri,Missouri,Missouri,Missouri,MO,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5311599,Reka Toman,142,434,Missouri,Missouri,Missouri,Missouri,MO,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,4682781,Saniah Tyler,142,434,Missouri,Missouri,Missouri,Missouri,MO,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5178275,Shannon Dowell,142,434,Missouri,Missouri,Missouri,Missouri,MO,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5240914,Sydney Mains,142,434,Missouri,Missouri,Missouri,Missouri,MO,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5311585,Aaliyah Chavez,201,522,Oklahoma,Oklahoma,Oklahoma,Oklahoma,OK,SEC,Southeastern Conference,23,23,2025-11-03,2026-02-09
+2026,5106164,Beatrice Culliton,201,522,Oklahoma,Oklahoma,Oklahoma,Oklahoma,OK,SEC,Southeastern Conference,23,23,2025-11-03,2026-02-09
+2026,5311587,Brooklyn Stewart,201,522,Oklahoma,Oklahoma,Oklahoma,Oklahoma,OK,SEC,Southeastern Conference,23,23,2025-11-03,2026-02-09
+2026,5239094,Caya Smith,201,522,Oklahoma,Oklahoma,Oklahoma,Oklahoma,OK,SEC,Southeastern Conference,23,23,2025-11-03,2026-02-09
+2026,5311589,Daffa Cissoko,201,522,Oklahoma,Oklahoma,Oklahoma,Oklahoma,OK,SEC,Southeastern Conference,23,23,2025-11-03,2026-02-09
+2026,5311586,Emma Tolan,201,522,Oklahoma,Oklahoma,Oklahoma,Oklahoma,OK,SEC,Southeastern Conference,23,23,2025-11-03,2026-02-09
+2026,5311588,Keziah Lofton,201,522,Oklahoma,Oklahoma,Oklahoma,Oklahoma,OK,SEC,Southeastern Conference,23,23,2025-11-03,2026-02-09
+2026,4433518,Payton Verhulst,201,522,Oklahoma,Oklahoma,Oklahoma,Oklahoma,OK,SEC,Southeastern Conference,23,23,2025-11-03,2026-02-09
+2026,5105732,Raegan Beers,201,522,Oklahoma,Oklahoma,Oklahoma,Oklahoma,OK,SEC,Southeastern Conference,23,23,2025-11-03,2026-02-09
+2026,5175754,Sahara Williams,201,522,Oklahoma,Oklahoma,Oklahoma,Oklahoma,OK,SEC,Southeastern Conference,23,23,2025-11-03,2026-02-09
+2026,5239093,Zya Vann,201,522,Oklahoma,Oklahoma,Oklahoma,Oklahoma,OK,SEC,Southeastern Conference,23,23,2025-11-03,2026-02-09
+2026,4682992,Christeen Iwuala,145,433,Ole Miss,Ole Miss,Mississippi,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,4583144,Cotie McMahon,145,433,Ole Miss,Ole Miss,Mississippi,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,4894351,Debreasha Powe,145,433,Ole Miss,Ole Miss,Mississippi,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,5108329,Denim DeShields,145,433,Ole Miss,Ole Miss,Mississippi,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,5178193,Desrae Kyles,145,433,Ole Miss,Ole Miss,Mississippi,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,5174279,J'Adore Young,145,433,Ole Miss,Ole Miss,Mississippi,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,5175423,Jayla Murray,145,433,Ole Miss,Ole Miss,Mississippi,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,4683312,Kaitlin Peterson,145,433,Ole Miss,Ole Miss,Mississippi,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,4433517,Latasha Lattimore,145,433,Ole Miss,Ole Miss,Mississippi,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,5311578,Lauren Jacobs,145,433,Ole Miss,Ole Miss,Mississippi,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,5239095,Sira Thienou,145,433,Ole Miss,Ole Miss,Mississippi,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,5238286,Tianna Thompson,145,433,Ole Miss,Ole Miss,Mississippi,Mississippi,MS,SEC,Southeastern Conference,23,24,2025-11-03,2026-02-05
+2026,5196144,Adhel Tac,2579,648,South Carolina,South Carolina,South Carolina,South Carolina,SC,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5311577,Agot Makeer,2579,648,South Carolina,South Carolina,South Carolina,South Carolina,SC,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5329673,Alicia Tournebize,2579,648,South Carolina,South Carolina,South Carolina,South Carolina,SC,SEC,Southeastern Conference,23,13,2025-12-28,2026-02-08
+2026,5311576,Ayla McDowell,2579,648,South Carolina,South Carolina,South Carolina,South Carolina,SC,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5121055,Chloe Kitts,2579,648,South Carolina,South Carolina,South Carolina,South Carolina,SC,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5239100,Joyce Edwards,2579,648,South Carolina,South Carolina,South Carolina,South Carolina,SC,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5239099,Maddy McDaniel,2579,648,South Carolina,South Carolina,South Carolina,South Carolina,SC,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5108587,Madina Okot,2579,648,South Carolina,South Carolina,South Carolina,South Carolina,SC,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,4434019,Maryam Dauda,2579,648,South Carolina,South Carolina,South Carolina,South Carolina,SC,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,4433797,Raven Johnson,2579,648,South Carolina,South Carolina,South Carolina,South Carolina,SC,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,4609797,Ta'Niya Latson,2579,648,South Carolina,South Carolina,South Carolina,South Carolina,SC,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5174284,Tessa Johnson,2579,648,South Carolina,South Carolina,South Carolina,South Carolina,SC,SEC,Southeastern Conference,23,26,2025-11-03,2026-02-08
+2026,5174433,Alyssa Latham,2633,694,Tennessee,Tennessee,Tennessee,Tennessee,TN,SEC,Southeastern Conference,23,21,2025-11-04,2026-02-08
+2026,5311575,Deniya Prawl,2633,694,Tennessee,Tennessee,Tennessee,Tennessee,TN,SEC,Southeastern Conference,23,21,2025-11-04,2026-02-08
+2026,5311574,Jaida Civil,2633,694,Tennessee,Tennessee,Tennessee,Tennessee,TN,SEC,Southeastern Conference,23,21,2025-11-04,2026-02-08
+2026,4565501,Janiah Barker,2633,694,Tennessee,Tennessee,Tennessee,Tennessee,TN,SEC,Southeastern Conference,23,21,2025-11-04,2026-02-08
+2026,4433799,Jersey Wolfenbarger,2633,694,Tennessee,Tennessee,Tennessee,Tennessee,TN,SEC,Southeastern Conference,23,21,2025-11-04,2026-02-08
+2026,4434014,Kaiya Wynn,2633,694,Tennessee,Tennessee,Tennessee,Tennessee,TN,SEC,Southeastern Conference,23,21,2025-11-04,2026-02-08
+2026,5197230,Kaniya Boyd,2633,694,Tennessee,Tennessee,Tennessee,Tennessee,TN,SEC,Southeastern Conference,23,21,2025-11-04,2026-02-08
+2026,5311571,Lauren Hurst,2633,694,Tennessee,Tennessee,Tennessee,Tennessee,TN,SEC,Southeastern Conference,23,21,2025-11-04,2026-02-08
+2026,5311573,Mia Pauldo,2633,694,Tennessee,Tennessee,Tennessee,Tennessee,TN,SEC,Southeastern Conference,23,21,2025-11-04,2026-02-08
+2026,5311572,Mya Pauldo,2633,694,Tennessee,Tennessee,Tennessee,Tennessee,TN,SEC,Southeastern Conference,23,21,2025-11-04,2026-02-08
+2026,5107471,Nya Robertson,2633,694,Tennessee,Tennessee,Tennessee,Tennessee,TN,SEC,Southeastern Conference,23,21,2025-11-04,2026-02-08
+2026,5106227,Ruby Whitehorn,2633,694,Tennessee,Tennessee,Tennessee,Tennessee,TN,SEC,Southeastern Conference,23,1,2025-11-04,2025-11-04
+2026,4682955,Talaysia Cooper,2633,694,Tennessee,Tennessee,Tennessee,Tennessee,TN,SEC,Southeastern Conference,23,21,2025-11-04,2026-02-08
+2026,4682913,Zee Spearman,2633,694,Tennessee,Tennessee,Tennessee,Tennessee,TN,SEC,Southeastern Conference,23,21,2025-11-04,2026-02-08
+2026,5311568,Aaliyah Crump,251,703,Texas,Texas,Texas,Texas,TX,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5105452,Ashton Judd,251,703,Texas,Texas,Texas,Texas,TX,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5175870,Breya Cunningham,251,703,Texas,Texas,Texas,Texas,TX,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5239103,Bryanna Preston,251,703,Texas,Texas,Texas,Texas,TX,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5311567,Grace Prenter,251,703,Texas,Texas,Texas,Texas,TX,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5239104,Jordan Lee,251,703,Texas,Texas,Texas,Texas,TX,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5239105,Justice Carlton,251,703,Texas,Texas,Texas,Texas,TX,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,4682860,Kyla Oldacre,251,703,Texas,Texas,Texas,Texas,TX,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5240913,Lovisa Asbrink Hose,251,703,Texas,Texas,Texas,Texas,TX,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5175792,Madison Booker,251,703,Texas,Texas,Texas,Texas,TX,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,4433523,Rori Harmon,251,703,Texas,Texas,Texas,Texas,TX,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5122915,Sarah Graves,251,703,Texas,Texas,Texas,Texas,TX,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5105751,Teya Sidberry,251,703,Texas,Texas,Texas,Texas,TX,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5174269,Aalyah Del Rosario,238,736,Vanderbilt,Vanderbilt,Vanderbilt,Tennessee,TN,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5174311,Aga Makurat,238,736,Vanderbilt,Vanderbilt,Vanderbilt,Tennessee,TN,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5174310,Aiyana Mitchell,238,736,Vanderbilt,Vanderbilt,Vanderbilt,Tennessee,TN,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5311546,Aubrey Galvan,238,736,Vanderbilt,Vanderbilt,Vanderbilt,Tennessee,TN,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5311547,Ava Black,238,736,Vanderbilt,Vanderbilt,Vanderbilt,Tennessee,TN,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5108914,Jada Brown,238,736,Vanderbilt,Vanderbilt,Vanderbilt,Tennessee,TN,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,4682855,Justine Pissott,238,736,Vanderbilt,Vanderbilt,Vanderbilt,Tennessee,TN,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5174307,Madison Greene,238,736,Vanderbilt,Vanderbilt,Vanderbilt,Tennessee,TN,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5239107,Mikayla Blakes,238,736,Vanderbilt,Vanderbilt,Vanderbilt,Tennessee,TN,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5311548,Monique Williams,238,736,Vanderbilt,Vanderbilt,Vanderbilt,Tennessee,TN,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5106170,Ndjakalenga Mwenentanda,238,736,Vanderbilt,Vanderbilt,Vanderbilt,Tennessee,TN,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,4433999,Sacha Washington,238,736,Vanderbilt,Vanderbilt,Vanderbilt,Tennessee,TN,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5239108,Trinity Wilson,238,736,Vanderbilt,Vanderbilt,Vanderbilt,Tennessee,TN,SEC,Southeastern Conference,23,25,2025-11-03,2026-02-09
+2026,5315699,Anika Hyland,2617,676,Stephen F. Austin,Stephen F. Austin,SFA,Texas,TX,Southland,Southland Conference,25,24,2025-11-03,2026-02-07
+2026,5107777,Ashlyn Traylor-Walker,2617,676,Stephen F. Austin,Stephen F. Austin,SFA,Texas,TX,Southland,Southland Conference,25,24,2025-11-03,2026-02-07
+2026,4898906,Avery VanSickle,2617,676,Stephen F. Austin,Stephen F. Austin,SFA,Texas,TX,Southland,Southland Conference,25,24,2025-11-03,2026-02-07
+2026,5315697,Aziyah Farrier,2617,676,Stephen F. Austin,Stephen F. Austin,SFA,Texas,TX,Southland,Southland Conference,25,24,2025-11-03,2026-02-07
+2026,5243348,Cha Gardner,2617,676,Stephen F. Austin,Stephen F. Austin,SFA,Texas,TX,Southland,Southland Conference,25,24,2025-11-03,2026-02-07
+2026,5115137,Harmanie Dominguez,2617,676,Stephen F. Austin,Stephen F. Austin,SFA,Texas,TX,Southland,Southland Conference,25,24,2025-11-03,2026-02-07
+2026,4899512,Hope LeMelle,2617,676,Stephen F. Austin,Stephen F. Austin,SFA,Texas,TX,Southland,Southland Conference,25,24,2025-11-03,2026-02-07
+2026,5315700,Kaylinn Kemp,2617,676,Stephen F. Austin,Stephen F. Austin,SFA,Texas,TX,Southland,Southland Conference,25,24,2025-11-03,2026-02-07
+2026,5243347,Key Roseby,2617,676,Stephen F. Austin,Stephen F. Austin,SFA,Texas,TX,Southland,Southland Conference,25,24,2025-11-03,2026-02-07
+2026,5175536,Lydia Cajuste,2617,676,Stephen F. Austin,Stephen F. Austin,SFA,Texas,TX,Southland,Southland Conference,25,24,2025-11-03,2026-02-07
+2026,5105405,Myka Perry,2617,676,Stephen F. Austin,Stephen F. Austin,SFA,Texas,TX,Southland,Southland Conference,25,24,2025-11-03,2026-02-07
+2026,5315701,Talia Vann,2617,676,Stephen F. Austin,Stephen F. Austin,SFA,Texas,TX,Southland,Southland Conference,25,24,2025-11-03,2026-02-07
+2026,5240793,Ally Schimel,204,528,Oregon State,Oregon State,Oregon St.,Oregon,OR,WCC,West Coast Conference,29,25,2025-11-07,2026-02-07
+2026,5106148,Catarina Ferreira,204,528,Oregon State,Oregon State,Oregon St.,Oregon,OR,WCC,West Coast Conference,29,25,2025-11-07,2026-02-07
+2026,5240796,Cloe Vecina,204,528,Oregon State,Oregon State,Oregon St.,Oregon,OR,WCC,West Coast Conference,29,25,2025-11-07,2026-02-07
+2026,5240795,Elisa Mehyar,204,528,Oregon State,Oregon State,Oregon St.,Oregon,OR,WCC,West Coast Conference,29,25,2025-11-07,2026-02-07
+2026,5175980,Jenna Villa,204,528,Oregon State,Oregon State,Oregon St.,Oregon,OR,WCC,West Coast Conference,29,25,2025-11-07,2026-02-07
+2026,5315510,Katelyn Field,204,528,Oregon State,Oregon State,Oregon St.,Oregon,OR,WCC,West Coast Conference,29,25,2025-11-07,2026-02-07
+2026,5315512,Keira Lindemans,204,528,Oregon State,Oregon State,Oregon St.,Oregon,OR,WCC,West Coast Conference,29,25,2025-11-07,2026-02-07
+2026,5175913,Kennedie Shuler,204,528,Oregon State,Oregon State,Oregon St.,Oregon,OR,WCC,West Coast Conference,29,25,2025-11-07,2026-02-07
+2026,5315511,Lara Alonso-Basurto,204,528,Oregon State,Oregon State,Oregon St.,Oregon,OR,WCC,West Coast Conference,29,25,2025-11-07,2026-02-07
+2026,4704907,Lizzy Williamson,204,528,Oregon State,Oregon State,Oregon St.,Oregon,OR,WCC,West Coast Conference,29,25,2025-11-07,2026-02-07
+2026,5174411,Lucia Navarro,204,528,Oregon State,Oregon State,Oregon St.,Oregon,OR,WCC,West Coast Conference,29,25,2025-11-07,2026-02-07
+2026,5240794,Mackenzie Shivers,204,528,Oregon State,Oregon State,Oregon St.,Oregon,OR,WCC,West Coast Conference,29,25,2025-11-07,2026-02-07
+2026,5105750,Nene Sow,204,528,Oregon State,Oregon State,Oregon St.,Oregon,OR,WCC,West Coast Conference,29,25,2025-11-07,2026-02-07
+2026,5175916,Susana Yepes,204,528,Oregon State,Oregon State,Oregon St.,Oregon,OR,WCC,West Coast Conference,29,25,2025-11-07,2026-02-07
+2026,5174368,Tiara Bolden,204,528,Oregon State,Oregon State,Oregon St.,Oregon,OR,WCC,West Coast Conference,29,25,2025-11-07,2026-02-07
+2026,5175979,Alex Covill,265,754,Washington State,Washington State,Washington St.,Washington,WA,WCC,West Coast Conference,29,26,2025-11-03,2026-02-07
+2026,5241568,Charlotte Abraham,265,754,Washington State,Washington State,Washington St.,Washington,WA,WCC,West Coast Conference,29,26,2025-11-03,2026-02-07
+2026,5175978,Eleonora Villa,265,754,Washington State,Washington State,Washington St.,Washington,WA,WCC,West Coast Conference,29,26,2025-11-03,2026-02-07
+2026,5241563,Jean Chiu,265,754,Washington State,Washington State,Washington St.,Washington,WA,WCC,West Coast Conference,29,26,2025-11-03,2026-02-07
+2026,5241567,Keandra Koorits,265,754,Washington State,Washington State,Washington St.,Washington,WA,WCC,West Coast Conference,29,26,2025-11-03,2026-02-07
+2026,5105768,Lauren Glazier,265,754,Washington State,Washington State,Washington St.,Washington,WA,WCC,West Coast Conference,29,26,2025-11-03,2026-02-07
+2026,5177896,Mackenzie Chatfield,265,754,Washington State,Washington State,Washington St.,Washington,WA,WCC,West Coast Conference,29,26,2025-11-03,2026-02-07
+2026,5313393,Malia Ruud,265,754,Washington State,Washington State,Washington St.,Washington,WA,WCC,West Coast Conference,29,26,2025-11-03,2026-02-07
+2026,5313390,Malvina Haziri,265,754,Washington State,Washington State,Washington St.,Washington,WA,WCC,West Coast Conference,29,26,2025-11-03,2026-02-07
+2026,5241565,Marta Alsina,265,754,Washington State,Washington State,Washington St.,Washington,WA,WCC,West Coast Conference,29,26,2025-11-03,2026-02-07
+2026,5313391,Tahara Magassa,265,754,Washington State,Washington State,Washington St.,Washington,WA,WCC,West Coast Conference,29,26,2025-11-03,2026-02-07
+2026,5313392,Tanja Valancic,265,754,Washington State,Washington State,Washington St.,Washington,WA,WCC,West Coast Conference,29,26,2025-11-03,2026-02-07
