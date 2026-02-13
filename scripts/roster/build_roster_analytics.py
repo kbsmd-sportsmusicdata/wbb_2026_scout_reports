@@ -504,6 +504,8 @@ def build_team_season_analytics(player_box, team_box, rosters, ap_teams, schedul
         'is_guard': 'sum',
         'is_forward': 'sum',
         'is_center': 'sum',
+        'conference': 'first',  # conference from roster
+        'division': 'first',  # division from roster
     }).reset_index()
 
     roster_agg.columns = [
@@ -511,7 +513,8 @@ def build_team_season_analytics(player_box, team_box, rosters, ap_teams, schedul
         'avg_height_inches', 'height_std',
         'avg_year', 'min_year', 'max_year',
         'transfer_count',
-        'guard_count', 'forward_count', 'center_count'
+        'guard_count', 'forward_count', 'center_count',
+        'conference', 'division'
     ]
 
     # Convert height to feet-inches string for readability
