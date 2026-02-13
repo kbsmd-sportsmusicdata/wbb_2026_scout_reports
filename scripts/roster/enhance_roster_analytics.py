@@ -671,10 +671,26 @@ def add_conference(team_top25, rosters):
 
     Maps team_location (box score name) to roster team name to look up conference.
     Falls back to the TEAM_NAME_MAP for known mismatches (USC, Ole Miss, TCU, etc.).
+
+    After the roster lookup, applies master mapping overrides for teams whose
+    conference changed between the 2024-25 roster season and the current 2025-26
+    season (e.g. UCLA/USC/Washington moved Pac-12 -> Big Ten, Oklahoma/Texas
+    moved Big 12 -> SEC, Princeton Ivy League -> Ivy short name).
     """
     print("\n" + "=" * 60)
     print("Adding Conference Field")
     print("=" * 60)
+
+    # 2025-26 conference corrections from master_player_season_mapping
+    # These teams changed conferences after the raw roster was scraped
+    CONFERENCE_OVERRIDES = {
+        'UCLA': 'Big Ten',
+        'USC': 'Big Ten',
+        'Washington': 'Big Ten',
+        'Oklahoma': 'SEC',
+        'Texas': 'SEC',
+        'Princeton': 'Ivy',
+    }
 
     # Build a team -> conference lookup from rosters (one conference per team)
     roster_conf = rosters.drop_duplicates('team')[['team', 'conference', 'division']].copy()
@@ -715,10 +731,22 @@ def add_conference(team_top25, rosters):
     team_top25['division'] = divisions
 
     matched = sum(1 for c in conferences if c is not None)
-    print(f"  Matched conference for {matched}/{len(team_top25)} teams")
+    print(f"  Matched conference for {matched}/{len(team_top25)} teams from roster")
     if matched < len(team_top25):
         missing = team_top25[team_top25['conference'].isna()]['team_location'].tolist()
         print(f"  Missing: {missing}")
+
+    # Apply 2025-26 conference overrides from master mapping
+    overrides_applied = 0
+    for team_loc, new_conf in CONFERENCE_OVERRIDES.items():
+        mask = team_top25['team_location'] == team_loc
+        if mask.any():
+            old_conf = team_top25.loc[mask, 'conference'].iloc[0]
+            team_top25.loc[mask, 'conference'] = new_conf
+            overrides_applied += 1
+            print(f"  Override: {team_loc} conference {old_conf} -> {new_conf}")
+
+    print(f"  Applied {overrides_applied} conference overrides for 2025-26 realignment")
 
     return team_top25
 
