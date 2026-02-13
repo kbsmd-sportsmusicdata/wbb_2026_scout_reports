@@ -834,8 +834,9 @@ Examples:
     team_top25 = add_conference(team_top25, rosters)
 
     # 9. Add run_date
-    team_top25['run_date'] = date.today().isoformat()
-    print(f"\n  Added run_date: {date.today().isoformat()}")
+    run_date_str = date.today().isoformat()
+    team_top25['run_date'] = run_date_str
+    print(f"\n  Added run_date: {run_date_str}")
 
     # Validate
     team_top25 = validate_enriched_data(team_top25)
