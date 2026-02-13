@@ -138,8 +138,9 @@ def load_data():
 
     # Standardize roster team names so they match box score team names
     # e.g. "Southern Cal" -> "USC", "Texas Christian" -> "TCU", "Mississippi" -> "Ole Miss"
+    original_teams = rosters['team'].copy()
     rosters['team'] = rosters['team'].apply(standardize_team_name)
-    standardized_count = (rosters['team'] != pd.read_csv(RAW_DIR / "wbb_rosters_2025_26.csv")['team']).sum()
+    standardized_count = (rosters['team'] != original_teams).sum()
     if standardized_count > 0:
         print(f"  Standardized {standardized_count} roster team name entries")
 
