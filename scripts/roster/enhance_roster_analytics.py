@@ -761,13 +761,13 @@ def add_conference(team_top25, rosters):
         master_state_dict = dict(zip(master_teams['standardized_team_name'], master_teams['team_state_long']))
 
         overrides_applied = 0
-        for _, row in team_top25.iterrows():
+        for index, row in team_top25.iterrows():
             team_loc = row['team_location']
             if team_loc in master_conf_dict:
                 master_conf = master_conf_dict[team_loc]
-                current_conf = team_top25.loc[team_top25['team_location'] == team_loc, 'conference'].iloc[0]
+                current_conf = row['conference']
                 if current_conf != master_conf:
-                    team_top25.loc[team_top25['team_location'] == team_loc, 'conference'] = master_conf
+                    team_top25.loc[index, 'conference'] = master_conf
                     overrides_applied += 1
                     print(f"  Override: {team_loc} conference {current_conf} -> {master_conf}")
 
