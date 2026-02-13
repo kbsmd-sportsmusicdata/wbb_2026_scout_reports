@@ -272,7 +272,7 @@ def fix_missing_roster_metrics(team_top25, player_full, rosters):
         total_minutes = team_players['minutes'].sum()
 
         # Minutes-weighted experience
-        team_players['year_num'] = team_players['year_numeric'].
+        team_players['year_num'] = team_players['year_numeric']
         exp_weighted = (team_players['minutes'] * team_players['year_num']).sum() / total_minutes if total_minutes > 0 else 0
 
         # Transfer minutes share
@@ -391,7 +391,7 @@ def add_role_weighted_experience(team_top25, player_full):
         players['athlete_position_name']
     ).apply(get_archetype)
 
-    players['year_num'] = players['year_numeric'].
+    players['year_num'] = players['year_numeric']
 
     # Compute per team
     results = []
@@ -589,41 +589,62 @@ def add_poll_game_context(team_top25, polls_games_path=None):
     polls_games = pd.read_csv(polls_games_path)
     print(f"  Loaded {len(polls_games)} rows")
 
-    # Aggregate to team-season
-    # Expected columns: team_id, game_id, opponent_rank, team_rank, game_result, margin, etc.
-    team_ids = team_top25['team_id'].unique()
+    # Build team location -> polls_games team name mapping
+    # Most match directly; handle known mismatches
+    location_to_pg = {}
+    for loc in team_top25['team_location'].unique():
+        location_to_pg[loc] = loc
+    # North Carolina in team_top25 maps to UNC in polls_games
+    location_to_pg['North Carolina'] = 'UNC'
 
+    # Deduplicate game rows: each (team, game_id) should appear once
+    if 'game_id' in polls_games.columns:
+        polls_games = polls_games.drop_duplicates(subset=['team', 'game_id'])
+
+    # Aggregate per team
     results = []
-    for team_id in team_ids:
-        team_games = polls_games[polls_games['team_id'] == team_id]
+    for _, team_row in team_top25.iterrows():
+        team_location = team_row['team_location']
+        team_id = team_row['team_id']
 
+        # Find matching polls_games team name
+        pg_name = location_to_pg.get(team_location, team_location)
+
+        team_games = polls_games[polls_games['team'] == pg_name]
         if len(team_games) == 0:
             continue
 
         row = {'team_id': team_id}
 
-        # Top 25 games (games where opponent was ranked)
-        top25_games = team_games[team_games['opponent_rank'] <= 25]
-        row['top25_games'] = len(top25_games)
-        row['top25_wins'] = (top25_games['game_result'] == 'W').sum() if 'game_result' in top25_games.columns else 0
-        row['top25_win_pct'] = (row['top25_wins'] / row['top25_games'] * 100) if row['top25_games'] > 0 else None
+        # Top 25 games (opponent ranked <= 25; unranked coded as 99)
+        opp_rank_col = 'game_Opponent Rank'
+        if opp_rank_col in team_games.columns:
+            top25_mask = team_games[opp_rank_col].fillna(99) <= 25
+            top25_games = team_games[top25_mask]
+            row['top25_games'] = len(top25_games)
+            if 'game_is_win' in top25_games.columns:
+                row['top25_wins'] = int(top25_games['game_is_win'].sum())
+            else:
+                row['top25_wins'] = 0
+            row['top25_win_pct'] = round(row['top25_wins'] / row['top25_games'] * 100, 1) if row['top25_games'] > 0 else None
 
         # Blowout rate (wins by 20+)
-        if 'margin' in team_games.columns:
-            blowouts = (team_games['margin'] >= 20).sum()
+        margin_col = 'game_scoring_margin'
+        if margin_col in team_games.columns:
+            blowouts = (team_games[margin_col] >= 20).sum()
             row['blowout_rate'] = round(blowouts / len(team_games) * 100, 1)
 
-        # Weeks in Top 25
-        if 'team_rank' in team_games.columns:
-            weeks_ranked = (team_games['team_rank'] <= 25).sum()
-            row['weeks_in_top25'] = weeks_ranked
+        # Weeks in Top 25 (use pre-computed max from poll-level column)
+        if 'weeks_in_top25' in team_games.columns:
+            row['weeks_in_top25'] = int(team_games['weeks_in_top25'].max())
 
-            # Best and worst rank
-            ranked_games = team_games[team_games['team_rank'] <= 25]
-            if len(ranked_games) > 0:
-                row['best_rank'] = ranked_games['team_rank'].min()
-                row['worst_rank'] = ranked_games['team_rank'].max()
-                row['rank_range'] = row['worst_rank'] - row['best_rank']
+        # Best and worst rank (pre-computed in polls_games)
+        if 'best_rank' in team_games.columns:
+            row['best_rank'] = int(team_games['best_rank'].min())
+        if 'worst_rank' in team_games.columns:
+            row['worst_rank'] = int(team_games['worst_rank'].max())
+        if 'best_rank' in row and 'worst_rank' in row:
+            row['rank_range'] = row['worst_rank'] - row['best_rank']
 
         results.append(row)
 
