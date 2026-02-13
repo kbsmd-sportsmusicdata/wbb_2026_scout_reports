@@ -751,20 +751,34 @@ def add_conference(team_top25, rosters):
         missing = team_top25[team_top25['conference'].isna()]['team_location'].tolist()
         print(f"  Missing: {missing}")
 
-    # Apply conference overrides derived from master mapping
-    master_conferences = build_conference_overrides_from_master()
-    overrides_applied = 0
-    for _, row in team_top25.iterrows():
-        team_loc = row['team_location']
-        if team_loc in master_conferences:
-            master_conf = master_conferences[team_loc]
-            current_conf = team_top25.loc[team_top25['team_location'] == team_loc, 'conference'].iloc[0]
-            if current_conf != master_conf:
-                team_top25.loc[team_top25['team_location'] == team_loc, 'conference'] = master_conf
-                overrides_applied += 1
-                print(f"  Override: {team_loc} conference {current_conf} -> {master_conf}")
+    # Apply conference overrides and team_state_long from master mapping
+    if Path(MASTER_MAPPING_PATH).exists():
+        master = pd.read_csv(MASTER_MAPPING_PATH)
+        master_teams = master.drop_duplicates('standardized_team_name')[
+            ['standardized_team_name', 'conference_short_name', 'team_state_long']
+        ]
+        master_conf_dict = dict(zip(master_teams['standardized_team_name'], master_teams['conference_short_name']))
+        master_state_dict = dict(zip(master_teams['standardized_team_name'], master_teams['team_state_long']))
 
-    print(f"  Applied {overrides_applied} conference overrides from master mapping")
+        overrides_applied = 0
+        for _, row in team_top25.iterrows():
+            team_loc = row['team_location']
+            if team_loc in master_conf_dict:
+                master_conf = master_conf_dict[team_loc]
+                current_conf = team_top25.loc[team_top25['team_location'] == team_loc, 'conference'].iloc[0]
+                if current_conf != master_conf:
+                    team_top25.loc[team_top25['team_location'] == team_loc, 'conference'] = master_conf
+                    overrides_applied += 1
+                    print(f"  Override: {team_loc} conference {current_conf} -> {master_conf}")
+
+        print(f"  Applied {overrides_applied} conference overrides from master mapping")
+
+        # Add team_state_long from master mapping
+        team_top25['team_state_long'] = team_top25['team_location'].map(master_state_dict)
+        state_matched = team_top25['team_state_long'].notna().sum()
+        print(f"  Added team_state_long for {state_matched}/{len(team_top25)} teams")
+    else:
+        print("  WARNING: Master mapping not found, skipping conference overrides and team_state_long")
 
     return team_top25
 

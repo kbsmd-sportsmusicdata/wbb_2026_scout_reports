@@ -195,7 +195,7 @@ def get_ap_top25_teams(schedule):
     return best_ranks
 
 
-def build_player_season_analytics(player_box, rosters, ap_teams):
+def build_player_season_analytics(player_box, rosters, ap_teams, schedule=None):
     """
     Build player_season_analytic_2026 table.
     Aggregates player box scores to season totals and joins with roster info.
@@ -303,7 +303,8 @@ def build_player_season_analytics(player_box, rosters, ap_teams):
     # Prepare roster for join - match on team name and player name
     roster_info = rosters[[
         'team', 'name', 'total_inches', 'year_clean', 'primary_position',
-        'previous_school_clean', 'redshirt', 'conference', 'division'
+        'previous_school_clean', 'redshirt', 'conference', 'division',
+        'team_state', 'hometown_clean', 'state_clean', 'country_clean'
     ]].copy()
 
     roster_info = roster_info.rename(columns={
@@ -357,11 +358,151 @@ def build_player_season_analytics(player_box, rosters, ap_teams):
     player_season['is_transfer'] = player_season['is_transfer'].fillna(False)
     player_season['is_redshirt'] = player_season['is_redshirt'].fillna(0).astype(bool)
 
+    # Add team_state_long from master mapping (roster only has 2-letter team_state)
+    if MASTER_MAPPING_PATH.exists():
+        master = pd.read_csv(MASTER_MAPPING_PATH)
+        state_lookup = master.drop_duplicates('standardized_team_name')[
+            ['standardized_team_name', 'team_state_long']
+        ]
+        player_season = player_season.merge(
+            state_lookup,
+            left_on='team_location',
+            right_on='standardized_team_name',
+            how='left'
+        )
+        player_season = player_season.drop(columns=['standardized_team_name'])
+        print(f"  Added team_state_long for {player_season['team_state_long'].notna().sum()} players")
+
+    # Add transfer hometown analysis flags
+    _add_transfer_hometown_flags(player_season, schedule)
+
     print(f"  Final player_season_analytic: {len(player_season)} rows")
     print(f"  AP Top 25 players: {player_season['is_ap_top25'].sum()}")
     print(f"  Transfer players: {player_season['is_transfer'].sum()}")
 
     return player_season
+
+
+def _normalize_city(city):
+    """Normalize city name for fuzzy matching: uppercase, strip punctuation, common abbreviations."""
+    if pd.isna(city):
+        return ''
+    city = str(city).upper().strip()
+    city = re.sub(r'[^A-Z\s]', '', city)
+    # Common abbreviations
+    city = re.sub(r'\bST\b', 'SAINT', city)
+    city = re.sub(r'\bMT\b', 'MOUNT', city)
+    city = re.sub(r'\bFT\b', 'FORT', city)
+    city = re.sub(r'\s+', ' ', city).strip()
+    return city
+
+
+def _build_team_city_lookup(schedule):
+    """
+    Build a team_id -> (city, state) lookup from schedule home venue data.
+
+    Uses the most common home venue city per team to avoid neutral-site games
+    skewing the result.
+    """
+    if schedule is None:
+        return {}
+
+    home_games = schedule[['home_id', 'venue_address_city', 'venue_address_state']].copy()
+    home_games['home_id'] = pd.to_numeric(home_games['home_id'], errors='coerce')
+    home_games = home_games.dropna(subset=['home_id', 'venue_address_city'])
+
+    # Most common city per team (avoids neutral-site outliers)
+    city_counts = home_games.groupby(
+        ['home_id', 'venue_address_city', 'venue_address_state']
+    ).size().reset_index(name='count')
+    idx = city_counts.groupby('home_id')['count'].idxmax()
+    best = city_counts.loc[idx]
+
+    return {
+        int(row['home_id']): (row['venue_address_city'], row['venue_address_state'])
+        for _, row in best.iterrows()
+    }
+
+
+def _add_transfer_hometown_flags(player_season, schedule=None):
+    """
+    Add transfer hometown analysis flags to player_season.
+
+    Flags added:
+    - is_homestate_transfer: True if transfer player's home state matches the
+      team's state (state_clean == team_state)
+    - is_hometown_transfer: True if transfer AND home state matches AND the
+      player's hometown city fuzzy-matches the team's campus city (derived
+      from schedule home venue data). Handles normalized comparison with
+      substring matching for metro area names.
+
+    Non-transfer players get False for both flags.
+    """
+    print("  Computing transfer hometown flags...")
+
+    # Start with False for all
+    player_season['is_homestate_transfer'] = False
+    player_season['is_hometown_transfer'] = False
+
+    # Only process transfers with location data
+    transfer_mask = player_season['is_transfer'] == True
+    has_state = player_season['state_clean'].notna() & player_season['team_state'].notna()
+    eligible = transfer_mask & has_state
+
+    if eligible.sum() == 0:
+        print("    No eligible transfers with location data")
+        return
+
+    # Home state match: 2-letter abbreviation comparison
+    state_match = (
+        player_season['state_clean'].str.upper().str.strip() ==
+        player_season['team_state'].str.upper().str.strip()
+    )
+    player_season.loc[eligible & state_match, 'is_homestate_transfer'] = True
+
+    homestate_count = (eligible & state_match).sum()
+    print(f"    Home-state transfers: {homestate_count}")
+
+    # Hometown match: fuzzy city comparison using schedule venue data
+    team_city_lookup = _build_team_city_lookup(schedule)
+    if not team_city_lookup:
+        print("    No schedule data available for hometown city matching")
+        return
+
+    state_matched_idx = player_season[eligible & state_match].index
+    hometown_count = 0
+
+    for idx in state_matched_idx:
+        hometown_raw = player_season.loc[idx, 'hometown_clean']
+        team_id = player_season.loc[idx, 'team_id']
+
+        if pd.isna(hometown_raw):
+            continue
+
+        # Look up team's campus city from schedule venue data
+        team_id_int = int(team_id) if pd.notna(team_id) else None
+        if team_id_int not in team_city_lookup:
+            continue
+
+        team_city, _ = team_city_lookup[team_id_int]
+
+        # hometown_clean format is "CITY, STATE" — extract the city part
+        city_part = str(hometown_raw).split(',')[0].strip()
+        city_norm = _normalize_city(city_part)
+        team_city_norm = _normalize_city(team_city)
+
+        if not city_norm or not team_city_norm:
+            continue
+
+        # Match if: exact match, or one is a substring of the other
+        # (handles metro area names like "East Lansing" in "Lansing")
+        if (city_norm == team_city_norm or
+                (len(city_norm) >= 4 and city_norm in team_city_norm) or
+                (len(team_city_norm) >= 4 and team_city_norm in city_norm)):
+            player_season.loc[idx, 'is_hometown_transfer'] = True
+            hometown_count += 1
+
+    print(f"    Hometown transfers (city+state match): {hometown_count}")
 
 
 def compute_minutes_weighted_team_metrics(player_season):
@@ -577,6 +718,7 @@ def build_team_season_analytics(player_box, team_box, rosters, ap_teams, schedul
         'is_center': 'sum',
         'conference': 'first',  # conference from roster
         'division': 'first',  # division from roster
+        'team_state': 'first',  # school state abbreviation
     }).reset_index()
 
     roster_agg.columns = [
@@ -585,7 +727,7 @@ def build_team_season_analytics(player_box, team_box, rosters, ap_teams, schedul
         'avg_year', 'min_year', 'max_year',
         'transfer_count',
         'guard_count', 'forward_count', 'center_count',
-        'conference', 'division'
+        'conference', 'division', 'team_state'
     ]
 
     # Convert height to feet-inches string for readability
@@ -796,7 +938,7 @@ def main():
     ap_teams = get_ap_top25_teams(schedule)
 
     # Build player season analytics
-    player_season = build_player_season_analytics(player_box, rosters, ap_teams)
+    player_season = build_player_season_analytics(player_box, rosters, ap_teams, schedule)
 
     # Build team season analytics (pass player_season for minutes-weighted metrics)
     team_season = build_team_season_analytics(
