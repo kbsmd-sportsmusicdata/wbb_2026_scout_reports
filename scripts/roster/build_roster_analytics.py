@@ -28,6 +28,9 @@ PROCESSED_DIR = DATA_DIR / "processed" / "roster"
 # Ensure output directory exists
 PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 
+# Master mapping file for team name standardization and conference alignment
+MASTER_MAPPING_PATH = RAW_DIR / "master_player_season_mapping_2026.csv"
+
 # Year-to-numeric mapping for experience calculations
 YEAR_MAP = {
     'Freshman': 1, 'Fr.': 1, 'FR': 1,
@@ -41,12 +44,16 @@ YEAR_MAP = {
     'Redshirt Senior': 4, 'RS Sr.': 4, 'R-Sr.': 4,
 }
 
-# Team name standardization mapping (source -> canonical)
-TEAM_NAME_MAP = {
+# Fallback team name standardization mapping (source -> canonical)
+# Used only when master mapping file is not available
+_FALLBACK_TEAM_NAME_MAP = {
     'Connecticut': 'UConn',
     'Louisiana State': 'LSU',
     'Southern California': 'USC',
+    'Southern Cal': 'USC',
     'Mississippi': 'Ole Miss',
+    'Texas Christian': 'TCU',
+    'Southern Methodist': 'SMU',
     'North Carolina': 'UNC',
     'Michigan St.': 'Michigan State',
     'Ohio St.': 'Ohio State',
@@ -57,6 +64,56 @@ TEAM_NAME_MAP = {
     'Arizona St.': 'Arizona State',
     'Brigham Young': 'BYU',
 }
+
+# Module-level team name map — populated at runtime from master mapping
+TEAM_NAME_MAP = {}
+
+
+def build_team_name_map_from_master(master_path=None):
+    """
+    Build team name standardization map from master_player_season_mapping.
+
+    Derives mappings from possible_team_name -> standardized_team_name where
+    the two differ. This centralizes team name knowledge in one source file.
+
+    Falls back to hardcoded _FALLBACK_TEAM_NAME_MAP if master mapping is
+    unavailable.
+    """
+    global TEAM_NAME_MAP
+
+    if master_path is None:
+        master_path = MASTER_MAPPING_PATH
+
+    if not Path(master_path).exists():
+        print(f"  WARNING: Master mapping not found at {master_path}, using fallback map")
+        TEAM_NAME_MAP = _FALLBACK_TEAM_NAME_MAP.copy()
+        return TEAM_NAME_MAP
+
+    master = pd.read_csv(master_path)
+    pairs = master[['standardized_team_name', 'possible_team_name']].drop_duplicates()
+
+    # Build map: where possible_team_name differs from standardized_team_name,
+    # map the alternate name to the standardized name
+    name_map = {}
+    for _, row in pairs.iterrows():
+        std = row['standardized_team_name']
+        possible = row['possible_team_name']
+        if pd.notna(possible) and possible != std and possible.lower() != std.lower():
+            name_map[possible] = std
+
+    # Merge with fallback to catch abbreviation variants (e.g. "Michigan St.")
+    # that aren't in the master mapping. Exclude fallback entries whose key is
+    # already a standardized_team_name in the master (e.g. "North Carolina" is
+    # canonical, so we should NOT map it to "UNC").
+    canonical_names = set(pairs['standardized_team_name'].unique())
+    merged = {k: v for k, v in _FALLBACK_TEAM_NAME_MAP.items() if k not in canonical_names}
+    merged.update(name_map)
+
+    TEAM_NAME_MAP = merged
+    print(f"  Loaded {len(name_map)} team name mappings from master mapping")
+    print(f"  Total mappings (incl. fallbacks): {len(TEAM_NAME_MAP)}")
+
+    return TEAM_NAME_MAP
 
 
 def standardize_team_name(name):
@@ -70,9 +127,19 @@ def load_data():
     """Load all required data sources."""
     print("Loading data sources...")
 
+    # Build team name map from master mapping (must be done before any joins)
+    build_team_name_map_from_master()
+
     # Load roster data
     rosters = pd.read_csv(RAW_DIR / "wbb_rosters_2025_26.csv")
     print(f"  Rosters: {len(rosters)} players")
+
+    # Standardize roster team names so they match box score team names
+    # e.g. "Southern Cal" -> "USC", "Texas Christian" -> "TCU", "Mississippi" -> "Ole Miss"
+    rosters['team'] = rosters['team'].apply(standardize_team_name)
+    standardized_count = (rosters['team'] != pd.read_csv(RAW_DIR / "wbb_rosters_2025_26.csv")['team']).sum()
+    if standardized_count > 0:
+        print(f"  Standardized {standardized_count} roster team name entries")
 
     # Load player box scores
     player_box = pd.read_parquet(RAW_DIR / "player_box_2026.parquet")

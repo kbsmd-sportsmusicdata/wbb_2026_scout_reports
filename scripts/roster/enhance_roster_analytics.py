@@ -30,6 +30,9 @@ RAW_DIR = DATA_DIR / "raw" / "2026"
 PROCESSED_DIR = DATA_DIR / "processed"
 ROSTER_DIR = PROCESSED_DIR / "roster"
 
+# Master mapping file for conference alignment and team name standardization
+MASTER_MAPPING_PATH = RAW_DIR / "master_player_season_mapping_2026.csv"
+
 # Allowed directories for file reads (security)
 ALLOWED_DATA_DIRS = [DATA_DIR.resolve(), Path(".").resolve()]
 
@@ -665,6 +668,30 @@ def add_poll_game_context(team_top25, polls_games_path=None):
     return team_top25
 
 
+def build_conference_overrides_from_master(master_path=None):
+    """
+    Build conference override map from master_player_season_mapping.
+
+    Compares the raw roster conference for each team against the master mapping's
+    conference_short_name. Where they differ (e.g. due to conference realignment),
+    the master mapping value is used as the authoritative current conference.
+
+    Returns dict of {standardized_team_name: master_conference}.
+    """
+    if master_path is None:
+        master_path = MASTER_MAPPING_PATH
+
+    if not Path(master_path).exists():
+        print(f"  WARNING: Master mapping not found at {master_path}")
+        return {}
+
+    master = pd.read_csv(master_path)
+    master_conf = master.drop_duplicates('standardized_team_name')[
+        ['standardized_team_name', 'conference_short_name']
+    ]
+    return dict(zip(master_conf['standardized_team_name'], master_conf['conference_short_name']))
+
+
 def add_conference(team_top25, rosters):
     """
     Add conference field to team_top25 from raw roster data.
@@ -672,25 +699,13 @@ def add_conference(team_top25, rosters):
     Maps team_location (box score name) to roster team name to look up conference.
     Falls back to the TEAM_NAME_MAP for known mismatches (USC, Ole Miss, TCU, etc.).
 
-    After the roster lookup, applies master mapping overrides for teams whose
-    conference changed between the 2024-25 roster season and the current 2025-26
-    season (e.g. UCLA/USC/Washington moved Pac-12 -> Big Ten, Oklahoma/Texas
-    moved Big 12 -> SEC, Princeton Ivy League -> Ivy short name).
+    After the roster lookup, applies overrides derived at runtime from the
+    master_player_season_mapping for teams whose conference changed between
+    the 2024-25 roster season and the current 2025-26 season.
     """
     print("\n" + "=" * 60)
     print("Adding Conference Field")
     print("=" * 60)
-
-    # 2025-26 conference corrections from master_player_season_mapping
-    # These teams changed conferences after the raw roster was scraped
-    CONFERENCE_OVERRIDES = {
-        'UCLA': 'Big Ten',
-        'USC': 'Big Ten',
-        'Washington': 'Big Ten',
-        'Oklahoma': 'SEC',
-        'Texas': 'SEC',
-        'Princeton': 'Ivy',
-    }
 
     # Build a team -> conference lookup from rosters (one conference per team)
     roster_conf = rosters.drop_duplicates('team')[['team', 'conference', 'division']].copy()
@@ -736,17 +751,20 @@ def add_conference(team_top25, rosters):
         missing = team_top25[team_top25['conference'].isna()]['team_location'].tolist()
         print(f"  Missing: {missing}")
 
-    # Apply 2025-26 conference overrides from master mapping
+    # Apply conference overrides derived from master mapping
+    master_conferences = build_conference_overrides_from_master()
     overrides_applied = 0
-    for team_loc, new_conf in CONFERENCE_OVERRIDES.items():
-        mask = team_top25['team_location'] == team_loc
-        if mask.any():
-            old_conf = team_top25.loc[mask, 'conference'].iloc[0]
-            team_top25.loc[mask, 'conference'] = new_conf
-            overrides_applied += 1
-            print(f"  Override: {team_loc} conference {old_conf} -> {new_conf}")
+    for _, row in team_top25.iterrows():
+        team_loc = row['team_location']
+        if team_loc in master_conferences:
+            master_conf = master_conferences[team_loc]
+            current_conf = team_top25.loc[team_top25['team_location'] == team_loc, 'conference'].iloc[0]
+            if current_conf != master_conf:
+                team_top25.loc[team_top25['team_location'] == team_loc, 'conference'] = master_conf
+                overrides_applied += 1
+                print(f"  Override: {team_loc} conference {current_conf} -> {master_conf}")
 
-    print(f"  Applied {overrides_applied} conference overrides for 2025-26 realignment")
+    print(f"  Applied {overrides_applied} conference overrides from master mapping")
 
     return team_top25
 
