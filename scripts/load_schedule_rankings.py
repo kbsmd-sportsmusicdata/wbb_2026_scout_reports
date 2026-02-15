@@ -82,14 +82,31 @@ def extract_rankings_lookup(schedule_df):
     return lookup
 
 
+def _load_processed_file(base_path):
+    """Load a processed file, preferring parquet over CSV."""
+    parquet_path = base_path.with_suffix('.parquet')
+    csv_path = base_path.with_suffix('.csv')
+    if parquet_path.exists():
+        print(f"  Loading from: {parquet_path}")
+        return pd.read_parquet(parquet_path)
+    elif csv_path.exists():
+        print(f"  Loading from: {csv_path}")
+        return pd.read_csv(csv_path)
+    else:
+        return None
+
+
 def add_rankings_to_game_summary(game_summary_path, rankings_lookup):
     """
     Add team_rank and opponent_rank columns to game_summary.
     Uses vectorized operations for performance.
+    Loads from parquet (preferred) or CSV.
     """
-    print(f"Loading game_summary from: {game_summary_path}")
-    df = pd.read_csv(game_summary_path)
-
+    base_path = Path(game_summary_path).with_suffix('')
+    df = _load_processed_file(base_path)
+    if df is None:
+        print(f"  ERROR: No game_summary found at {base_path}(.parquet|.csv)")
+        return None
     print(f"  Loaded {len(df)} rows")
 
     # Ensure team_id is int for matching
@@ -194,36 +211,40 @@ def main():
     # 2. Extract rankings lookup
     rankings_lookup = extract_rankings_lookup(schedule_df)
 
-    # 3. Check if game_summary exists
-    game_summary_path = PROCESSED_DIR / "game_summary.csv"
-    if not game_summary_path.exists():
-        print(f"\nWARNING: {game_summary_path} not found.")
-        print("Run weekly_pull.py first to generate game_summary.csv")
+    # 3. Check if game_summary exists (parquet or csv)
+    game_summary_base = PROCESSED_DIR / "game_summary"
+    if not game_summary_base.with_suffix('.parquet').exists() and not game_summary_base.with_suffix('.csv').exists():
+        print(f"\nWARNING: No game_summary found at {game_summary_base}(.parquet|.csv)")
+        print("Run weekly_pull.py first to generate game_summary data.")
         return
 
     # 4. Add rankings to game_summary
     print(f"\nAdding rankings to game_summary...")
-    df_with_ranks = add_rankings_to_game_summary(game_summary_path, rankings_lookup)
+    df_with_ranks = add_rankings_to_game_summary(game_summary_base, rankings_lookup)
+    if df_with_ranks is None:
+        return
 
     # 5. Filter to ranked games only
     print(f"\nFiltering to ranked games...")
     df_ranked = filter_ranked_games(df_with_ranks)
 
-    # 6. Save outputs
+    # 6. Save outputs (both parquet and CSV)
     # Save full game_summary with rankings (overwrites original)
-    df_with_ranks.to_csv(game_summary_path, index=False)
-    print(f"\n✓ Updated {game_summary_path} with rankings ({len(df_with_ranks)} rows)")
+    df_with_ranks.to_csv(game_summary_base.with_suffix('.csv'), index=False)
+    df_with_ranks.to_parquet(game_summary_base.with_suffix('.parquet'), index=False)
+    print(f"\n✓ Updated game_summary with rankings ({len(df_with_ranks)} rows)")
 
     # Save filtered version
-    ranked_path = PROCESSED_DIR / "game_summary_ranked.csv"
-    df_ranked.to_csv(ranked_path, index=False)
-    print(f"✓ Saved filtered ranked games to {ranked_path} ({len(df_ranked)} rows)")
+    ranked_path = PROCESSED_DIR / "game_summary_ranked"
+    df_ranked.to_csv(ranked_path.with_suffix('.csv'), index=False)
+    df_ranked.to_parquet(ranked_path.with_suffix('.parquet'), index=False)
+    print(f"✓ Saved filtered ranked games to {ranked_path}(.csv|.parquet) ({len(df_ranked)} rows)")
 
     # 7. Filter player_game to only include players from ranked games
     print(f"\nFiltering player_game to ranked games...")
-    player_game_path = PROCESSED_DIR / "player_game.csv"
-    if player_game_path.exists():
-        player_game = pd.read_csv(player_game_path)
+    player_game_base = PROCESSED_DIR / "player_game"
+    player_game = _load_processed_file(player_game_base)
+    if player_game is not None:
         print(f"  Loaded {len(player_game)} player rows")
 
         # Get unique game_ids from ranked games
@@ -236,27 +257,22 @@ def main():
         removed = len(player_game) - filtered_count
         print(f"  Filtered: {len(player_game)} -> {filtered_count} rows ({removed} removed)")
 
-        # Save filtered version
-        player_ranked_path = PROCESSED_DIR / "player_game_ranked.csv"
-        player_ranked.to_csv(player_ranked_path, index=False)
-        print(f"✓ Saved filtered player data to {player_ranked_path} ({len(player_ranked)} rows)")
+        # Save filtered version (both formats)
+        player_ranked_path = PROCESSED_DIR / "player_game_ranked"
+        player_ranked.to_csv(player_ranked_path.with_suffix('.csv'), index=False)
+        player_ranked.to_parquet(player_ranked_path.with_suffix('.parquet'), index=False)
+        print(f"✓ Saved filtered player data to {player_ranked_path}(.csv|.parquet) ({len(player_ranked)} rows)")
     else:
-        print(f"  WARNING: {player_game_path} not found. Skipping player filtering.")
+        print(f"  WARNING: No player_game found at {player_game_base}(.parquet|.csv). Skipping player filtering.")
 
     # Show file sizes
-    full_size = game_summary_path.stat().st_size / (1024 * 1024)
-    ranked_size = ranked_path.stat().st_size / (1024 * 1024)
     print(f"\nFile sizes:")
-    print(f"  game_summary.csv: {full_size:.1f} MB")
-    print(f"  game_summary_ranked.csv: {ranked_size:.1f} MB")
-
-    if player_game_path.exists():
-        player_full_size = player_game_path.stat().st_size / (1024 * 1024)
-        player_ranked_path = PROCESSED_DIR / "player_game_ranked.csv"
-        if player_ranked_path.exists():
-            player_ranked_size = player_ranked_path.stat().st_size / (1024 * 1024)
-            print(f"  player_game.csv: {player_full_size:.1f} MB")
-            print(f"  player_game_ranked.csv: {player_ranked_size:.1f} MB")
+    for name in ['game_summary', 'game_summary_ranked', 'player_game', 'player_game_ranked']:
+        for ext in ['.csv', '.parquet']:
+            p = PROCESSED_DIR / f"{name}{ext}"
+            if p.exists():
+                size = p.stat().st_size / (1024 * 1024)
+                print(f"  {name}{ext}: {size:.1f} MB")
 
 
 if __name__ == "__main__":
