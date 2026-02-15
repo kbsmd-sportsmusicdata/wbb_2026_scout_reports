@@ -220,7 +220,7 @@ def main():
 
     # 4. Add rankings to game_summary
     print(f"\nAdding rankings to game_summary...")
-    df_with_ranks = add_rankings_to_game_summary(game_summary_base.with_suffix('.csv'), rankings_lookup)
+    df_with_ranks = add_rankings_to_game_summary(game_summary_base, rankings_lookup)
     if df_with_ranks is None:
         return
 
