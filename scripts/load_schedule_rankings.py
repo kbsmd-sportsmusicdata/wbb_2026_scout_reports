@@ -230,10 +230,8 @@ def main():
 
     # 6. Save outputs (both parquet and CSV)
     # Save full game_summary with rankings (overwrites original)
-    game_summary_csv = PROCESSED_DIR / "game_summary.csv"
-    game_summary_parquet = PROCESSED_DIR / "game_summary.parquet"
-    df_with_ranks.to_csv(game_summary_csv, index=False)
-    df_with_ranks.to_parquet(game_summary_parquet, index=False)
+    df_with_ranks.to_csv(game_summary_base.with_suffix('.csv'), index=False)
+    df_with_ranks.to_parquet(game_summary_base.with_suffix('.parquet'), index=False)
     print(f"\n✓ Updated game_summary with rankings ({len(df_with_ranks)} rows)")
 
     # Save filtered version
