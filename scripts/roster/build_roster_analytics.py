@@ -163,11 +163,21 @@ def get_ap_top25_teams(schedule):
     """
     Extract teams that have been in AP Top 25 at any point during the season.
     Returns DataFrame with team_id, team_name, and best_rank.
+
+    Filters to regular-season games only (season_type == 2) so that
+    postseason tournament seedings are not confused with AP poll rankings.
     """
     print("\nIdentifying AP Top 25 teams...")
 
+    # Filter to regular season to avoid postseason seedings being treated as AP ranks
+    if 'season_type' in schedule.columns:
+        reg_season = schedule[schedule['season_type'] == 2]
+        print(f"  Using {len(reg_season)} regular-season games (excluded {len(schedule) - len(reg_season)} postseason)")
+    else:
+        reg_season = schedule
+
     # Get home teams with rankings
-    home_ranked = schedule[schedule['home_current_rank'] <= 25][
+    home_ranked = reg_season[reg_season['home_current_rank'] <= 25][
         ['home_id', 'home_display_name', 'home_current_rank']
     ].rename(columns={
         'home_id': 'team_id',
@@ -176,7 +186,7 @@ def get_ap_top25_teams(schedule):
     })
 
     # Get away teams with rankings
-    away_ranked = schedule[schedule['away_current_rank'] <= 25][
+    away_ranked = reg_season[reg_season['away_current_rank'] <= 25][
         ['away_id', 'away_display_name', 'away_current_rank']
     ].rename(columns={
         'away_id': 'team_id',
@@ -364,20 +374,30 @@ def build_player_season_analytics(player_box, rosters, ap_teams, schedule=None):
     player_season['is_transfer'] = player_season['is_transfer'].fillna(False)
     player_season['is_redshirt'] = player_season['is_redshirt'].fillna(0).astype(bool)
 
-    # Add team_state_long from master mapping (roster only has 2-letter team_state)
+    # Add team_state_long and apply conference overrides from master mapping
     if MASTER_MAPPING_PATH.exists():
         master = pd.read_csv(MASTER_MAPPING_PATH)
-        state_lookup = master.drop_duplicates('standardized_team_name')[
-            ['standardized_team_name', 'team_state_long']
+        master_teams = master.drop_duplicates('standardized_team_name')[
+            ['standardized_team_name', 'team_state_long', 'conference_short_name']
         ]
         player_season = player_season.merge(
-            state_lookup,
+            master_teams[['standardized_team_name', 'team_state_long']],
             left_on='team_location',
             right_on='standardized_team_name',
             how='left'
         )
         player_season = player_season.drop(columns=['standardized_team_name'])
         print(f"  Added team_state_long for {player_season['team_state_long'].notna().sum()} players")
+
+        # Override stale roster conferences with master mapping values
+        master_conf = dict(zip(
+            master_teams['standardized_team_name'],
+            master_teams['conference_short_name']
+        ))
+        player_season['conference'] = player_season.apply(
+            lambda r: master_conf.get(r['team_location'], r['conference']),
+            axis=1
+        )
 
     # Add transfer hometown analysis flags
     _add_transfer_hometown_flags(player_season, schedule)
@@ -866,6 +886,31 @@ def build_team_season_analytics(player_box, team_box, rosters, ap_teams, schedul
     # Clean up duplicate columns
     if 'team' in team_season.columns:
         team_season = team_season.drop(columns=['team'])
+
+    # =====================
+    # Apply Conference Overrides from Master Mapping
+    # =====================
+    # The raw roster data has stale conference affiliations (pre-realignment).
+    # Override with current-season conferences from the master mapping.
+    if Path(MASTER_MAPPING_PATH).exists():
+        master = pd.read_csv(MASTER_MAPPING_PATH)
+        master_teams = master.drop_duplicates('standardized_team_name')[
+            ['standardized_team_name', 'conference_short_name']
+        ]
+        master_conf = dict(zip(
+            master_teams['standardized_team_name'],
+            master_teams['conference_short_name']
+        ))
+        overrides = 0
+        for idx, row in team_season.iterrows():
+            team_loc = row.get('team_location', '')
+            if team_loc in master_conf:
+                new_conf = master_conf[team_loc]
+                if pd.notna(new_conf) and row.get('conference') != new_conf:
+                    team_season.loc[idx, 'conference'] = new_conf
+                    overrides += 1
+        if overrides:
+            print(f"  Applied {overrides} conference overrides from master mapping")
 
     # =====================
     # Merge Minutes-Weighted Metrics
