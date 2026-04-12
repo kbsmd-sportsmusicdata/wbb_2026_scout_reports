@@ -50,9 +50,13 @@ TEAM_NAME_MAP = {
     'Iowa St.': 'Iowa State',
     'Mississippi St.': 'Mississippi State',
     'Miami': 'Miami (FL)',
+    'Miami (OH)': 'Miami Ohio',
     'Arizona St.': 'Arizona State',
     'Brigham Young': 'BYU',
     'TCU': 'Texas Christian',
+    'Charleston': 'College of Charleston',
+    'Missouri State': 'Missouri St.',
+    'Colorado State': 'Colorado St.',
 }
 
 
@@ -201,9 +205,12 @@ def fix_missing_roster_metrics(team_top25, player_full, rosters):
         team_roster = rosters[rosters['team'].str.lower() == roster_name.lower()].copy()
 
         if len(team_roster) == 0:
-            # Try partial match
+            # Try partial match: require roster team starts with the search name
+            # (prevents "Missouri State" matching "Northwest Missouri State")
+            search = roster_name.lower()
             for roster_team in rosters['team'].unique():
-                if roster_name.lower() in roster_team.lower() or roster_team.lower() in roster_name.lower():
+                rt = roster_team.lower()
+                if rt.startswith(search) or search.startswith(rt):
                     team_roster = rosters[rosters['team'] == roster_team]
                     print(f"    Found partial match: {roster_team}")
                     break
@@ -730,10 +737,12 @@ def add_conference(team_top25, rosters):
             divisions.append(roster_div_dict.get(mapped))
             continue
 
-        # Try case-insensitive partial match
+        # Try case-insensitive partial match (word-boundary aligned)
         found = False
+        tl = team_loc.lower()
         for roster_team in roster_conf_dict:
-            if roster_team.lower() == team_loc.lower() or team_loc.lower() in roster_team.lower():
+            rt = roster_team.lower()
+            if rt == tl or rt.startswith(tl) or tl.startswith(rt):
                 conferences.append(roster_conf_dict[roster_team])
                 divisions.append(roster_div_dict.get(roster_team))
                 found = True

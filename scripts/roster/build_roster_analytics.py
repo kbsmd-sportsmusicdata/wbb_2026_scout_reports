@@ -242,6 +242,11 @@ def build_player_season_analytics(player_box, rosters, ap_teams, schedule=None):
         'starter': 'games_started'
     })
 
+    # Round game-context averages to 1 decimal place
+    for col in ['team_score', 'opponent_team_score']:
+        if col in player_season.columns:
+            player_season[col] = player_season[col].round(1)
+
     print(f"  Aggregated to {len(player_season)} player-seasons")
 
     # Calculate per-game averages
@@ -658,6 +663,10 @@ def build_team_season_analytics(player_box, team_box, rosters, ap_teams, schedul
         'team_id', 'games_played', 'total_points', 'ppg',
         'total_opp_points', 'opp_ppg'
     ]
+
+    # Round per-game averages to 1 decimal place
+    team_games['ppg'] = team_games['ppg'].round(1)
+    team_games['opp_ppg'] = team_games['opp_ppg'].round(1)
 
     # Ensure team_id is int
     team_games['team_id'] = pd.to_numeric(team_games['team_id'], errors='coerce').fillna(0).astype(int)
